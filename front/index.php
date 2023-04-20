@@ -1,4 +1,2 @@
 <?php
-//permet de faire une redirection vers un autre fichier
-header("Location: ../index.php");
-?>
+header("Location:../index.php");

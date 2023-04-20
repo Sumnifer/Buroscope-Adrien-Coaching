@@ -10,20 +10,20 @@ session_start();
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
   />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="assets/css/FontAwesome.css" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/FontAwesome.css" />
   <title>Adrien | Coaching</title>
 </head>
 <body>
 <header class="header">
   <a href="" class="header__logo"
-  ><img src="assets/img/logo.png" alt="logo" class="header__logo_img" />
+  ><img src="../assets/img/logo.png" alt="logo" class="header__logo_img" />
     <h1 class="header__logo_title">Adrien Coaching</h1></a
   >
   <nav class="header__nav">
     <menu class="header__nav_menu">
       <li class="header__nav_menu_items">
-        <a href="front/index.php" class="header__nav_menu_items_link">Accueil</a>
+        <a href="index.php" class="header__nav_menu_items_link">Accueil</a>
       </li>
       <li class="header__nav_menu_items">
         <a href="" class="header__nav_menu_items_link">Présentation</a>
@@ -73,7 +73,7 @@ session_start();
           echo "<a href='back/back.php?action=logout' class='header__controls_detail_bloc_link'>
         <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Déconnexion</a>";
         } else {
-          echo "<a href='front/login.php' class='header__controls_detail_bloc_link'>
+          echo "<a href='sections/login.php' class='header__controls_detail_bloc_link'>
         <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Connexion</a>";}
         ?>
       </div>
