@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/FontAwesome.css" />
+<title>Panneau de Configuration</title>
+<body class="body">
+  <h1 class="body__title"><?php if(isset($title)){echo $title;}  ?></h1>
+  <aside class="aside">
+    <nav class="aside_navbar">
+      <menu class="aside_navbar_menu">
+        <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-house aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=settings" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gear aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=pages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-file aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=articles" class="aside_navbar_menu_list_link"><i class="fa-solid fa-newspaper aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=calendar" class="aside_navbar_menu_list_link"><i class="fa-solid fa-calendar-days aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=medias" class="aside_navbar_menu_list_link"><i class="fa-regular fa-image aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-text aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-envelope aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-key aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=logout" class="aside_navbar_menu_list_link"><i class="fa-solid fa-arrow-right-to-bracket aside_navbar_menu_list_link_icons"></i></a></li>
+      </menu>
+    </nav>
+  </aside>
+  <section class="content">
+    <?php if(isset($confirmation)){echo $confirmation;} ?>
+    <?php if(isset($content)){echo $content;} ?>
+    <?php if(isset($form)){include($form);} ?>
+  </section>
+
+</body>
+</html>

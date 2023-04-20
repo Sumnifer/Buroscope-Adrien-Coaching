@@ -1,0 +1,21 @@
+// couleurs
+
+$primary : #26261F
+$secondary : #FFE13F
+$white: #f5f5f5
+$blue: #2F4858
+
+// Breakpoints
+
+// 639px, 1023px, 1399px
+$breakpoints-max: ("small": "39.9375em", "medium": "63.9375em", "large": "87.4375em")
+// 640px, 1024px, 1400px
+$breakpoints-min: ("medium": "40em", "large": "64em", "xlarge": "87.5em")
+
+//Queries
+@mixin max($size)
+  @media screen and (max-width: map-get($breakpoints-max, $size))
+    @content
+@mixin min($size)
+  @media screen and (min-width: map-get($breakpoints-min, $size))
+    @content

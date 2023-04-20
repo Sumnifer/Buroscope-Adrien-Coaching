@@ -1,0 +1,41 @@
+.users_form
+  display: flex
+  flex-direction: column
+  padding: 2% 25%
+  width: 100%
+
+  background-color: $blue
+  &_label
+    margin-bottom: 5px
+  &_div
+    display: flex
+    align-items: center
+    gap: .5rem
+    justify-content: space-between 
+    &_bloc
+      display: flex
+      flex-direction: column
+      width: 100%
+      &_input
+        width: 100%
+  &__input
+    padding: .4rem
+    margin: .2rem 0 .5rem 0
+    background-color: $primary
+    color: $secondary
+    border: 1px solid $secondary
+    border-radius: .625rem
+    outline: none
+    &::placeholder
+      color: $secondary
+  &_btn
+    padding: 0.5rem
+    align-self: center
+    width: 30%
+    margin-top: 1rem
+    border-radius: 30px
+    border: none
+    text-transform: uppercase
+    color: $primary
+    cursor: pointer
+    background-color: $secondary

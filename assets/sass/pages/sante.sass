@@ -1,0 +1,67 @@
+.inscription_body
+    position: relative
+
+.header__inscription
+    display: flex
+    justify-content: center
+    border-bottom: 3px solid $white
+    &_logo
+        &_img
+            width: 200px
+            object-fit: cover
+
+.questionnaire
+    padding-block: 5rem
+    padding-left: 45%
+    background-color: $blue
+    color: $white
+    line-height: 2rem
+    border-bottom: 3px solid $white
+    &__title
+        font-weight: 700
+        font-size: 1.5rem
+        padding-bottom: 1rem
+
+
+.info
+    display: flex
+    justify-content: center
+    padding-top: 4%
+    &__form
+        display: flex
+        justify-content: space-between
+        gap: 10rem
+        &_label
+            display: none    
+        &_item
+            display: flex
+            gap: 2rem
+        &_input
+            width: 100%
+            padding: .8rem 8rem .8rem 1.2rem
+            background-color: transparent
+            border: 1px solid $secondary
+            border-radius: 10px
+            color: $secondary
+            outline: none
+            &::placeholder
+                color: $secondary
+
+.sante-title
+    display: flex
+    justify-content: center
+    padding-top: 4%
+    font-size: 1.8rem
+    color: $white
+
+
+.sante
+    
+    &__oui
+        color: $white
+        text-transform: uppercase
+        font-size: .8rem
+    &__text
+        display: grid
+        grid-template-columns: 2% 80% 9% 9%
+        gap: 1rem

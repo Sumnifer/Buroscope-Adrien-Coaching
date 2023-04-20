@@ -1,0 +1,41 @@
+.footer
+  background-color: $blue
+  display: grid
+  &__box
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 1rem 12.5rem
+    &_nav
+      &_menu
+        display: flex
+        align-items: center
+        &_items
+          &_cta
+            padding: 1rem
+            text-transform: uppercase
+            font-size: 1rem
+            color: $white
+            font-weight: 500
+    & &_social
+      display: flex
+      align-self: center
+      padding-block: 2rem
+      width: 50%
+      justify-content: center
+      gap: 2.5rem
+      &_icon
+        font-size: 2rem
+        color: $secondary
+
+  &__mention
+    display: flex
+    font-size: 1rem
+    justify-content: center
+    align-items: center
+    width: auto
+    justify-self: center
+    padding-bottom: 2rem
+    text-transform: uppercase
+    color: $white
+    cursor: pointer

@@ -1,0 +1,92 @@
+.header
+  padding-inline: 10%
+  height: 80px
+
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  background-color: $blue
+  position: relative
+  border-bottom: 4px solid $white
+
+  &__logo
+    display: flex
+    align-items: center
+
+    &_img
+      width: 80px
+      aspect-ratio: 1
+
+    &_title
+      color: $secondary
+      font-weight: 600
+
+
+
+
+
+
+
+  &__nav
+
+    @media screen and (max-width: 992px)
+      display: none
+
+    &_menu
+      display: flex
+      align-items: center
+      justify-content: center
+      gap: 1rem
+
+      &_items
+        height: 100%
+        padding: 0.5rem 1rem
+
+        &_link
+          text-transform: uppercase
+          font-size: 1rem
+          color: $white
+          font-weight: 500
+
+  &__controls
+    display: flex
+    align-items: center
+    gap: 1rem
+
+    &_detail
+      display: flex
+      flex-direction: column
+
+      &_summary
+        color: $secondary
+        text-transform: uppercase
+        cursor: pointer
+        list-style-type: none
+        display: flex
+        align-items: start
+
+        &_icon
+          color: $secondary
+          padding-left: 0.5rem
+
+      &_bloc
+        display: flex
+        flex-direction: column
+        gap: 2rem
+        padding: 1rem
+        position: absolute
+        top: 100%
+        width: 15%
+        background-color: $primary
+        border-bottom: 4px solid $secondary
+
+        @media screen and (max-width: 992px)
+          width: 20%
+
+        &_link
+          color: $secondary
+
+          &_icon
+            margin-right: 0.5rem
+

@@ -1,0 +1,81 @@
+.testimonials
+  position: relative
+  display: grid
+  padding-bottom: 4rem
+  margin-bottom: 4rem
+  &::after
+    content: ''
+    position: absolute
+    bottom: 0
+    right: 0
+    width: 70%
+    height: 0.25rem
+    background-color: $secondary
+    border-top-left-radius: 1.875rem
+    border-bottom-left-radius: 1.875rem
+
+  &__comment
+    padding-top: 2rem
+    text-align: center
+    text-transform: uppercase
+    color: $white
+    font-size: 1rem
+    font-weight: 600
+
+  &__title
+    padding-top: 2rem
+    text-align: center
+    text-transform: uppercase
+    color: $secondary
+    font-size: 2rem
+    font-weight: 600
+  &__cards
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: repeat(2, 1fr)
+    gap: 5rem
+    padding: 5rem 12.5rem
+
+    &_card
+      background-color: $blue
+      padding: 2rem
+      border-radius: 10px
+      &_header
+        display: flex
+        align-items: center
+        padding-bottom: 2rem
+        gap: 0.5rem
+        position: relative
+        &_title
+          text-transform: uppercase
+          color: $white
+          font-size: 1.4rem
+          font-weight: 600
+        &_stars
+          position: absolute
+          top: 25%
+          right: 0
+          color: $secondary
+      &_paragraph
+        font-size: 1.2rem
+        line-height: 2rem
+        text-align: justify
+        color: $white
+
+  &__cta
+    display: flex
+    justify-content: center
+    align-items: center
+    width: auto
+    justify-self: center
+    padding: 0.5rem  2rem
+    text-transform: uppercase
+    border-radius: 1.875rem
+    background-color: $blue
+    border-color: transparent
+    color: $white
+    cursor: pointer
+    &_icon
+
+      font-size: 1.5rem
+      margin-right: 1rem
