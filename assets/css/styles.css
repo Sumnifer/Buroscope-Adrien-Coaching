@@ -355,6 +355,7 @@ a {
   flex-direction: column;
   padding: 2% 25%;
   width: 100%;
+  background-color: #2F4858;
 }
 .users_form_label {
   margin-bottom: 5px;

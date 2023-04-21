@@ -14,6 +14,7 @@ function login($login, $pass)
 {
     $connexion = connexion();
     $requete = "SELECT * FROM users WHERE email_users='" . $login . "'";
+    echo $requete;
     $resultat = mysqli_query($connexion, $requete);
     $nb_ligne = mysqli_num_rows($resultat);
     if ($nb_ligne == 1) {
@@ -23,7 +24,7 @@ function login($login, $pass)
         $_SESSION["prenom_users"] = $ligne->prenom_users;
         $_SESSION["nom_users"] = $ligne->nom_users;
         if ($ligne->statut_users == "root"){
-            header("location: ../back/back.php");
+            header("location: ../../back/back.php");
         }else {
             header("location: ../front.php");
         }

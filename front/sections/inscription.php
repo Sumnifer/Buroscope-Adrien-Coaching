@@ -1,5 +1,5 @@
 <?php
-require_once "../tools/fonctions.php";
+require_once "../../tools/fonctions.php";
 $connexion = connexion();
 
 if (isset($_POST["submit"])) {
@@ -56,9 +56,9 @@ if (isset($_POST["submit"])) {
 
 
         if($stmt->execute()){
+            header("Location: formSante.html");
             $confirmation =
             "<p class=\"success\"><i class=\"fa-solid fa-circle-check success_icon\"></i>Bienvenue parmi nous ! Vous pouvez désormais vous connecter.</p>";
-
             foreach($_POST as $cle => $valeur){
                 unset($_POST[$cle]);
             }
@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
     }
 }
 include "inscription.html";
-include "../front/sections/generic/footer.php";
+include "footer.php";
 mysqli_close($connexion);
 
         $stmt->execute();
