@@ -112,7 +112,7 @@ a {
 .content__details {
   background-color: #26261F;
   border-radius: 0.625rem;
-  margin-bottom: 0.125rem;
+  margin-bottom: 0.125;
 }
 .content__details_summary {
   padding: 0.5rem;
