@@ -5,7 +5,7 @@
     <div class="prestation__container">
         <div class="prestation__container_card">
             <img
-                src="assets/img/cathy-pham-3jAN9InapQI-unsplash%201.png"
+                src="../assets/img/cathy-pham-3jAN9InapQI-unsplash%201.png"
                 alt=""
                 class="prestation__container_card_img"
             />
@@ -26,7 +26,7 @@
         </div>
         <div class="prestation__container_card">
             <img
-                src="assets/img/bruce-mars-tj27cwu86Wk-unsplash%201.png"
+                src="../assets/img/bruce-mars-tj27cwu86Wk-unsplash%201.png"
                 alt=""
                 class="prestation__container_card_img"
             />
@@ -47,7 +47,7 @@
         </div>
         <div class="prestation__container_card">
             <img
-                src="assets/img/luis-vidal-FodEsaNZs48-unsplash%201.png"
+                src="../assets/img/luis-vidal-FodEsaNZs48-unsplash%201.png"
                 alt=""
                 class="prestation__container_card_img"
             />

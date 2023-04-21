@@ -34,10 +34,10 @@ session_start();
       <li class="header__nav_menu_items">
         <?php
         if (isset($_SESSION["id_users"])) {?>
-        <a href="../front/sections/contact_logged.php" class="header__nav_menu_items_link">Contact</a>
+        <a href="sections/contact_logged.php" class="header__nav_menu_items_link">Contact</a>
        <?php }
         else{?>
-            <a href="front/contact.php" class="header__nav_menu_items_link">Contact</a>
+            <a href="sections/contact.php" class="header__nav_menu_items_link">Contact</a>
 
         <?php };?>
 
