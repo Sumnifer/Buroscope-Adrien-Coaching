@@ -1,16 +1,14 @@
 <?php $connexion = connexion(); ?>
-<form action="back.php?action=articles&case=<?php if (isset($action_form)) {
-    echo $action_form;
-} ?>" method="post" class="articles_form" enctype="multipart/form-data">
+<form action="back.php?action=articles&case=<?php if (isset($action_form)) {echo $action_form;} ?>" method="post" class="articles_form" enctype="multipart/form-data">
     <label class="articles_form_label" for="title_articles">Titre</label>
     <input class="articles_form_input" type="text" name="title_articles" id="title_articles" value="<?php if (
         isset($_POST["title_articles"])
     ) {
         echo $_POST["title_articles"];
-    } ?>">
+    } ?>" placeholder="Titre">
 
     <label class="articles_form_label" for="content_articles">Contenu</label>
-    <textarea class="articles_form_textarea" name="content_articles" id="content_articles"><?php if (
+    <textarea class="articles_form_textarea" name="content_articles" id="content_articles" placeholder="Contenu"><?php if (
         isset($_POST["content_articles"])
     ) {
         echo $_POST["content_articles"];
@@ -35,7 +33,7 @@
 
   <div class="articles_form_div">
     <label for="visibility_articles_div_input"> Oui </label>
-    <input class="articles_form_div_input "type="radio" name="visibility_articles" id="visibility_articles">
+    <input class="articles_form_div_input" type="radio" name="visibility_articles" id="visibility_articles">
     <label for="visibility_articles"> Non </label>
     <input class="articles_form_radio" type="radio" name="visibility_articles" id="visibility_articles">
   </div>
