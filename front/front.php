@@ -50,10 +50,13 @@ if (isset($_GET["action"])) {
                     "<p class=\"success\"><i class=\"fa-solid fa-circle-check success_icon\"></i>Vous êtes désormais inscrit à notre newsletter !</p>";
                 include "front.html";
             }
-
             break;
+            case "presentation":
+                include "sections/presentation_page.php";
+                break;
     }
 }
 include "sections/footer.php";
 
 mysqli_close($connexion); // ? ==> Fermeture DB <==
+header("Location: front.php?action=index");
