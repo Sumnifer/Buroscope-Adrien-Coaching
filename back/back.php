@@ -49,6 +49,10 @@ if (isset($_SESSION["id_users"])) {
                 include "sections/calendar.php";
                 break;
 
+                case "presentations":
+                include "sections/presentations.php";
+                break;
+
         }
 
         // ?<== ========================================== ==> Fin du Switch <== =========================================== ==>

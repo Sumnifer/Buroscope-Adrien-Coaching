@@ -26,10 +26,10 @@ session_start();
         <a href="front.php?action=index" class="header__nav_menu_items_link">Accueil</a>
       </li>
       <li class="header__nav_menu_items">
-        <a href="" class="header__nav_menu_items_link">Présentation</a>
+        <a href="front.php?action=presentation" class="header__nav_menu_items_link">Presentation</a>
       </li>
       <li class="header__nav_menu_items">
-        <a href="#prestation" class="header__nav_menu_items_link">Préstation</a>
+        <a href="front.php?action=prestation" class="header__nav_menu_items_link">Prestation</a>
       </li>
       <li class="header__nav_menu_items">
         <a href="front.php?action=contact" class="header__nav_menu_items_link">Contact</a>
