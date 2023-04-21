@@ -34,6 +34,7 @@ session_start();
       <li class="header__nav_menu_items">
         <?php
         if (isset($_SESSION["id_users"])) {?>
+
         <a href="sections/contact_logged.php" class="header__nav_menu_items_link">Contact</a>
        <?php }
         else{?>
