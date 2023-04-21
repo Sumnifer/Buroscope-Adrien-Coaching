@@ -7,16 +7,17 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-    <link rel="stylesheet" href="../assets/css/FontAwesome.css" />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/FontAwesome.css" />
     <title>Inscription</title>
   </head>
 
   <body class="inscription_body">
     <header class="header__inscription">
-      <a href="index.php" class="header__inscription_logo">
+      <a href="../index.php" class="header__inscription_logo">
         <img
           src="../assets/img/logo.png"
+
           alt="logo"
           class="header__inscription_logo_img"
         />
@@ -29,7 +30,7 @@
     <section class="info">
       <form action="inscription.php" method="post" class="info__form">
         <div class="info__form">
-          <label for="email" class="info__form_label">Poids en Kg</label>
+          <label for="poids" class="info__form_label">Poids en Kg</label>
           <input
             type="text"
             name="poids"
@@ -39,7 +40,7 @@
           />
         </div>
         <div class="info__form">
-          <label for="password" class="info__form_label">Taille en cm</label>
+          <label for="taille" class="info__form_label">Taille en cm</label>
           <input
             type="text"
             name="taille"
@@ -48,6 +49,7 @@
             class="info__form_input"
           />
         </div>
+      </form>
     </section>
 
     <section>
@@ -59,6 +61,7 @@
         <div class="sante__text">
           <div class="sante__text_global">
             <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
+
             <p>Un membre de votre famille est-il décédé subitement d’une cause cardiaque ou inexpliquée ?</p>
             <input type="checkbox">
             <input type="checkbox">
@@ -106,22 +109,27 @@
             <p>Ressentez-vous une douleur, un manque de force ou une raideur suite à un problème osseux, articulaire ou musculaire (fracture, entorse, luxation, déchirure, tendinite, etc…) survenu durant les 12 derniers mois ?</p>
             <input type="checkbox">
             <input type="checkbox">
+
           </div>
           <div class="sante__text_global">
             <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
             <p>Votre pratique sportive est-elle interrompue pour des raisons de santé ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
+
+            <input type="checkbox" class="sante__text_global_input">
+            <input type="checkbox" class="sante__text_global_input">
+
           </div>
           <div class="sante__text_global">
             <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
             <p>Pensez-vous avoir besoin d’un avis médical pour poursuivre votre pratique sportive ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
+
+            <input type="checkbox" class="sante__text_global_input">
+            <input type="checkbox" class="sante__text_global_input">
           </div>
         </div>
         <div class="sante__button">
-          <p class="sante__button_text">Envoyer le formulaire</p>
+          <a href="#" class="sante__button_text">Envoyer le formulaire</a>
+
         </div>
     </section>
   </body>
