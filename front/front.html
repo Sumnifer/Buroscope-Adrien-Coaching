@@ -1,5 +1,5 @@
 <?php include "sections/header.php" ?>
-<?php if (isset($confirmation)) {echo $confirmation;} ?>
+
 
 <section class="hero_section">
   <img src="../assets/img/header.jpg" alt="" />
@@ -155,7 +155,11 @@
       </div>
       <p class="reseau__container_items_paragraph">Et Abonnez-vous à ma Newsletter pour en savoir plus sur mes actualités !</p>
       <div class="reseau__container_items_newsletter">
-        <?php if(isset($form)) {include $form;} ?>
+        <form action="front.php?action=newsletters#newsletters" method="post" enctype="multipart/form-data" id="newsletters">
+        <?php if (isset($confirmation)) {echo $confirmation;} ?>
+          <input type='email' name='email_newsletters' id='email_newsletters' class='reseau__container_items_newsletter_input'>
+          <button type='submit' class='reseau__container_items_newsletter_cta'>S’abonner</button>
+        </form>
       </div>
     </div>
   </div>
