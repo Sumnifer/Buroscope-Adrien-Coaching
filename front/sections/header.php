@@ -23,7 +23,7 @@ session_start();
   <nav class="header__nav">
     <menu class="header__nav_menu">
       <li class="header__nav_menu_items">
-        <a href="front.php" class="header__nav_menu_items_link">Accueil</a>
+        <a href="front.php?action=index" class="header__nav_menu_items_link">Accueil</a>
       </li>
       <li class="header__nav_menu_items">
         <a href="" class="header__nav_menu_items_link">Présentation</a>
@@ -32,17 +32,7 @@ session_start();
         <a href="#prestation" class="header__nav_menu_items_link">Préstation</a>
       </li>
       <li class="header__nav_menu_items">
-        <?php
-        if (isset($_SESSION["id_users"])) {?>
-
-        <a href="sections/contact_logged.php" class="header__nav_menu_items_link">Contact</a>
-       <?php }
-        else{?>
-            <a href="sections/contact.php" class="header__nav_menu_items_link">Contact</a>
-
-        <?php };?>
-
-
+        <a href="front.php?action=contact" class="header__nav_menu_items_link">Contact</a>
       </li>
     </menu>
   </nav>
@@ -71,10 +61,10 @@ session_start();
         >
         <?php
         if(isset($_SESSION['id_users'])){
-          echo "<a href='../back/back.php?action=logout' class='header__controls_detail_bloc_link'>
+          echo "<a href='front.php?action=logout' class='header__controls_detail_bloc_link'>
         <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Déconnexion</a>";
         } else {
-          echo "<a href='sections/login.php' class='header__controls_detail_bloc_link'>
+          echo "<a href='front.php?action=logging' class='header__controls_detail_bloc_link'>
         <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Connexion</a>";}
         ?>
       </div>

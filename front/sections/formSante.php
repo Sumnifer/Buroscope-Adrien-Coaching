@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../../assets/css/styles.css" />
-    <link rel="stylesheet" href="../../assets/css/FontAwesome.css" />
-    <title>Inscription</title>
-  </head>
-
-  <body class="inscription_body">
-    <header class="header__inscription">
-      <a href="../index.php" class="header__inscription_logo">
-        <img
-          src="../assets/img/logo.png"
-
-          alt="logo"
-          class="header__inscription_logo_img"
-        />
-      </a>
-    </header>
-    <section class="questionnaire">
-      <h1 class="questionnaire__title">Questionnaire santé</h1>
-    </section>
-
+  <div class="inscription_body">
     <section class="info">
       <form action="inscription.php" method="post" class="info__form">
         <div class="info__form">
@@ -52,8 +24,8 @@
       </form>
     </section>
 
-    <section>
-      <h2 class="sante-title">Durant les 12 derniers mois</h2>
+    <section class="sante">
+      <h2 class="sante_title">Durant les 12 derniers mois</h2>
         <div class="sante__oui">
           <p>Oui</p>
           <p>Non</p>
@@ -132,5 +104,4 @@
 
         </div>
     </section>
-  </body>
-</html>
+  </div>
