@@ -12,7 +12,7 @@ if (isset($_SESSION["id_users"])) {
 
             case "logout":
                 session_destroy();
-                header("location: ../front");
+                header("location: ../front/front.php?action=index");
                 break;
 
 
@@ -62,5 +62,5 @@ if (isset($_SESSION["id_users"])) {
 
     // !<== ====================================== ==> Utilisateurs Connectés <== ====================================== ==>
 } else {
-    header("Location:../login/login.php");
+    header("Location: ../front/front.php?action=logging");
 }
