@@ -21,49 +21,56 @@ if (isset($_POST["submit"])) {
     }
     if (empty($confirmation)) {
         $email = htmlspecialchars($_POST["email_users"], ENT_QUOTES, "UTF-8");
-        $genre =$_POST["gender_users"];
-        $surname = htmlspecialchars($_POST["surname_users"], ENT_QUOTES, "UTF-8");
-        $name = htmlspecialchars($_POST["name_users"], ENT_QUOTES, "UTF-8");
-        $phone = preg_replace("/[^0-9]/","",$_POST["phone_users"]);
-        $date = strtotime(str_replace("/", "-", $_POST['date_users']));
-        if(!$date){
-            $confirmation= "<p class=\"warning\"><i class=\"fa-solid fa-triangle-exclamation warning_icon mr-1\"></i>Veuillez entrer une date de naissance valide</p>";
-        }else{
-            $date=date("Y-m-d", $date);
-        }
-        $pass = password_hash(
-            htmlspecialchars($_POST["pass_users"], ENT_QUOTES, "UTF-8"),
-            PASSWORD_DEFAULT
-        );
-        $statut = "user";
+        $query = "SELECT id_users FROM users WHERE email_users = '$email'";
+        $result = mysqli_query($connexion, $query);
 
-        $stmt = $connexion->prepare(
-            "INSERT INTO users (email_users, surname_users, gender_users, phone_users, name_users, date_users, pass_users, statut_users  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-        );
-        $stmt->bind_param(
-            "ssssssss",
-            $email,
-            $surname,
-            $genre,
-            $phone,
-            $name,
-            $date,
-            $pass,
-            $statut
-
-        );
-
-
-        if($stmt->execute()){
-            header("Location: front.php?action=formSante");
-            $confirmation =
-            "<p class=\"success\"><i class=\"fa-solid fa-circle-check success_icon\"></i>Bienvenue parmi nous ! Vous pouvez désormais vous connecter.</p>";
-            foreach($_POST as $cle => $valeur){
-                unset($_POST[$cle]);
+        if(mysqli_num_rows($result) > 0){
+            $confirmation = "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon mr-1'></i>Cette adresse e-mail est déjà utilisée.</p>";
+        } else {
+            $genre = $_POST["gender_users"];
+            $surname = htmlspecialchars($_POST["surname_users"], ENT_QUOTES, "UTF-8");
+            $name = htmlspecialchars($_POST["name_users"], ENT_QUOTES, "UTF-8");
+            $phone = preg_replace("/[^0-9]/", "", $_POST["phone_users"]);
+            $date = strtotime(str_replace("/", "-", $_POST['date_users']));
+            if (!$date) {
+                $confirmation = "<p class=\"warning\"><i class=\"fa-solid fa-triangle-exclamation warning_icon mr-1\"></i>Veuillez entrer une date de naissance valide</p>";
+            } else {
+                $date = date("Y-m-d", $date);
             }
-        }else{
-            $confirmation=
-            "<p class=\"warning\"><i class=\"fa-solid fa-triangle-exclamation warning_icon mr-1\"></i>Une erreur est suvenue</p>";
+            $pass = password_hash(
+                htmlspecialchars($_POST["pass_users"], ENT_QUOTES, "UTF-8"),
+                PASSWORD_DEFAULT
+            );
+            $statut = "user";
+
+            $stmt = $connexion->prepare(
+                "INSERT INTO users (email_users, surname_users, gender_users, phone_users, name_users, date_users, pass_users, statut_users  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+            );
+            $stmt->bind_param(
+                "ssssssss",
+                $email,
+                $surname,
+                $genre,
+                $phone,
+                $name,
+                $date,
+                $pass,
+                $statut
+
+            );
+
+
+            if ($stmt->execute()) {
+                header("Location: front.php?action=formSante");
+                $confirmation =
+                    "<p class=\"success\"><i class=\"fa-solid fa-circle-check success_icon\"></i>Bienvenue parmi nous ! Vous pouvez désormais vous connecter.</p>";
+                foreach ($_POST as $cle => $valeur) {
+                    unset($_POST[$cle]);
+                }
+            } else {
+                $confirmation =
+                    "<p class=\"warning\"><i class=\"fa-solid fa-triangle-exclamation warning_icon mr-1\"></i>Une erreur est suvenue</p>";
+            }
         }
     }
 }
@@ -82,7 +89,7 @@ mysqli_close($connexion);
     <h1 class="connexion__title">Créer votre compte</h1>
     <p class="connexion__paragraph">
         Vous avez déjà un compte ?
-        <a href="login.php" class="connexion__paragraph_link">Connectez-vous.</a>
+        <a href="front.php?action=logging" class="connexion__paragraph_link">Connectez-vous.</a>
     </p>
 </section>
 
