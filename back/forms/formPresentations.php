@@ -1,16 +1,21 @@
-<form action="back.php?action=presentations&case=<?php if (isset($action_form)) {echo $action_form;} ?>" method="post" class="presentation__form" enctype="multipart/form-data">
-    <label for="title_presentation" class="presentation__form_label">Titre</label>
-    <input type="text" name="title_presentation" id="title_presentation" class="presentation__form_input" placeholder="Titre" value="<?php if (isset($_POST["title_presentation"])) {echo $_POST["title_presentation"];}?>">
-    <label for="content_presentation" class="presentation__form_label">Contenu</label>
-    <textarea name="content_presentation" id="content_presentation" class="presentation__form_textarea" placeholder="Contenu"><?php if (isset($_POST["content_presentation"])) {echo $_POST["content_presentation"];}?></textarea>
-    <label for="img_presentation" class="presentation__form_label">Illustration</label>
-    <input type="file" name="img_presentation" id="img_presentation" class="presentation__form_input" value="">
-    <label for="alt_presentation" class="presentation__form_label">Attribut Alt</label>
-    <input type="text" name="alt_presentation" id="alt_presentation" class="presentation__form_input" placeholder="Attribut" value="<?php if (isset($_POST['alt_presentation'])){echo $_POST['alt_presentation'];} ?>">
-    <label for="direction_presentation" class="presentation__form_label">Emplacement de l'image</label>
-    <select name="direction_presentation" id="direction_presentation" class="presentation__form_select">
-        <option class="presentation__form_select_option" value="left">Gauche</option>
-        <option class="presentation__form_select_option" value="right">Droite</option>
+<form action="back.php?action=presentations&case=<?php if (isset($action_form)) {echo $action_form;} ?>" method="post" class="presentation__form" id="presentation_form" enctype="multipart/form-data">
+    <label for="title_presentations" class="presentation__form_label">Titre</label>
+    <input type="text" name="title_presentations" id="title_presentations" class="presentation__form_input" placeholder="Titre" value="<?php if (isset($_POST["title_presentations"])) {echo $_POST["title_presentations"];}?>">
+    <label for="content_presentations" class="presentation__form_label">Contenu</label>
+    <textarea name="content_presentations" id="content_presentations" class="presentation__form_textarea" placeholder="Contenu"><?php if (isset($_POST["content_presentations"])) {echo $_POST["content_presentations"];}?></textarea>
+    <label for="img_presentations" class="presentation__form_label">Illustration</label>
+    <input type="file" name="img_presentations" id="img_presentations" class="presentation__form_input" value="">
+    <label for="alt_presentations" class="presentation__form_label">Attribut Alt</label>
+    <input type="text" name="alt_presentations" id="alt_presentations" class="presentation__form_input" placeholder="Attribut" value="<?php if (isset($_POST['alt_presentations'])){echo $_POST['alt_presentations'];} ?>">
+    <label for="direction_presentations" class="presentation__form_label">Emplacement de l'image</label>
+    <select name="direction_presentations" id="direction_presentations" class="presentation__form_select">
+        <option class="presentation__form_select_option" value="left" <?php if((isset($direction))&&( $direction=="left")){echo "selected";} ?>>Gauche</option>
+        <option class="presentation__form_select_option" value="right"<?php if((isset($direction))&&( $direction=="right")){echo "selected";} ?>>Droite</option>
+    </select>
+    <label for="visibility_presentations" class="presentation__form_label">Visibilité</label>
+    <select name="visibility_presentations" id="visibility_presentations" class="presentation__form_select">
+        <option class="presentation__form_select_option" value="1" <?php if((isset($visibility))&&( $visibility==1)){echo "selected";} ?>>Oui</option>
+        <option class="presentation__form_select_option" value="2" <?php if((isset($visibility))&&( $visibility==2)){echo "selected";} ?>>Non</option>
     </select>
     <button class="presentation__form_btn" type="submit"> Enregistrer</button>
 </form>

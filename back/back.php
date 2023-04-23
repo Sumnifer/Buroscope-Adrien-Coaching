@@ -1,70 +1,65 @@
 <?php
 session_start();
-
 if (isset($_SESSION["id_users"])) {
-    require_once "../tools/fonctions.php";
-    $connexion = connexion(); // ? ==> Connexion DB <==
+    if ($_SESSION["statut_users"] != "user") {
+        require_once "../tools/fonctions.php";
+        $connexion = connexion(); // ? ==> Connexion DB <==
 
+        if (isset($_GET["action"])) {
+            switch ($_GET["action"]) {
+                case "logout":
+                    session_destroy();
+                    header("location: ../front/front.php?action=index");
+                    break;
 
-    if (isset($_GET["action"])) {
+                case "users":
+                    include "sections/users.php";
+                    break;
 
-        switch ($_GET["action"]) {
+                case "settings":
+                    include "sections/settings.php";
+                    break;
 
-            case "logout":
-                session_destroy();
-                header("location: ../front/front.php?action=index");
-                break;
+                // * <== ----------------------------------------------------- ==>
 
+                case "dashboard":
+                    include "sections/dashboard.php";
+                    break;
 
-            case "users":
-                include "sections/users.php";
-                break;
+                // * <== ----------------------------------------------------- ==>
 
+                case "pages":
+                    include "sections/pages.php";
+                    break;
 
-            case "settings":
-                include "sections/settings.php";
-                break;
+                // * <== ----------------------------------------------------- ==>
 
-            // * <== ----------------------------------------------------- ==>
+                case "articles":
+                    include "sections/articles.php";
+                    break;
 
-            case "dashboard":
-                include "sections/dashboard.php";
-                break;
+                // * <== ----------------------------------------------------- ==>
 
-            // * <== ----------------------------------------------------- ==>
-
-            case "pages":
-                include "sections/pages.php";
-                break;
-
-            // * <== ----------------------------------------------------- ==>
-
-            case "articles":
-                include "sections/articles.php";
-                break;
-
-            // * <== ----------------------------------------------------- ==>
-
-            case "calendar":
-                include "sections/calendar.php";
-                break;
+                case "calendar":
+                    include "sections/calendar.php";
+                    break;
 
                 case "presentations":
-                include "sections/presentations.php";
-                break;
+                    include "sections/presentations.php";
+                    break;
+            }
 
+            // ?<== ========================================== ==> Fin du Switch <== =========================================== ==>
+        } else {
+            header("Location: back.php?action=dashboard");
         }
 
-        // ?<== ========================================== ==> Fin du Switch <== =========================================== ==>
+        include "back.html";
+        mysqli_close($connexion); // ? ==> Fermeture DB <==
     } else {
-        header("Location: back.php?action=dashboard");
+    header("Location: ../front/front.php?action=index");
     }
-
-    // +<== =========================================== ==> Fin Action <== ============================================= ==>
-    include "back.html";
-    mysqli_close($connexion); // ? ==> Fermeture DB <==
-
-    // !<== ====================================== ==> Utilisateurs Connectés <== ====================================== ==>
 } else {
     header("Location: ../front/front.php?action=logging");
+
 }

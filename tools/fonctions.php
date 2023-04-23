@@ -22,10 +22,12 @@ function login($login, $pass)
         $_SESSION["id_users"] = $ligne->id_users;
         $_SESSION["prenom_users"] = $ligne->prenom_users;
         $_SESSION["nom_users"] = $ligne->nom_users;
+        $_SESSION["email_users"] = $ligne->email_users;
+        $_SESSION["statut_users"] = $ligne->statut_users;
         if ($ligne->statut_users == "root"){
             header("location: ../back/back.php");
         }else {
-            header("location: ../front.php?action=index");
+            header("location: ../front/front.php?action=index");
         }
     }
     mysqli_close($connexion);

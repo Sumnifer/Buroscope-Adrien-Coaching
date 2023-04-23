@@ -3,6 +3,8 @@
   display: grid
   grid-template-columns: 60px 1fr
   &__title
+    width: 100%
+    justify-self: center
     background-color: #2F4858
     padding-block: 2rem
     text-align: center
@@ -11,6 +13,14 @@
     grid-column: 1/5
     color: $white
     font-weight: 700
+    position: relative
+  &__link
+    position: absolute
+    right: 2%
+    top: 4.5%
+    color: $white
+    &_icon
+      font-size: 2rem
 
 
 
@@ -26,8 +36,14 @@
       padding: 0.5rem
       display: grid
       grid-template-columns: repeat(4,1fr)
+      align-items: center
       gap: 1rem
       border-bottom: 1px solid $white
+      &_items
+        &_img
+          width: 60px
+          aspect-ratio: 1
+          object-fit: cover
 
       &_actions
         display: flex
