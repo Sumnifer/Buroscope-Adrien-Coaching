@@ -24,12 +24,8 @@
 
 
 
-
-
-
-
   &__nav
-
+    height: 100%
     @media screen and (max-width: 992px)
       display: none
 
@@ -37,17 +33,54 @@
       display: flex
       align-items: center
       justify-content: center
-      gap: 1rem
+      height: 100%
+      margin: 0
+      padding: 0
 
       &_items
         height: 100%
-        padding: 0.5rem 1rem
+        position: relative
+        width: 150px
+        z-index: 4
 
         &_link
           text-transform: uppercase
+          height: 100%
           font-size: 1rem
           color: $white
           font-weight: 500
+          display: flex
+          align-items: center
+          justify-content: center
+          z-index: 3
+          &:hover
+            &::before
+              transform: translateY(0%)
+            &::after
+              width: 100%
+              opacity: 100%
+          &::before
+            content: ''
+            top: 0
+            position: absolute
+            display: block
+            transform: translateY(-100%)
+            height: 100%
+            z-index: -1
+            width: 100%
+            background-color: #243742
+            transition: transform 0.7s ease-in-out
+          &::after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 0
+            height: 2px
+            width: 0
+            opacity: 0
+            background-color: white
+            transition: width 0.7s ease-in-out
+            transition-delay: 0.7s
 
   &__controls
     display: flex
