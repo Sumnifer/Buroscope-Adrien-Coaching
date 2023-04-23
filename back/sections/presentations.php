@@ -75,7 +75,6 @@ if (isset($_SESSION["id_users"])) {
                                 "' WHERE id_presentations='" .
                                 $last_Id .
                                 "'";
-                            echo $request2;
                             $result2 = mysqli_query($connexion, $request2);
                         }
                     }
@@ -178,6 +177,7 @@ if (isset($_SESSION["id_users"])) {
                             "." .
                             $file_extension;
                         $file_path = "../medias/" . $new_file_name;
+                        echo $file_path;
 
                         if (
                             move_uploaded_file(
@@ -258,7 +258,7 @@ if (isset($_SESSION["id_users"])) {
                         "'";
                     $result4 = mysqli_query($connexion, $request4);
                     $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation a bien été supprimée </p>";
+                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été supprimée </p>";
 
                     $request2 =
                         "SELECT * FROM presentations ORDER BY rank_presentations";

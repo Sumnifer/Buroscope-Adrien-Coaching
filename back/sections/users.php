@@ -32,7 +32,7 @@ if (isset($_SESSION["id_users"])) {
                     $query = "SELECT id_users FROM users WHERE email_users = '$email'";
                     $result = mysqli_query($connexion, $query);
 
-                    if(mysqli_num_rows($result) > 0){
+                    if (mysqli_num_rows($result) > 0) {
                         $confirmation = "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon mr-1'></i>Cette adresse e-mail existe déjà dans la base de données.</p>";
                     } else {
 
@@ -198,6 +198,11 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
+                case "searchUsers":
+                    if (isset($_POST["formUsersSearch"])) {
+                        $searchResult = $_POST["formUsersSearch"];
+                    }
+                    break;
         }
     }
 
@@ -205,10 +210,14 @@ if (isset($_SESSION["id_users"])) {
 
     if ($_SESSION["statut_users"] == "root") {
         $request = "SELECT * FROM users ORDER BY id_users";
+    }
+    if ((($_SESSION["statut_users"] == "root") || ($_SESSION['statut_users'] == 'admin')) && ($_GET['case'] == 'searchUsers')) {
+        $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
     } else {
         $request =
             "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
     }
+
     $result = mysqli_query($connexion, $request);
     $content = "<details class=\"content__details\">";
     $content .= "<summary class=\"content__details_summary\">";

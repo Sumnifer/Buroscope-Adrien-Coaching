@@ -33,6 +33,13 @@
     </nav>
   </aside>
   <section class="content">
+    <?php if($_GET['action']=='users'){ ?>
+    <form action="back.php?action=users&case=searchUsers" method="post" enctype="multipart/form-data">
+      <label for="formUsersSearch"></label>
+      <input type="search" name="formUsersSearch" id="formUsersSearch" class="users_form__searchInput" placeholder="Rechercher">
+      <button type="submit" class="searchButton">Rechercher</button>
+    </form>
+    <?php } ?>
     <?php if(isset($confirmation)){echo $confirmation;} ?>
     <?php if(isset($content)){echo $content;} ?>
     <?php if(isset($form)){include($form);} ?>
