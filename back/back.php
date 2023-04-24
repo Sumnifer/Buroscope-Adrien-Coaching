@@ -61,6 +61,9 @@ if (isset($_SESSION["id_users"])) {
                     break;
 
                 // * <== ----------------------------------------------------- ==>
+                case "sliders":
+                    include "sections/sliders.php";
+                    break;
 
             }
 
