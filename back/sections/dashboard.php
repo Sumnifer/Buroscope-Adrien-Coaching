@@ -1,7 +1,7 @@
 <?php
+session_start();
 $title = "Dashboard";
 $connexion = connexion();
-
 function counter($connexion, $table)
 {
     $request = "SELECT * FROM " . $table;
@@ -11,8 +11,9 @@ function counter($connexion, $table)
 
 $cards = [
     "users" => ["count" => counter($connexion, "users"), "icon" => "fa-users", "name" => "Utilisateurs",],
-    "pages" => ["count" => counter($connexion, "pages"), "icon" => "fa-file-alt","name" => "Pages",],
-    "articles" => ["count" => counter($connexion, "articles"), "icon" => "fa-newspaper","name" => "Articles",],
+    "pages" => ["count" => counter($connexion, "pages"), "icon" => "fa-page","name" => "Pages",],
+    "sliders" => ["count" => counter($connexion, "sliders"), "icon" => "fa-rectangle-vertical-history","name" => "Sliders",],
+    "payments" => ["count" => counter($connexion, "sliders"), "icon" => "fa-credit-card-alt","name" => "Paiements",],
     "presentations" => ["count" => counter($connexion, "presentations"), "icon" => "fa-layer-group", "name" => "Présentations",],
     "prestations" => ["count" => counter($connexion, "prestations"), "icon" => "fa-cards-blank", "name" => "Prestations",],
     "messages" => ["count" => counter($connexion, "messages"), "icon" => "fa-envelope", "name" => "Messages",],

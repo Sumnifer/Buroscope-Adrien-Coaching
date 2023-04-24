@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,22 +15,32 @@
 </head>
 
 <body class="body" id="body">
+<div class="body__div">
+  <h1 class="body__div_title"><?php if(isset($title)){echo $title;}  ?></h1>
+  <div class="body__div_statut">
+    <div class="body__div_statut_div">
+    <?php if(isset($_SESSION['name_users'])){echo "<p>".$_SESSION['name_users']." ".$_SESSION['surname_users']."</p>";} ?>
+    <?php echo "<p> Statut : ".$_SESSION['statut_users']."</p>"; ?>
+    </div>
+    <a href="../front/front.php?action=index" class="body__div_statut_link"><i class="fa-solid fa-desktop body__link_icon"></i></a>
 
-  <h1 class="body__title"><?php if(isset($title)){echo $title;}  ?></h1>
-  <a href="../front/front.php?action=index" class="body__link"><i class="fa-solid fa-desktop body__link_icon"></i></a>
+  </div>
+</div>
+
   <aside class="aside">
     <nav class="aside_navbar">
       <menu class="aside_navbar_menu">
-        <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-house aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=settings" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gear aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=pages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-file aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=sliders" class="aside_navbar_menu_list_link"><i class="fa-solid fa-file aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=payment" class="aside_navbar_menu_list_link"><i class="fa-solid fa-credit-card-alt aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=calendar" class="aside_navbar_menu_list_link"><i class="fa-solid fa-calendar-days aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=presentations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-layer-group aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=prestations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-cards-blank aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-envelope aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-house aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='dashboard'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=settings" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gear aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='settings'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='users'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=pages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-page aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='pages'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=sliders" class="aside_navbar_menu_list_link"><i class="fa-solid fa-rectangle-vertical-history aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='sliders'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=payment" class="aside_navbar_menu_list_link"><i class="fa-solid fa-credit-card-alt aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='payment'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=calendar" class="aside_navbar_menu_list_link"><i class="fa-solid fa-calendar-days aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='calendar'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=presentations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-layer-group aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='presentations'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=prestations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-cards-blank aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='prestations'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=notices" class="aside_navbar_menu_list_link"><i class="fa-solid fa-thumbs-up aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='notices'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=messages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-envelope aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='messages'){echo "<span class='selected'></span>";} ?></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=logout" class="aside_navbar_menu_list_link"><i class="fa-solid fa-arrow-right-to-bracket aside_navbar_menu_list_link_icons"></i></a></li>
       </menu>
     </nav>
@@ -57,6 +68,24 @@
     <?php if(isset($content)){echo $content;} ?>
     <?php if(isset($form)){include($form);} ?>
   </section>
-  <script src="../script.js"></script>
+<script src="../script.js"></script>
+<script>
+  // Récupérez tous les éléments avec la classe "confirmation"
+  // Récupérez tous les éléments avec la classe "confirmation"
+  let confirmations = document.querySelectorAll('.confirmation');
+
+  // Pour chaque élément avec la classe "confirmation"
+  confirmations.forEach(function(confirmation) {
+    // Utilisez la fonction setTimeout pour définir l'opacité de la confirmation sur 0 après 5 secondes
+    setTimeout(function() {
+      confirmation.style.opacity = 0;
+    }, 5000);
+    setTimeout(function () {
+      confirmation.style.display = 'none';
+    }, 5500);
+  });
+
+</script>
+
 </body>
 </html>
