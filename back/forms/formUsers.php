@@ -1,9 +1,29 @@
 <?php
-// + <=================================================================================================================>
-?>
+$class='';
+if(isset($_GET['case'])){
+    if($_GET['case']=='loadUsers'){
+        $class = "form_section_display";
+    }
+    if($_GET['case']=='unloadUsers'){
+        $class = "form_section_display";
+    }
+}?>
+<section class="form_section <?php echo $class ?>" id="userForm">
 <form action="back.php?action=users&case=<?php if (isset($action_form)) {
     echo $action_form;
 } ?>" method="post" class="users_form" enctype="multipart/form-data">
+    <div class="user_form__container">
+        <h1 class="presentation__form_div_title">
+            <?php
+            if ($_GET['case'] == "loadUsers"){
+                echo "Modifier un Utilisateur";
+            }
+            if($_GET['case']=="unloadUsers")
+                echo "Ajouter un Utilisateur";
+            ?>
+        </h1>
+    <i class="users_form__container_icon fa-solid fa-xmark" id="closeButton"></i>
+    </div>
     <label for="email_users">Email</label>
     <input type="email" name="email_users" id="email_users" class="users_form__input" placeholder="Email" value="<?php if (
         isset($_POST["email_users"])
@@ -108,3 +128,4 @@
 
     <button type="submit" class="users_form_btn">Enregistrer</button>
 </form>
+</section>

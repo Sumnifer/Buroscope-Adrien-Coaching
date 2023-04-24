@@ -9,9 +9,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/FontAwesome.css" />
-<title>Panneau de Configuration</title>
 
-<body class="body">
+<title>Panneau de Configuration</title>
+</head>
+
+<body class="body" id="body">
 
   <h1 class="body__title"><?php if(isset($title)){echo $title;}  ?></h1>
   <a href="../front/front.php?action=index" class="body__link"><i class="fa-solid fa-desktop body__link_icon"></i></a>
@@ -31,18 +33,29 @@
       </menu>
     </nav>
   </aside>
-  <section class="content">
+  <section class="content" id="content">
+    <div class="content__div">
+      <?php if($_GET['action']!='dashboard') {
+          if ($_GET['action']== 'users'){
+          echo "<a href='back.php?action=users&case=unloadUsers' class='content__div_button' id='newButton'>Nouveau<i class='fa-solid fa-plus content__div_button_icon'></i></a>";
+          }
+          if($_GET['action']=='presentations') {
+          echo "<a href='back.php?action=presentations&case=unloadPresentations' class='content__div_button' id='newButton'>Nouveau <i class='fa-solid fa-plus content__div_button_icon'></i></a>";
+          }
+      } ?>
     <?php if($_GET['action']=='users'){ ?>
+
     <form action="back.php?action=users&case=searchUsers" method="post" enctype="multipart/form-data" class="userSearchForm">
       <label for="formUsersSearch"></label>
       <input type="search" name="formUsersSearch" id="formUsersSearch" class="users_form__searchInput" placeholder="Rechercher">
       <button type="submit" class="searchButton"><i class="fa-solid fa-magnifying-glass searchButtonIcon"></i></button>
     </form>
     <?php } ?>
+    </div>
     <?php if(isset($confirmation)){echo $confirmation;} ?>
     <?php if(isset($content)){echo $content;} ?>
     <?php if(isset($form)){include($form);} ?>
   </section>
-
+  <script src="../script.js"></script>
 </body>
 </html>

@@ -158,7 +158,6 @@ if (isset($_SESSION["id_users"])) {
                         $confirmation =
                             "<p class=\"warning\"><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Une erreur est survenue lors de la mise à jour</p>";
                     }
-                    header("Location: back.php?action=users");
                 }
 
                 break;
@@ -203,19 +202,25 @@ if (isset($_SESSION["id_users"])) {
                         $searchResult = $_POST["formUsersSearch"];
                     }
                     break;
+            case "unloadUsers" :
+                $action_form = "newUsers";
+                foreach ($_POST as $cle => $valeur) {
+                    unset($_POST[$cle]);
+                }
+                break;
         }
     }
 
     // Affichage des utilisateurs
 
-    if ($_SESSION["statut_users"] == "root") {
-        $request = "SELECT * FROM users ORDER BY id_users";
-    }
-    if ((($_SESSION["statut_users"] == "root") || ($_SESSION['statut_users'] == 'admin')) && ($_GET['case'] == 'searchUsers')) {
-        $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
-    } else {
+    if ($_SESSION["statut_users"] != "root") {
         $request =
             "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
+    }
+    if ((($_SESSION["statut_users"] == "root") || ($_SESSION['statut_users'] == 'admin')) && ($_GET['case'] === 'searchUsers')) {
+        $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
+    } else {
+        $request = "SELECT * FROM users ORDER BY id_users";
     }
 
     $result = mysqli_query($connexion, $request);
@@ -223,27 +228,25 @@ if (isset($_SESSION["id_users"])) {
     $content .= "<summary class=\"content__details_summary\">";
     $content .= "<div>ID</div>";
     $content .= "<div>EMAIL</div>";
-    $content .= "<div>ACTION</div>";
     $content .= "<div>STATUT</div>";
+    $content .= "<div>ACTION</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $content .= "<details class=\"content__details\">";
         $content .= "<summary class=\"content__details_summary\">";
         $content .= "<div class=\"content__details_summary_items\">$rows->id_users</div>";
         $content .= "<div class=\"content__details_summary_items\">$rows->email_users</div>";
+        $content .= "<div class=\"content__details_summary_items\">$rows->statut_users</div>";
         $content .=
-            "<div class='content__details_summary_actions'><a class='content__details_summary_actions_link' href='back.php?action=users&case=loadUsers&id_users=" .
+            "<div class='content__details_summary_actions'><a class='modify content__details_summary_actions_link-modify' href='back.php?action=users&case=loadUsers&id_users=" .
             $rows->id_users .
             "' >
-                      <i class='fa-solid fa-pen-to-square'></i></a>";
+                      <i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=users&case=warningUsers&id_users=" .
+            "<a class='content__details_summary_actions_link-trash' href='back.php?action=users&case=warningUsers&id_users=" .
             $rows->id_users .
             "'>
-                      <i class='fa-solid fa-trash'></i></a>";
-        $content .= "<a class='content__details_summary_actions_link' href='#'>
-                      <i class='fa-solid fa-message'></i></a></div>";
-        $content .= "<div class=\"content__details_summary_items\">$rows->statut_users</div>";
+                      <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
 }

@@ -4,11 +4,14 @@ if (isset($_SESSION["id_users"])) {
     mysqli_set_charset($connexion, "utf8");
     $title = "Gestion des Presentations";
     $form = "forms/formPresentations.php";
-    $action_form = "newPresentations";
+
+
 
     if (isset($_GET["case"])) {
+
         switch ($_GET["case"]) {
             case "newPresentations":
+                $action_form = "newPresentations";
                 $request =
                     "SELECT COUNT(*) AS nb_presentations FROM presentations";
                 $result = mysqli_query($connexion, $request);
@@ -141,6 +144,7 @@ if (isset($_SESSION["id_users"])) {
                         "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la visibilité</p>";
                 }
 
+
                 if (empty($error)) {
                     $request = "UPDATE presentations SET 
                     title_presentations='$title_presentations',
@@ -213,8 +217,14 @@ if (isset($_SESSION["id_users"])) {
                             $_GET["id_presentations"] .
                             "'";
                         $resultat = mysqli_query($connexion, $requete);
-                        $confirmation =
-                            "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La visibilité a bien été modifiée </p>";
+                        if($_GET['visibility']==1){
+                            $confirmation =
+                                "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais visible </p>";
+                        }
+                        if($_GET['visibility']==2){
+                            $confirmation =
+                                "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais invisible </p>";
+                        }
                     }
                 }
 
@@ -335,6 +345,14 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
+            case "unloadPresentations" :
+                $action_form = "newPresentations";
+                foreach ($_POST as $cle => $valeur) {
+                    unset($_POST[$cle]);
+                }
+                break;
+
+
         }
     }
     $request = "SELECT * FROM presentations ORDER BY rank_presentations";
@@ -352,16 +370,16 @@ if (isset($_SESSION["id_users"])) {
         $content .=
             "<div class='content__details_summary_items'>" .
             $rows->rank_presentations .
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=rankPresentations&direction=up&id_presentations=" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=presentations&case=rankPresentations&direction=up&id_presentations=" .
             $rows->id_presentations .
             "&rank=" .
             $rows->rank_presentations .
-            "'><i class='fa-solid fa-arrow-up ' style='margin-inline: 0.2rem; margin-left: 0.5rem'></i></a>" .
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=rankPresentations&direction=down&id_presentations=" .
+            "'><i class='fa-solid fa-arrow-up '></i></a>" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=presentations&case=rankPresentations&direction=down&id_presentations=" .
             $rows->id_presentations .
             "&rank=" .
             $rows->rank_presentations .
-            "'><i class='fa-solid fa-arrow-down' style='margin-inline: 0.2rem'></i></a></div>";
+            "'><i class='fa-solid fa-arrow-down'></i></a></div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_presentations</div>";
 
         $content .=
@@ -369,24 +387,24 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_presentations == 1) {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=visibilityPresentations&visibility=2&id_presentations=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=presentations&case=visibilityPresentations&visibility=2&id_presentations=" .
                 $rows->id_presentations .
-                "' ><i class='fa-solid fa-eye-slash'></i></a>";
+                "' ><i class='fa-solid fa-eye content__details_summary_actions_link_icon-eyes'></i></a>";
         } else {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=visibilityPresentations&visibility=1&id_presentations=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=presentations&case=visibilityPresentations&visibility=1&id_presentations=" .
                 $rows->id_presentations .
-                "' ><i class='fa-solid fa-eye'></i></a>";
+                "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
         }
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=loadPresentations&id_presentations=" .
+            "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=presentations&case=loadPresentations&id_presentations=" .
             $rows->id_presentations .
-            "#presentation_form" .
-            "' ><i class='fa-solid fa-pen-to-square'></i></a>";
+
+            " '><i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=warningPresentations&id_presentations=" .
+            "<a class='content__details_summary_actions_link-trash' href='back.php?action=presentations&case=warningPresentations&id_presentations=" .
             $rows->id_presentations .
-            "'><i class='fa-solid fa-trash'></i></a>";
+            "'><i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
 }
