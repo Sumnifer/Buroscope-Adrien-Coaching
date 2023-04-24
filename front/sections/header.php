@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +15,7 @@ session_start();
 </head>
 <body>
 <header class="header">
-  <a href="" class="header__logo"
+  <a href="front.php?action=index" class="header__logo"
   ><img src="../assets/img/logo.png" alt="logo" class="header__logo_img" />
     <h1 class="header__logo_title">Adrien Coaching</h1></a
   >

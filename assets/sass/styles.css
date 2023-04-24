@@ -137,7 +137,8 @@ a {
 .content__details_summary_items_img {
   width: 60px;
   aspect-ratio: 1;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .content__details_summary_actions {
   display: flex;
@@ -282,6 +283,9 @@ a {
   border-radius: 0.625rem;
   outline: none;
 }
+.pages__form_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .pages__form_input::placeholder {
   color: #FFE13F;
 }
@@ -331,6 +335,9 @@ a {
   border-radius: 0.625rem;
   outline: none;
 }
+.articles_form_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .articles_form_input::placeholder {
   color: #FFE13F;
 }
@@ -346,6 +353,9 @@ a {
   min-height: 6.25rem;
   max-width: 45rem;
   max-height: 45rem;
+}
+.articles_form_textarea::-moz-placeholder {
+  color: #FFE13F;
 }
 .articles_form_textarea::placeholder {
   color: #FFE13F;
@@ -413,6 +423,9 @@ a {
   border-radius: 0.625rem;
   outline: none;
 }
+.users_form__input::-moz-placeholder {
+  color: #FFE13F;
+}
 .users_form__input::placeholder {
   color: #FFE13F;
 }
@@ -446,6 +459,9 @@ a {
   border-radius: 0.625rem;
   outline: none;
   width: 20%;
+}
+.users_form__searchInput::-moz-placeholder {
+  color: #FFE13F;
 }
 .users_form__searchInput::placeholder {
   color: #FFE13F;
@@ -481,6 +497,9 @@ a {
   border-radius: 0.625rem;
   outline: none;
 }
+.presentation__form_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .presentation__form_input::placeholder {
   color: #FFE13F;
 }
@@ -496,6 +515,9 @@ a {
   min-height: 6.25rem;
   max-width: 45rem;
   max-height: 45rem;
+}
+.presentation__form_textarea::-moz-placeholder {
+  color: #FFE13F;
 }
 .presentation__form_textarea::placeholder {
   color: #FFE13F;
@@ -545,25 +567,29 @@ a {
 .inscription_body_container_img:nth-of-type(1) {
   align-self: flex-end;
   width: 400px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .inscription_body_container_img:nth-of-type(2) {
   margin-top: -20%;
   margin-left: 10%;
   width: 300px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .inscription_body_container_img:nth-of-type(3) {
   margin-top: -30%;
   margin-left: 30%;
   width: 400px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .inscription_body_container_img:nth-of-type(4) {
   margin-top: -20%;
   margin-left: 40%;
   width: 300px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .header__inscription {
@@ -573,7 +599,8 @@ a {
 }
 .header__inscription_logo_img {
   width: 200px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .connexion {
@@ -632,6 +659,9 @@ a {
   color: #FFE13F;
   outline: none;
 }
+.inscription__form_item_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .inscription__form_item_input::placeholder {
   color: #FFE13F;
 }
@@ -654,6 +684,9 @@ a {
   border-radius: 10px;
   color: #FFE13F;
   outline: none;
+}
+.inscription__form_input::-moz-placeholder {
+  color: #FFE13F;
 }
 .inscription__form_input::placeholder {
   color: #FFE13F;
@@ -717,6 +750,9 @@ a {
   border-radius: 10px;
   padding: 0.5rem;
   outline: none;
+  color: #FFE13F;
+}
+.login__form_input::-moz-placeholder {
   color: #FFE13F;
 }
 .login__form_input::placeholder {
@@ -1065,7 +1101,8 @@ a {
   margin-inline: 35%;
   text-align: center;
   color: #f5f5f5;
-  padding-block-end: 4rem;
+  -webkit-padding-after: 4rem;
+          padding-block-end: 4rem;
 }
 
 .testimonials {
@@ -1175,7 +1212,8 @@ a {
 }
 .reseau__container_items_img {
   width: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   max-height: 700px;
 }
 .reseau__container_items:nth-of-type(2) {
@@ -1225,12 +1263,10 @@ a {
 }
 
 .password {
-  padding: 2rem 35% 2rem 35%;
+  padding: 2rem 10% 2rem 55%;
   margin-bottom: 25rem;
 }
 .password__title {
-  text-align: center;
-  text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 700;
   color: #f5f5f5;
@@ -1241,14 +1277,10 @@ a {
   flex-direction: column;
   gap: 1rem;
 }
-.password__form_item {
-  display: flex;
-  gap: 2rem;
-}
-.password__form_item_label {
+.password__form_label {
   display: none;
 }
-.password__form_item_input {
+.password__form_input {
   width: 100%;
   padding: 0.8rem;
   background-color: transparent;
@@ -1257,7 +1289,10 @@ a {
   color: #FFE13F;
   outline: none;
 }
-.password__form_item_input::placeholder {
+.password__form_input::-moz-placeholder {
+  color: #FFE13F;
+}
+.password__form_input::placeholder {
   color: #FFE13F;
 }
 .password__form_cta {
@@ -1316,6 +1351,9 @@ a {
   border: 1px solid #FFE13F;
   color: #FFE13F;
 }
+.contact_body_container_form_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .contact_body_container_form_input::placeholder {
   color: #FFE13F;
 }
@@ -1331,6 +1369,9 @@ a {
   outline: none;
   border: 1px solid #FFE13F;
   margin-bottom: 1rem;
+  color: #FFE13F;
+}
+.contact_body_container_form_textarea::-moz-placeholder {
   color: #FFE13F;
 }
 .contact_body_container_form_textarea::placeholder {
@@ -1349,6 +1390,9 @@ a {
   background-color: transparent;
   outline: none;
   border: 1px solid #FFE13F;
+  color: #FFE13F;
+}
+.contact_body_container_form_bloc_input::-moz-placeholder {
   color: #FFE13F;
 }
 .contact_body_container_form_bloc_input::placeholder {
@@ -1415,7 +1459,8 @@ a {
 }
 .header__inscription_logo_img {
   width: 200px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .questionnaire {
@@ -1457,6 +1502,9 @@ a {
   border-radius: 10px;
   color: #FFE13F;
   outline: none;
+}
+.info__form_input::-moz-placeholder {
+  color: #FFE13F;
 }
 .info__form_input::placeholder {
   color: #FFE13F;
@@ -1539,7 +1587,8 @@ a {
   border-radius: 20px;
   width: 30%;
   aspect-ratio: 1;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .presentation_page__card_content {
   padding: 5rem 3rem 5rem 4rem;
@@ -1610,6 +1659,9 @@ a {
   border: 1px solid #FFE13F;
   color: #FFE13F;
 }
+.contact_body_container_form_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .contact_body_container_form_input::placeholder {
   color: #FFE13F;
 }
@@ -1625,6 +1677,9 @@ a {
   outline: none;
   border: 1px solid #FFE13F;
   margin-bottom: 1rem;
+  color: #FFE13F;
+}
+.contact_body_container_form_textarea::-moz-placeholder {
   color: #FFE13F;
 }
 .contact_body_container_form_textarea::placeholder {
@@ -1645,6 +1700,9 @@ a {
   border: 1px solid #FFE13F;
   color: #FFE13F;
 }
+.contact_body_container_form_bloc_input::-moz-placeholder {
+  color: #FFE13F;
+}
 .contact_body_container_form_bloc_input::placeholder {
   color: #FFE13F;
 }
@@ -1655,6 +1713,4 @@ a {
 body {
   font-family: Roboto, sans-serif;
   background-color: #26261F;
-}
-
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

@@ -36,7 +36,7 @@ if (isset($_POST["submit"])) {
                 placeholder="Mot de Passe"
                 class="login__form_input"
             />
-            <a href="#" class="login__form_reset">Mot de passe oublié ?</a>
+            <a href="front.php?action=forgotPassword" class="login__form_reset">Mot de passe oublié ?</a>
             <input
                 type="submit"
                 value="me connecter"
