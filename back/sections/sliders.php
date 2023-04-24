@@ -88,7 +88,7 @@ if (isset($_SESSION["id_users"])) {
             case "loadSliders":
                 if (isset($_GET["id_sliders"])) {
                     $action_form =
-                        "modifysliders&id_sliders=" .
+                        "modifySliders&id_sliders=" .
                         $_GET["id_sliders"];
                     $request =
                         "SELECT * FROM sliders WHERE id_sliders='" .
@@ -105,9 +105,7 @@ if (isset($_SESSION["id_users"])) {
                 break;
 
             case "modifySliders":
-                $action_form =
-                    "modifysliders&id_sliders=" .
-                    $_GET["id_sliders"];
+
                 $id_sliders = $_GET["id_sliders"];
                 $title_sliders = $_POST["title_sliders"];
                 $content_sliders = $_POST["content_sliders"];
