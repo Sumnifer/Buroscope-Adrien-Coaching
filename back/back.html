@@ -19,25 +19,24 @@
     <nav class="aside_navbar">
       <menu class="aside_navbar_menu">
         <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-house aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=settings" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gear aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=pages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-file aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=articles" class="aside_navbar_menu_list_link"><i class="fa-solid fa-newspaper aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=payment" class="aside_navbar_menu_list_link"><i class="fa-solid fa-credit-card-alt aside_navbar_menu_list_link_icons"></i></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=calendar" class="aside_navbar_menu_list_link"><i class="fa-solid fa-calendar-days aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=medias" class="aside_navbar_menu_list_link"><i class="fa-regular fa-image aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="back.php?action=presentations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-text aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=presentations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-layer-group aside_navbar_menu_list_link_icons"></i></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=prestations" class="aside_navbar_menu_list_link"><i class="fa-solid fa-cards-blank aside_navbar_menu_list_link_icons"></i></a></li>
         <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-envelope aside_navbar_menu_list_link_icons"></i></a></li>
-        <li class="aside_navbar_menu_list"><a href="" class="aside_navbar_menu_list_link"><i class="fa-solid fa-key aside_navbar_menu_list_link_icons"></i></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=logout" class="aside_navbar_menu_list_link"><i class="fa-solid fa-arrow-right-to-bracket aside_navbar_menu_list_link_icons"></i></a></li>
       </menu>
     </nav>
   </aside>
   <section class="content">
     <?php if($_GET['action']=='users'){ ?>
-    <form action="back.php?action=users&case=searchUsers" method="post" enctype="multipart/form-data">
+    <form action="back.php?action=users&case=searchUsers" method="post" enctype="multipart/form-data" class="userSearchForm">
       <label for="formUsersSearch"></label>
       <input type="search" name="formUsersSearch" id="formUsersSearch" class="users_form__searchInput" placeholder="Rechercher">
-      <button type="submit" class="searchButton">Rechercher</button>
+      <button type="submit" class="searchButton"><i class="fa-solid fa-magnifying-glass searchButtonIcon"></i></button>
     </form>
     <?php } ?>
     <?php if(isset($confirmation)){echo $confirmation;} ?>

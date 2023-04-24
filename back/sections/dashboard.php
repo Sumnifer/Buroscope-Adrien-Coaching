@@ -13,9 +13,11 @@ $cards = [
     "users" => ["count" => counter($connexion, "users"), "icon" => "fa-users", "name" => "Utilisateurs",],
     "pages" => ["count" => counter($connexion, "pages"), "icon" => "fa-file-alt","name" => "Pages",],
     "articles" => ["count" => counter($connexion, "articles"), "icon" => "fa-newspaper","name" => "Articles",],
-    "presentations" => ["count" => counter($connexion, "presentations"), "icon" => "fa-text", "name" => "Présentations",],
+    "presentations" => ["count" => counter($connexion, "presentations"), "icon" => "fa-layer-group", "name" => "Présentations",],
+    "prestations" => ["count" => counter($connexion, "prestations"), "icon" => "fa-cards-blank", "name" => "Prestations",],
+    "messages" => ["count" => counter($connexion, "messages"), "icon" => "fa-envelope", "name" => "Messages",],
+    "notices" => ["count" => counter($connexion, "notices"), "icon" => "fa-thumbs-up", "name" => "Avis",],
 ];
-
 $content = "<section class='dashboard'>";
 
 foreach ($cards as $name => $card) {

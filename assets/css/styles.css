@@ -429,9 +429,17 @@ a {
   background-color: #FFE13F;
 }
 
+.userSearchForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  justify-content: flex-end;
+}
+
 .users_form__searchInput {
-  padding: 0.4rem;
-  margin: 0.2rem 0 0.5rem 0;
+  padding: 0.5rem;
   background-color: #26261F;
   color: #FFE13F;
   border: 1px solid #FFE13F;
@@ -445,15 +453,16 @@ a {
 
 .searchButton {
   padding: 0.5rem;
-  align-self: center;
-  width: 10%;
-  margin-top: 1rem;
   border-radius: 30px;
   border: none;
   text-transform: uppercase;
   color: #26261F;
   cursor: pointer;
   background-color: #FFE13F;
+}
+
+.searchButtonIcon {
+  font-size: 1rem;
 }
 
 .presentation__form {

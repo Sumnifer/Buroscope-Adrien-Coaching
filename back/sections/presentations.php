@@ -177,7 +177,6 @@ if (isset($_SESSION["id_users"])) {
                             "." .
                             $file_extension;
                         $file_path = "../medias/" . $new_file_name;
-                        echo $file_path;
 
                         if (
                             move_uploaded_file(
@@ -195,7 +194,7 @@ if (isset($_SESSION["id_users"])) {
                         }
                     }
                     $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation a bien été modifiée </p>";
+                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été modifiée </p>";
                 } else {
                     $confirmation = $error;
                 }
