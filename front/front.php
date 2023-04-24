@@ -51,12 +51,18 @@ if (isset($_GET["action"])) {
                 include "front.html";
             }
             break;
-            case "presentation":
-                include "sections/presentation_page.php";
-                break;
+        case "presentation":
+            include "sections/presentation_page.php";
+            break;
+
+        case "forgotPassword":
+            include "sections/forgotpassword.php";
+            break;
+
+        case "resetPassword":
+            include "sections/resetpassword.php";
+            break;
     }
 }
 include "sections/footer.php";
 
-mysqli_close($connexion); // ? ==> Fermeture DB <==
-header("Location: front.php?action=index");
