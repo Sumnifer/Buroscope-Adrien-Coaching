@@ -2,36 +2,74 @@
   color: $white
   display: grid
   grid-template-columns: 60px 1fr
-  &__title
+  &__div
+    grid-column: 1/3
     width: 100%
-    justify-self: center
+    display: grid
     background-color: #2F4858
-    padding-block: 2rem
-    text-align: center
-    font-size: 2rem
-    text-transform: uppercase
-    grid-column: 1/5
-    color: $white
-    font-weight: 700
-    position: relative
-  &__link
-    position: absolute
-    right: 2%
-    top: 4.5%
-    color: $white
-    &_icon
+    align-items: center
+    &_title
+      justify-self: center
+      padding-block: 2rem
+      text-align: center
       font-size: 2rem
+      text-transform: uppercase
+      color: $white
+      font-weight: 700
+      position: relative
+    &_statut
+      position: absolute
+      right: 2%
+      display: flex
+      align-items: center
+      gap: 1rem
+      &_div
+        font-size: .8rem
+        border: 1px solid $white
+        padding: .5rem
+
+      &_link
+        color: $white
+        text-decoration: none
+        font-size: 2rem
+        font-weight: 700
 
 
 
+.contentDisplay
+  overflow: hidden
 .content
   padding: 2%
-  background-color: $primary
+  background-color: $white
+
+  &__div
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    margin-bottom: 1rem
+    &_button
+      padding: .2rem 1rem
+      border: none
+      text-transform: uppercase
+      color: $white
+      cursor: pointer
+      background-color: limegreen
+      display: flex
+      align-items: center
+      justify-content: center
+      border-radius: 5px
+      &_icon
+        margin-left: 0.3rem
+        padding: 0.3rem
+        font-size: 1rem
 
   &__details
-    background-color: $primary
-    border-radius: .625rem
-    margin-bottom: .125rem
+    color: $blue
+    border: 1px solid $blue
+    margin-block: 0.3rem
+    &:nth-of-type(1)
+      border: None
+      font-weight: 900
     &_summary
       padding: 0.5rem
       display: grid
@@ -49,7 +87,35 @@
         display: flex
         gap: 0.5rem
         &_link
-          color: $secondary
+          padding: 0.3rem
+          border-radius: 5px
+          display: grid
+          place-items: center
+          color: $white
+          &-eyes
+            background-color: #ffe13f
+            color: $white
+            padding: 0.3rem
+            border-radius: 5px
+          &-trash
+            background-color: red
+            color: $white
+            padding: 0.3rem
+            border-radius: 5px
+          &-modify
+            background-color: dodgerblue
+            color: $white
+            padding: 0.3rem
+            border-radius: 5px
+        &_arrows
+          border-radius: 5px
+          padding: 0.5rem
+          margin: 0.2rem
+          color: $white
+          background-color: $blue
+          &:nth-of-type(1)
+            margin-left: 1rem
+
 
 
 
@@ -68,12 +134,24 @@
       align-items: center
       gap: 1rem
       padding: 0
+      position: relative
+      z-index: 3
       &_list
+        display: flex
+        align-items: center
+        position: relative
         &_link
           color: $white
           font-size: 2rem
+          z-index: 5
 .aside_navbar_menu_list_link_icons
   font-size: 1.5rem
+
+.confirmation
+  opacity: 1
+  transition: opacity 0.5s ease-out
+
+
 
 
 
@@ -118,5 +196,16 @@
       &_icons
         font-size: 4rem
         margin-block: 1rem
-        color: $secondary
+        color: $white
 
+
+.selected
+    display: block
+    position: absolute
+    border-radius: 50%
+    width: 8px
+    aspect-ratio: 1
+    background-color: limegreen
+    bottom: -10px
+    left: 50%
+    transform: translateX(-50%)

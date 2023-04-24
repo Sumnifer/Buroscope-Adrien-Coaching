@@ -20,8 +20,8 @@ function login($login, $pass)
         $ligne = mysqli_fetch_object($resultat);
         $hashed_pass = PASSWORD_VERIFY($pass, $ligne->pass_users);
         $_SESSION["id_users"] = $ligne->id_users;
-        $_SESSION["prenom_users"] = $ligne->prenom_users;
-        $_SESSION["nom_users"] = $ligne->nom_users;
+        $_SESSION["name_users"] = $ligne->name_users;
+        $_SESSION["surname_users"] = $ligne->surname_users;
         $_SESSION["email_users"] = $ligne->email_users;
         $_SESSION["statut_users"] = $ligne->statut_users;
         if ($ligne->statut_users == "root"){

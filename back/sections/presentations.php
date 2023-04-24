@@ -4,30 +4,33 @@ if (isset($_SESSION["id_users"])) {
     mysqli_set_charset($connexion, "utf8");
     $title = "Gestion des Presentations";
     $form = "forms/formPresentations.php";
-    $action_form = "newPresentations";
+
+
 
     if (isset($_GET["case"])) {
+
         switch ($_GET["case"]) {
             case "newPresentations":
+                $action_form = "newPresentations";
                 $request =
                     "SELECT COUNT(*) AS nb_presentations FROM presentations";
                 $result = mysqli_query($connexion, $request);
                 $rows = mysqli_fetch_object($result);
                 if (empty($_POST["title_presentations"])) {
                     $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";
                 }
-                if (empty($_POST["content_presentations"])) {
+                elseif (empty($_POST["content_presentations"])) {
                     $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
                 }
-                if (empty($_POST["alt_presentations"])) {
+                elseif (empty($_POST["alt_presentations"])) {
                     $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer un alt </p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer un alt </p>";
                 }
-                if (empty($_POST["visibility_presentations"])) {
+                elseif (empty($_POST["visibility_presentations"])) {
                     $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
                 } else {
                     $request =
                         "INSERT INTO presentations SET 
@@ -51,7 +54,7 @@ if (isset($_SESSION["id_users"])) {
                     $last_Id = mysqli_insert_id($connexion);
 
                     if (
-                        isset($_FILES["img_presentations"]) &&
+                        !empty($_FILES["img_presentations"]) &&
                         $_FILES["img_presentations"]["error"] == 0
                     ) {
                         $file_name = $_FILES["img_presentations"]["name"];
@@ -75,13 +78,12 @@ if (isset($_SESSION["id_users"])) {
                                 "' WHERE id_presentations='" .
                                 $last_Id .
                                 "'";
-                            echo $request2;
                             $result2 = mysqli_query($connexion, $request2);
                         }
                     }
 
                     $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La presentation a bien été crée </p>";
+                        "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La presentation a bien été crée </p>";
                     foreach ($_POST as $cle => $valeur) {
                         unset($_POST[$cle]);
                     }
@@ -123,24 +125,25 @@ if (isset($_SESSION["id_users"])) {
 
                 if (empty($title_presentations)) {
                     $error .=
-                        "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner le titre</p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner le titre</p>";
                 }
                 if (empty($content_presentations)) {
                     $error .=
-                        "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner le contenu</p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner le contenu</p>";
                 }
                 if (empty($alt_presentations)) {
                     $error .=
-                        "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la description alternative</p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la description alternative</p>";
                 }
                 if (empty($direction_presentations)) {
                     $error .=
-                        "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la direction</p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la direction</p>";
                 }
                 if (empty($visibility_presentations)) {
                     $error .=
-                        "<p class='warning'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la visibilité</p>";
+                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la visibilité</p>";
                 }
+
 
                 if (empty($error)) {
                     $request = "UPDATE presentations SET 
@@ -195,7 +198,7 @@ if (isset($_SESSION["id_users"])) {
                         }
                     }
                     $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation a bien été modifiée </p>";
+                        "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été modifiée </p>";
                 } else {
                     $confirmation = $error;
                 }
@@ -214,8 +217,14 @@ if (isset($_SESSION["id_users"])) {
                             $_GET["id_presentations"] .
                             "'";
                         $resultat = mysqli_query($connexion, $requete);
-                        $confirmation =
-                            "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La visibilité a bien été modifiée </p>";
+                        if($_GET['visibility']==1){
+                            $confirmation =
+                                "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais visible </p>";
+                        }
+                        if($_GET['visibility']==2){
+                            $confirmation =
+                                "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais invisible </p>";
+                        }
                     }
                 }
 
@@ -225,7 +234,7 @@ if (isset($_SESSION["id_users"])) {
                 if (isset($_GET["id_presentations"])) {
                     $confirmation = "<div class='confirm'>";
                     $confirmation .=
-                        "<p class='confirm__paragraph'>Êtes vous sûr de vouloir supprimer la presentation n°" .
+                        "<p class='confirm__paragraph'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Êtes vous sûr de vouloir supprimer la presentation n°" .
                         $_GET["id_presentations"] .
                         "</p>";
                     $confirmation .=
@@ -258,7 +267,7 @@ if (isset($_SESSION["id_users"])) {
                         "'";
                     $result4 = mysqli_query($connexion, $request4);
                     $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La prestation a bien été supprimée </p>";
+                        "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été supprimée </p>";
 
                     $request2 =
                         "SELECT * FROM presentations ORDER BY rank_presentations";
@@ -336,6 +345,14 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
+            case "unloadPresentations" :
+                $action_form = "newPresentations";
+                foreach ($_POST as $cle => $valeur) {
+                    unset($_POST[$cle]);
+                }
+                break;
+
+
         }
     }
     $request = "SELECT * FROM presentations ORDER BY rank_presentations";
@@ -353,16 +370,16 @@ if (isset($_SESSION["id_users"])) {
         $content .=
             "<div class='content__details_summary_items'>" .
             $rows->rank_presentations .
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=rankPresentations&direction=up&id_presentations=" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=presentations&case=rankPresentations&direction=up&id_presentations=" .
             $rows->id_presentations .
             "&rank=" .
             $rows->rank_presentations .
-            "'><i class='fa-solid fa-arrow-up ' style='margin-inline: 0.2rem; margin-left: 0.5rem'></i></a>" .
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=rankPresentations&direction=down&id_presentations=" .
+            "'><i class='fa-solid fa-arrow-up '></i></a>" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=presentations&case=rankPresentations&direction=down&id_presentations=" .
             $rows->id_presentations .
             "&rank=" .
             $rows->rank_presentations .
-            "'><i class='fa-solid fa-arrow-down' style='margin-inline: 0.2rem'></i></a></div>";
+            "'><i class='fa-solid fa-arrow-down'></i></a></div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_presentations</div>";
 
         $content .=
@@ -370,24 +387,24 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_presentations == 1) {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=visibilityPresentations&visibility=2&id_presentations=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=presentations&case=visibilityPresentations&visibility=2&id_presentations=" .
                 $rows->id_presentations .
-                "' ><i class='fa-solid fa-eye-slash'></i></a>";
+                "' ><i class='fa-solid fa-eye content__details_summary_actions_link_icon-eyes'></i></a>";
         } else {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=visibilityPresentations&visibility=1&id_presentations=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=presentations&case=visibilityPresentations&visibility=1&id_presentations=" .
                 $rows->id_presentations .
-                "' ><i class='fa-solid fa-eye'></i></a>";
+                "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
         }
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=loadPresentations&id_presentations=" .
+            "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=presentations&case=loadPresentations&id_presentations=" .
             $rows->id_presentations .
-            "#presentation_form" .
-            "' ><i class='fa-solid fa-pen-to-square'></i></a>";
+
+            " '><i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=presentations&case=warningPresentations&id_presentations=" .
+            "<a class='content__details_summary_actions_link-trash' href='back.php?action=presentations&case=warningPresentations&id_presentations=" .
             $rows->id_presentations .
-            "'><i class='fa-solid fa-trash'></i></a>";
+            "'><i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
 }

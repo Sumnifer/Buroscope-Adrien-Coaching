@@ -1,12 +1,42 @@
+.form_section
+  backdrop-filter: blur(5px)
+  position: absolute
+  height: 100vh
+  width: 100vw
+  top: 0
+  left: 0
+  display: grid
+  transform: translateY(-100%)
+  place-items: center
+  transition: transform 0.5s ease-in-out
+
+.form_section_display
+  transform: translateY(0)
 .users_form
   display: flex
   flex-direction: column
-  padding: 2% 25%
-  width: 100%
-
-  background-color: $blue
+  background-color: $white
+  width: 50%
+  padding: 5%
+  border: 2px solid $blue
+  &__container
+    position: relative
+    &_title
+      color: $blue
+      font-size: 1.5rem
+      font-weight: 900
+      text-align: center
+      text-transform: uppercase
+    &_icon
+      color: $blue
+      position: absolute
+      top: 20%
+      right: 30%
+      font-size: 1.5rem
+      cursor: pointer
   &_label
     margin-bottom: 5px
+    color: $blue
   &_div
     display: flex
     align-items: center
@@ -21,13 +51,12 @@
   &__input
     padding: .4rem
     margin: .2rem 0 .5rem 0
-    background-color: $primary
-    color: $secondary
-    border: 1px solid $secondary
-    border-radius: .625rem
+    background-color: #c8c8c8
+    color: $blue
+    border: 1px solid $blue
     outline: none
     &::placeholder
-      color: $secondary
+      color: $blue
   &_btn
     padding: 0.5rem
     align-self: center
@@ -36,6 +65,32 @@
     border-radius: 30px
     border: none
     text-transform: uppercase
-    color: $primary
+    color: $white
     cursor: pointer
-    background-color: $secondary
+    background-color: $blue
+    font-weight: 900
+.userSearchForm
+  display: flex
+  align-items: center
+  gap: 0.5rem
+  justify-content: flex-end
+.users_form__searchInput
+  padding: .5rem
+  background-color: $white
+  color: $blue
+  border: 1px solid $blue
+
+  outline: none
+  &::placeholder
+    color: $blue
+.searchButton
+    padding: 0.5rem
+    border-radius: 30px
+    border: none
+    text-transform: uppercase
+    color: $white
+    cursor: pointer
+    background-color: $blue
+
+.searchButtonIcon
+  font-size: 1rem

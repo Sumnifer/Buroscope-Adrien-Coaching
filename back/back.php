@@ -12,9 +12,13 @@ if (isset($_SESSION["id_users"])) {
                     header("location: ../front/front.php?action=index");
                     break;
 
+                // * <== ----------------------------------------------------- ==>
+
                 case "users":
                     include "sections/users.php";
                     break;
+
+                // * <== ----------------------------------------------------- ==>
 
                 case "settings":
                     include "sections/settings.php";
@@ -44,9 +48,23 @@ if (isset($_SESSION["id_users"])) {
                     include "sections/calendar.php";
                     break;
 
+                // * <== ----------------------------------------------------- ==>
+
                 case "presentations":
                     include "sections/presentations.php";
                     break;
+
+                // * <== ----------------------------------------------------- ==>
+
+                case "prestations":
+                    include "sections/prestations.php";
+                    break;
+
+                // * <== ----------------------------------------------------- ==>
+                case "sliders":
+                    include "sections/sliders.php";
+                    break;
+
             }
 
             // ?<== ========================================== ==> Fin du Switch <== =========================================== ==>
@@ -57,9 +75,8 @@ if (isset($_SESSION["id_users"])) {
         include "back.html";
         mysqli_close($connexion); // ? ==> Fermeture DB <==
     } else {
-    header("Location: ../front/front.php?action=index");
+        header("Location: ../front/front.php?action=index");
     }
 } else {
     header("Location: ../front/front.php?action=logging");
-
 }
