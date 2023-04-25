@@ -17,6 +17,6 @@
     <a href="" class="footer__mention">mentions légales</a>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
   </body>
 </html>

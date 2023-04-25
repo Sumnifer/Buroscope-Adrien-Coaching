@@ -62,6 +62,10 @@ if (isset($_GET["action"])) {
         case "resetPassword":
             include "sections/resetpassword.php";
             break;
+
+        case "settings":
+            include "sections/settings.php";
+            break;
     }
 }
 include "sections/footer.php";

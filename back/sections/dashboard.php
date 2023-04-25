@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $title = "Dashboard";
 $connexion = connexion();
 function counter($connexion, $table)

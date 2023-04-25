@@ -46,18 +46,11 @@
         ></i>
       </summary>
       <div class="header__controls_detail_bloc">
-        <a href="../back/back.php" class="header__controls_detail_bloc_link"
-        ><i
-            class="fa-regular fa-table header__controls_detail_bloc_link_icon"
-          ></i>
-          Tableau de Bord</a
-        >
-        <a href="" class="header__controls_detail_bloc_link"
-        ><i
-            class="fa-regular fa-gear header__controls_detail_bloc_link_icon"
-          ></i>
-          Paramètres</a
-        >
+        <?php if(($_SESSION['statut_users']=='admin') || ($_SESSION['statut_users']=='root')){
+          echo "<a href='../back/back.php' class='header__controls_detail_bloc_link'><i class='fa-regular fa-table header__controls_detail_bloc_link_icon'></i>Tableau de Bord</a>";
+        } else {
+        echo "<a href='front.php?action=account' class='header__controls_detail_bloc_link'><i class='fa-regular fa-user header__controls_detail_bloc_link_icon'></i>Mon Compte</a>";
+        } ?>
         <?php
         if(isset($_SESSION['id_users'])){
           echo "<a href='front.php?action=logout' class='header__controls_detail_bloc_link'>
