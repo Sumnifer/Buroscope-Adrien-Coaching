@@ -241,13 +241,13 @@ if (isset($_SESSION["id_users"])) {
         $request =
             "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
     }
-    if (
-        ($_SESSION["statut_users"] == "root" ||
-            $_SESSION["statut_users"] == "admin") &&
-        $_GET["case"] === "searchUsers"
-    ) {
-        $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
-    } else {
+    //if (
+
+       // $_GET["case"] == "searchUsers"
+    //) {
+      //  $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
+    //}
+else {
         $request = "SELECT * FROM users ORDER BY id_users";
     }
 
