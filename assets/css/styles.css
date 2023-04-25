@@ -528,13 +528,14 @@ a {
 .users_form__container_icon {
   color: #2F4858;
   position: absolute;
-  top: 20%;
+  top: 10%;
   right: 30%;
   font-size: 1.5rem;
   cursor: pointer;
 }
-.users_form_label {
+.users_form__container_label {
   margin-bottom: 5px;
+  font-size: 1.3rem;
   color: #2F4858;
 }
 .users_form_div {
@@ -678,7 +679,7 @@ a {
 }
 .presentation__form_label {
   font-size: 1.3rem;
-  color: #f5f5f5;
+  color: #2F4858;
 }
 .presentation__form_select {
   padding: 0.4rem;

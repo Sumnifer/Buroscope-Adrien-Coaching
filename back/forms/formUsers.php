@@ -24,19 +24,19 @@ if(isset($_GET['case'])){
         </h1>
     <i class="users_form__container_icon fa-solid fa-xmark" id="closeButton"></i>
     </div>
-    <label for="email_users">Email</label>
+    <label for="email_users" class="users_form__container_label">Email</label>
     <input type="email" name="email_users" id="email_users" class="users_form__input" placeholder="Email" value="<?php if (
         isset($_POST["email_users"])
     ) {
         echo $_POST["email_users"];
     } ?>">
-    <label for="pass_users">Password</label>
+    <label for="pass_users" class="users_form__container_label">Password</label>
     <input type="password" name="pass_users" id="pass_users" class="users_form__input" placeholder="Password" value="<?php if (
         isset($_POST["pass_users"])
     ) {
         echo $_POST["pass_users"];
     } ?>">
-    <label for="gender_users">Civilité</label>
+    <label for="gender_users" class="users_form__container_label">Civilité</label>
     <select name="gender_users" id="gender_users" class="users_form__input">
         <option value="">Sélectionnez une civilité</option>
         <option value="Monsieur" <?php if (
@@ -70,7 +70,7 @@ if(isset($_GET['case'])){
 
     <div class="users_form_div">
         <div class="users_form_div_bloc">
-            <label for="name_users">Prénom</label>
+            <label for="name_users" class="users_form__container_label">Prénom</label>
             <input type="text" name="name_users" id="name_users" class="users_form__input users_form_div_bloc_input"
                 placeholder="Prénom" value="<?php if (
                     isset($_POST["name_users"])
@@ -88,13 +88,13 @@ if(isset($_GET['case'])){
                 } ?>">
         </div>
     </div>
-    <label for="phone_users">Téléphone</label>
+    <label for="phone_users" class="users_form__container_label">Téléphone</label>
     <input type="tel" name="phone_users" id="phone_users" class="users_form__input" placeholder="Téléphone" value="<?php if (
         isset($_POST["phone_users"])
     ) {
         echo $_POST["phone_users"];
     } ?>">
-    <label for="date_users" class="users_form_label">Date de naissance</label>
+    <label for="date_users" class="users_form__container_label">Date de naissance</label>
     <div class="users_form_div">
         <input class="users_form__input" type="date" name="date_users"  id="date_users" min="1901-01-01" value="<?php if (
             isset($_POST["date_users"])
@@ -103,7 +103,7 @@ if(isset($_GET['case'])){
         } ?>">
     </div>
 
-    <label for="statut_users">Statut</label>
+    <label for="statut_users" class="users_form__container_label">Statut</label>
     <select name="statut_users" id="statut_users" class="users_form__input">
         <option>Sélectionnez un statut</option>
         <option value="user" <?php if (
