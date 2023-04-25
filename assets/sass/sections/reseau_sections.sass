@@ -1,0 +1,60 @@
+.reseau
+
+  &__title
+    text-align: center
+    text-transform: uppercase
+    color: $white
+    font-size: 2rem
+    font-weight: 600
+    &_span
+      color: $secondary
+  &__container
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 4rem
+    padding: 5rem 12.5rem
+    &_items
+      &_img
+        width: 100%
+        object-fit: contain
+        max-height: 700px
+      &:nth-of-type(2)
+        display: flex
+        flex-direction: column
+        padding-inline: 10%
+      &_paragraph
+        line-height: 2.6rem
+        font-size: 2rem
+        color: $white
+        text-transform: uppercase
+        &:nth-of-type(2)
+          margin-bottom: 2rem
+      &_social
+        display: flex
+        align-self: center
+        padding-block: 2rem
+        width: 50%
+        justify-content: space-between
+        &_icon
+          font-size: 2.4rem
+          color: $secondary
+
+      &_newsletter
+        &_input
+          padding: .5rem 1rem
+          width: 60%
+          background-color: transparent
+          border: 1px solid $secondary
+          color: $white
+          border-radius: .5rem
+        &_cta
+          background-color: $secondary
+          padding: .5rem 1rem
+          border-color: transparent
+          border-radius: .5rem
+          text-transform: uppercase
+          font-size: .8rem
+
+
+
+
