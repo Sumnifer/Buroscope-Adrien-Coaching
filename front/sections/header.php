@@ -52,7 +52,7 @@
           ></i>
           Tableau de Bord</a
         >
-        <a href="" class="header__controls_detail_bloc_link"
+        <a href="front.php?action=settings" class="header__controls_detail_bloc_link"
         ><i
             class="fa-regular fa-gear header__controls_detail_bloc_link_icon"
           ></i>

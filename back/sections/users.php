@@ -141,9 +141,9 @@ if (isset($_SESSION["id_users"])) {
 
                     if (!empty($_POST["pass_users"])) {
                         $request .= ", pass_users ='" . password_hash(
-                                htmlspecialchars($_POST["pass_users"], ENT_QUOTES, "UTF-8"),
-                                PASSWORD_DEFAULT
-                            ) . "'";
+                            htmlspecialchars($_POST["pass_users"], ENT_QUOTES, "UTF-8"),
+                            PASSWORD_DEFAULT
+                        ) . "'";
                     }
 
                     $request .= " WHERE id_users='" . $_GET["id_users"] . "'";
@@ -198,11 +198,11 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
-                case "searchUsers":
-                    if (isset($_POST["formUsersSearch"])) {
-                        $searchResult = $_POST["formUsersSearch"];
-                    }
-                    break;
+            case "searchUsers":
+                if (isset($_POST["formUsersSearch"])) {
+                    $searchResult = $_POST["formUsersSearch"];
+                }
+                break;
         }
     }
 
