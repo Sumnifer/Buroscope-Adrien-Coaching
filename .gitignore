@@ -1,2 +1,4 @@
 .idea
 node_modules
+tools/connect.php
+assets/css/styles.css.map

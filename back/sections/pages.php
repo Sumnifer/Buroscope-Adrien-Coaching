@@ -125,6 +125,7 @@ if (isset($_SESSION["id_users"])) {
     $content .= "<summary class='content__details_summary'>";
     $content .= "<div>ID</div>";
     $content .= "<div>PAGE</div>";
+    $content .= "<div></div>";
     $content .= "<div>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
@@ -132,17 +133,18 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<summary class='content__details_summary'>";
         $content .= "<div class='content__details_summary_items'>$rows->id_pages</div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_pages</div>";
+        $content .= "<div class='content__details_summary_items'></div>";
         $content .=
             "<div class='content__details_summary_actions'>
-                <a class='content__details_summary_actions_link' href='back.php?action=pages&case=loadPages&id_pages=" .
+                <a class='content__details_summary_actions_link-modify' href='back.php?action=pages&case=loadPages&id_pages=" .
             $rows->id_pages .
             "' >
-                  <i class='fa-solid fa-pen-to-square'></i></a>";
+                  <i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=pages&case=warningPages&id_pages=" .
+            "<a class='content__details_summary_actions_link-trash' href='back.php?action=pages&case=warningPages&id_pages=" .
             $rows->id_pages .
             "'>
-                  <i class='fa-solid fa-trash'></i></a>";
+                  <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
     // ? ==================================================================================================================>

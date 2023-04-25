@@ -52,3 +52,4 @@ if (isset($_POST['btn_forgotpassword'])) {
                 passe</button>
         </form>
     </section>
+</main>
