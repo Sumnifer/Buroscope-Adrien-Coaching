@@ -709,6 +709,55 @@ a {
   font-weight: 900;
 }
 
+.slider__form {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  width: 100%;
+  padding: 5%;
+  border: 2px solid #2F4858;
+  position: relative;
+}
+.slider__form_label {
+  font-size: 1.3rem;
+  color: #2F4858;
+}
+.slider__form_textarea {
+  padding: 0.4rem;
+  margin: 0.2rem 0 0.5rem 0;
+  background-color: #c8c8c8;
+  color: #2F4858;
+  border: 1px solid #2F4858;
+  outline: none;
+  min-width: 100%;
+  min-height: 6.25rem;
+  max-width: 100%;
+  max-height: 45rem;
+  font-family: Roboto, sans-serif;
+}
+.slider__form_textarea::placeholder {
+  color: #2F4858;
+}
+.slider__form_imput {
+  padding: 0.4rem;
+  margin: 0.2rem 0 0.5rem 0;
+  background-color: #c8c8c8;
+  color: #2F4858;
+  border: 1px solid #2F4858;
+  outline: none;
+}
+.slider__form_imput::placeholder {
+  color: #2F4858;
+}
+.slider__form_label_div {
+  padding: 0.4rem;
+  margin: 0.2rem 0 0.5rem 0;
+  background-color: #c8c8c8;
+  color: #2F4858;
+  border: 1px solid #2F4858;
+  border-radius: 0.625rem;
+  outline: none;
+}
 .inscription_body {
   position: relative;
 }
