@@ -344,12 +344,12 @@ if (isset($_SESSION["id_users"])) {
         $content .=
             "<div class='content__details_summary_items'>" .
             $rows->rank_sliders .
-            "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=rankSliders&direction=up&id_sliders=" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=sliders&case=rankSliders&direction=up&id_sliders=" .
             $rows->id_sliders .
             "&rank=" .
             $rows->rank_sliders .
             "'><i class='fa-solid fa-arrow-up ' style='margin-inline: 0.2rem; margin-left: 0.5rem'></i></a>" .
-            "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=rankSliders&direction=down&id_sliders=" .
+            "<a class='content__details_summary_actions_arrows' href='back.php?action=sliders&case=rankSliders&direction=down&id_sliders=" .
             $rows->id_sliders .
             "&rank=" .
             $rows->rank_sliders .
@@ -361,24 +361,24 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_sliders == 1) {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=visibilitySliders&visibility=2&id_sliders=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=sliders&case=visibilitySliders&visibility=2&id_sliders=" .
                 $rows->id_sliders .
-                "' ><i class='fa-solid fa-eye-slash'></i></a>";
+                "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
         } else {
             $content .=
-                "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=visibilitySliders&visibility=1&id_sliders=" .
+                "<a class='content__details_summary_actions_link-eyes' href='back.php?action=sliders&case=visibilitySliders&visibility=1&id_sliders=" .
                 $rows->id_sliders .
-                "' ><i class='fa-solid fa-eye'></i></a>";
+                "' ><i class='fa-solid fa-eye content__details_summary_actions_link_icon-eyes'></i></a>";
         }
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=loadSliders&id_sliders=" .
+            "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=sliders&case=loadSliders&id_sliders=" .
             $rows->id_sliders .
             "#presentation_form" .
-            "' ><i class='fa-solid fa-pen-to-square'></i></a>";
+            "' ><i class=' fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
-            "<a class='content__details_summary_actions_link' href='back.php?action=sliders&case=warningSliders&id_sliders=" .
+            "<a class='content__details_summary_actions_link-trash' href='back.php?action=sliders&case=warningSliders&id_sliders=" .
             $rows->id_sliders .
-            "'><i class='fa-solid fa-trash'></i></a>";
+            "'><i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
 }

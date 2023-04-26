@@ -11,6 +11,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/FontAwesome.css" />
+    <script src="../../javaScript/jquery.min.js"></script>
+    <script src="../../javaScript/jquery-3.2.1.min.js"></script>
+    <script src="../../javaScript/sss.js"></script>
+    <script src="../../javaScript/sss.min.js"></script>
+
   <title>Adrien | Coaching</title>
 </head>
 <body>
