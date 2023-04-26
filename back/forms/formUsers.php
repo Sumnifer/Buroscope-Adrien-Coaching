@@ -79,7 +79,7 @@ if(isset($_GET['case'])){
                 } ?>">
         </div>
         <div class="users_form_div_bloc">
-            <label for="surname_users">Nom</label>
+            <label for="surname_users" class="users_form__container_label">Nom</label>
             <input type="text" name="surname_users" id="surname_users"
                 class="users_form__input users_form_div_bloc_input" placeholder="Nom" value="<?php if (
                     isset($_POST["surname_users"])
