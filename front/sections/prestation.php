@@ -14,12 +14,13 @@ echo $nb_prestations;
 $content = "<section class='prestation' id='prestation'>
 <h1 class='prestation__title'>
 Découvrez <span class='prestation__title_span'>mes prestations</span></h1>";
-    if(($nb_prestations = 4) || ($nb_prestations = 8)){
+    if(($nb_prestations == '4') || ($nb_prestations == '8')){
     $content .= "<div class='prestation__container' style='grid-template-columns: repeat(4, 1fr);'>";
     }
-    if(($nb_prestations = 3) || ($nb_prestations = 6)){
+    else{
     $content .= "<div class='prestation__container' style='grid-template-columns: repeat(3, 1fr);'>";
     }
+
 
 while($rows = mysqli_fetch_object($result)) {
 
