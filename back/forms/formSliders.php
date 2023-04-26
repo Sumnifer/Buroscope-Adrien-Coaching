@@ -5,8 +5,8 @@
     <label for="content_sliders">Contenu texte du sliders (facultatif)</label>
     <textarea id="content_sliders" placeholder="Contenu [facultatif]" name="content_sliders"><?php if(isset($_POST['content_sliders'])){echo $_POST['content_sliders'];} ?></textarea>
 
-    <label for="image">Illustration du sliders (obligatoire)</label>
-    <input id="image" class="" type="file" name="img_sliders" value="">
+    <label for="img_sliders">Illustration du sliders (obligatoire)</label>
+    <input id="img_sliders" class="" type="file" name="img_sliders" value="">
     <?php if(isset($miniature)){echo $miniature;} ?>
 
     <label for="alt_sliders">Alt du sliders (obligatoire)</label>
