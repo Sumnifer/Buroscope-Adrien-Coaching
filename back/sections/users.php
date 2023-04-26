@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION["id_users"])) {
+if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
     $title = "Gestion des Utilisateurs";
     $form = "forms/formUsers.php";
     $action_form = "newUsers";
@@ -227,17 +227,11 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
-            case "searchUsers":
-                if (isset($_POST["formUsersSearch"])) {
-                    $searchResult = $_POST["formUsersSearch"];
-                }
-                break;
-            case "unloadUsers":
-                $action_form = "newUsers";
-                foreach ($_POST as $cle => $valeur) {
-                    unset($_POST[$cle]);
-                }
-                break;
+                case "searchUsers":
+                    if (isset($_POST["formUsersSearch"])) {
+                        $searchResult = $_POST["formUsersSearch"];
+                    }
+                    break;
         }
     }
 
@@ -283,4 +277,6 @@ else {
                       <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
+} else {
+    header("Location: ../front.php?action=login");
 }

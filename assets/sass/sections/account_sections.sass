@@ -1,0 +1,82 @@
+.account__body
+    position: relative
+
+    &_title
+        text-align: center
+        text-transform: uppercase
+        font-size: 1.5rem
+        font-weight: 700
+        color: $white
+        padding-block: 1rem
+        margin-top: 3rem
+
+    &_form
+        display: flex
+        flex-direction: column
+        gap: 1rem
+
+    &_container-first
+        display: flex
+        flex-direction: column
+        margin-inline: 30%
+        margin-bottom: 2rem
+        gap: 1rem
+        padding: 0 0 1rem
+        border-radius: 10px
+        background-color: $blue
+        &_info
+            margin-inline: 2rem
+            padding-bottom: 1rem
+            color: $white
+            border-bottom: solid 1px $secondary
+            &:nth-of-type(1)
+                padding-top: 1rem
+
+            &_span
+                text-transform: uppercase
+    &_container
+        display: flex
+        flex-direction: column
+        margin-inline: 30%
+        gap: 1rem
+        padding: 0 0 1rem
+        border-radius: 10px
+        border: 2px solid $blue
+
+        &:last-of-type
+            margin-bottom: 5rem
+
+
+
+        &_title
+            color: $white
+            padding: .5rem 1rem
+            background-color: $blue
+            border-top-left-radius: 10px
+            border-top-right-radius: 10px
+
+        &_label
+            display: none
+
+        &_input
+            margin-inline: 2rem
+            padding: .5rem
+            background-color: transparent
+            border: 1px solid $secondary
+            border-radius: 10px
+            color: $secondary
+            outline: none
+            &::placeholder
+                color: $secondary
+
+        &_cta
+            width: 30%
+            align-self: center
+            padding-block: .5rem
+            background-color: $secondary
+            color: $primary
+            border-color: transparent
+            border-radius: 10px
+            font-weight: 700
+            text-transform: uppercase
+            cursor: pointer
