@@ -63,8 +63,8 @@ if (isset($_GET["action"])) {
             include "sections/resetpassword.php";
             break;
 
-        case "settings":
-            include "sections/settings.php";
+        case "account":
+            include "sections/account.php";
             break;
         case "calendar":
             include "sections/calendar.php";
