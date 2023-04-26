@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION["id_users"])) {
+if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
     $title = "Gestion des Utilisateurs";
     $form = "forms/formUsers.php";
     $action_form = "newUsers";
@@ -277,4 +277,6 @@ else {
                       <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
+} else {
+    header("Location: ../front.php?action=login");
 }

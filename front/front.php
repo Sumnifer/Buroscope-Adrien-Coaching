@@ -66,7 +66,9 @@ if (isset($_GET["action"])) {
         case "settings":
             include "sections/settings.php";
             break;
+        case "calendar":
+            include "sections/calendar.php";
+            break;
     }
 }
 include "sections/footer.php";
-
