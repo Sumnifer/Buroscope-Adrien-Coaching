@@ -51,8 +51,13 @@
           if ($_GET['action']== 'users'){
           echo "<a href='back.php?action=users&case=unloadUsers' class='content__div_button' id='newButton'>Nouveau<i class='fa-solid fa-plus content__div_button_icon'></i></a>";
           }
+
           if($_GET['action']=='presentations') {
           echo "<a href='back.php?action=presentations&case=unloadPresentations' class='content__div_button' id='newButton'>Nouveau <i class='fa-solid fa-plus content__div_button_icon'></i></a>";
+          }
+
+          if($_GET['action']=='prestations') {
+          echo "<a href='back.php?action=prestations&case=unloadPrestations' class='content__div_button' id='newButton'>Nouveau <i class='fa-solid fa-plus content__div_button_icon'></i></a>";
           }
       } ?>
     <?php if($_GET['action']=='users'){ ?>

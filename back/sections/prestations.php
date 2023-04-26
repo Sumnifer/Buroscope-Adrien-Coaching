@@ -106,14 +106,14 @@ if (isset($_SESSION["id_users"])) {
                     $rows = mysqli_fetch_object($result);
                     $_POST["title_prestations"] = $rows->title_prestations;
                     $_POST["content_prestations"] =
-                        $rows->content_preqtations;
+                        $rows->content_prestations;
                     $_POST["alt_prestations"] = $rows->alt_prestations;
-                    $price = $rows->price_prestations;
+                    $_POST['price_prestations'] = $rows->price_prestations;
                     $visibility = $rows->visibility_prestations;
                 }
                 break;
 
-            case "modifyPrestation":
+            case "modifyPrestations":
                 $action_form =
                     "modifyPrestations&id_prestations=" .
                     $_GET["id_prestations"];
@@ -371,7 +371,7 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<summary class='content__details_summary'>";
         $content .=
             "<div class='content__details_summary_items'>" .
-            $rows->prestations .
+            $rows->rank_prestations .
             "<a class='content__details_summary_actions_arrows' href='back.php?action=prestations&case=rankPrestations&direction=up&id_prestations=" .
             $rows->id_prestations .
             "&rank=" .

@@ -2,6 +2,7 @@ let newButton = document.getElementById("newButton");
 let closeButton = document.getElementById("closeButton");
 let form = document.getElementById("userForm");
 let formPresentation = document.getElementById("presentationFormSection");
+let formPrestation = document.getElementById("prestationFormSection")
 let body = document.getElementById("body");
 if(newButton) {
   newButton.addEventListener("click", function () {
@@ -10,6 +11,8 @@ if(newButton) {
     }
     if (formPresentation) {
       formPresentation.classList.toggle("presentationFormSection_display");
+    }if (formPrestation) {
+      formPrestation.classList.toggle("prestationFormSection_display");
     }
   });
 }
@@ -21,6 +24,9 @@ if(closeButton) {
     }
     if (formPresentation) {
       formPresentation.classList.toggle("presentationFormSection_display");
+    }
+    if (formPrestation) {
+      formPrestation.classList.toggle("prestationFormSection_display");
     }
   });
 }

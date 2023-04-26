@@ -25,6 +25,8 @@
   &__container
     display: grid
     grid-template-columns: repeat(3, 1fr)
+    justify-content: center
+
     gap: 4rem
     padding: 5rem 12.5rem
 
@@ -35,9 +37,12 @@
       flex-direction: column
       justify-content: space-between
       color: $white
+      overflow: hidden
 
       &_img
         margin-bottom: 2rem
+        width: 100%
+        aspect-ratio: 1/0.8
 
       &_cta
         align-self: center
@@ -50,11 +55,13 @@
         margin-bottom: 1rem
         padding-block: .5rem
         cursor: pointer
+        text-transform: uppercase
 
       &_title
         padding: 1rem 2rem
         color: $white
         position: relative
+        text-transform: uppercase
 
 
         &::before
@@ -69,15 +76,12 @@
           color: $secondary
 
       &_paragraph
-        &:first-of-type
-          padding-inline: 2rem
-          text-align: justify
-          height: 100%
-          font-size: .9rem
-        &:last-of-type
-          text-align: center
-          padding: 1rem 3rem
-          font-size: .8rem
+        padding-inline: 2rem
+        text-align: justify
+        height: 100%
+        font-size: .9rem
+        margin-bottom: 3rem
+
 
   &__paragraph
     margin-inline: 35%

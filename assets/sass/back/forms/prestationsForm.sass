@@ -1,0 +1,88 @@
+.prestationFormSection
+  backdrop-filter: blur(2px)
+  position: absolute
+  height: 100vh
+  width: 100vw
+  top: 0
+  left: 0
+  display: grid
+  transform: translateY(-200%)
+  place-items: center
+  transition: transform 0.5s ease-in-out
+
+.prestationFormSection_display
+  transform: translateY(0)
+
+.prestation__form
+  display: flex
+  flex-direction: column
+  background-color: $white
+  width: 50%
+  padding: 5%
+  border: 2px solid $blue
+  position: relative
+  &_div
+
+    &_title
+      color: $blue
+      font-size: 1.5rem
+      font-weight: 900
+      text-align: center
+      text-transform: uppercase
+    &_button
+      color: $blue
+      position: absolute
+      top: 5%
+      right: 5%
+      font-size: 1.5rem
+      cursor: pointer
+  &_input
+    padding: .4rem
+    margin: .2rem 0 .5rem 0
+    background-color: #c8c8c8
+    color: $blue
+    border: 1px solid $blue
+    outline: none
+    &::placeholder
+      color: $blue
+  &_textarea
+    padding: .4rem
+    margin: .2rem 0 .5rem 0
+    background-color: #c8c8c8
+    color: $blue
+    border: 1px solid $blue
+    outline: none
+    min-width : 100%
+    min-height : 6.25rem
+    max-width : 100%
+    max-height : 45rem
+    font-family: Roboto, sans-serif
+    &::placeholder
+      color: $blue
+  &_label
+    font-size: 1.3rem
+    color: $blue
+  &_select
+    padding: .4rem
+    margin: .2rem 0 .5rem 0
+    background-color: #c8c8c8
+    color: $blue
+    border: 1px solid $blue
+    border-radius: .625rem
+    outline: none
+    &_option
+      background-color: #c8c8c8
+      color: $blue
+      padding: 0.5rem
+  &_btn
+    padding: .5rem
+    align-self: center
+    width: 30%
+    margin-top: 1rem
+    border-radius: 30px
+    border: none
+    text-transform: uppercase
+    color: $white
+    cursor: pointer
+    background-color: $blue
+    font-weight: 900
