@@ -1,14 +1,47 @@
+.account_reference
+    position: relative
+.account__nav
+    background-color: $blue
+    color: $white
+    position: absolute
+    top: 0
+    width: 15%
+    z-index: 10
+    padding-top: 2rem
+    height: 100%
+    &_ul
+        display: flex
+        flex-direction: column
+        &_li
+            padding-inline: 1rem
+            display: flex
+            justify-content: space-between
+            padding-block: 2rem
+            transition: all 0.5s ease-in-out
+            &:hover
+                background-color: #243742
+                cursor: pointer
+            &_link
+                color: $white
+                text-transform: uppercase
+                font-weight: 700
+                &_icon
+                    margin-right: .5rem
 .account__body
     position: relative
+    background-color: $white
+    padding-block: 3rem
+    padding-inline: 35% 20%
+
 
     &_title
         text-align: center
         text-transform: uppercase
         font-size: 1.5rem
         font-weight: 700
-        color: $white
+        color: $blue
         padding-block: 1rem
-        margin-top: 3rem
+        margin-bottom: 2rem
 
     &_form
         display: flex
@@ -18,30 +51,36 @@
     &_container-first
         display: flex
         flex-direction: column
-        margin-inline: 30%
         margin-bottom: 2rem
         gap: 1rem
         padding: 0 0 1rem
         border-radius: 10px
-        background-color: $blue
+        border: 1px solid $blue
+        color: $blue
+        overflow: hidden
+        &_title
+            color: $white
+            padding: .5rem 1rem
+            background-color: $blue
         &_info
             margin-inline: 2rem
             padding-bottom: 1rem
-            color: $white
-            border-bottom: solid 1px $secondary
             &:nth-of-type(1)
                 padding-top: 1rem
 
             &_span
                 text-transform: uppercase
+                font-weight: 700
     &_container
         display: flex
         flex-direction: column
-        margin-inline: 30%
+        margin-bottom: 2rem
         gap: 1rem
         padding: 0 0 1rem
         border-radius: 10px
         border: 2px solid $blue
+        overflow: hidden
+        color: $blue
 
         &:last-of-type
             margin-bottom: 5rem
@@ -52,8 +91,8 @@
             color: $white
             padding: .5rem 1rem
             background-color: $blue
-            border-top-left-radius: 10px
-            border-top-right-radius: 10px
+        &_subtitle
+            padding-left: 2rem
 
         &_label
             display: none
@@ -62,19 +101,19 @@
             margin-inline: 2rem
             padding: .5rem
             background-color: transparent
-            border: 1px solid $secondary
+            border: 1px solid $blue
             border-radius: 10px
-            color: $secondary
+            color: $blue
             outline: none
             &::placeholder
-                color: $secondary
+                color: $blue
 
         &_cta
             width: 30%
             align-self: center
             padding-block: .5rem
-            background-color: $secondary
-            color: $primary
+            background-color: $blue
+            color: $white
             border-color: transparent
             border-radius: 10px
             font-weight: 700

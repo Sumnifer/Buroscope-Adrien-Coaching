@@ -1795,17 +1795,58 @@ a {
   border-radius: 5px;
 }
 
+.account_reference {
+  position: relative;
+}
+
+.account__nav {
+  background-color: #2F4858;
+  color: #f5f5f5;
+  position: absolute;
+  top: 0;
+  width: 15%;
+  z-index: 10;
+  padding-top: 2rem;
+  height: 100%;
+}
+.account__nav_ul {
+  display: flex;
+  flex-direction: column;
+}
+.account__nav_ul_li {
+  padding-inline: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding-block: 2rem;
+  transition: all 0.5s ease-in-out;
+}
+.account__nav_ul_li:hover {
+  background-color: #243742;
+  cursor: pointer;
+}
+.account__nav_ul_li_link {
+  color: #f5f5f5;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.account__nav_ul_li_link_icon {
+  margin-right: 0.5rem;
+}
+
 .account__body {
   position: relative;
+  background-color: #f5f5f5;
+  padding-block: 3rem;
+  padding-inline: 35% 20%;
 }
 .account__body_title {
   text-align: center;
   text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #f5f5f5;
+  color: #2F4858;
   padding-block: 1rem;
-  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 .account__body_form {
   display: flex;
@@ -1815,33 +1856,40 @@ a {
 .account__body_container-first {
   display: flex;
   flex-direction: column;
-  margin-inline: 30%;
   margin-bottom: 2rem;
   gap: 1rem;
   padding: 0 0 1rem;
   border-radius: 10px;
+  border: 1px solid #2F4858;
+  color: #2F4858;
+  overflow: hidden;
+}
+.account__body_container-first_title {
+  color: #f5f5f5;
+  padding: 0.5rem 1rem;
   background-color: #2F4858;
 }
 .account__body_container-first_info {
   margin-inline: 2rem;
   padding-bottom: 1rem;
-  color: #f5f5f5;
-  border-bottom: solid 1px #FFE13F;
 }
 .account__body_container-first_info:nth-of-type(1) {
   padding-top: 1rem;
 }
 .account__body_container-first_info_span {
   text-transform: uppercase;
+  font-weight: 700;
 }
 .account__body_container {
   display: flex;
   flex-direction: column;
-  margin-inline: 30%;
+  margin-bottom: 2rem;
   gap: 1rem;
   padding: 0 0 1rem;
   border-radius: 10px;
   border: 2px solid #2F4858;
+  overflow: hidden;
+  color: #2F4858;
 }
 .account__body_container:last-of-type {
   margin-bottom: 5rem;
@@ -1850,8 +1898,9 @@ a {
   color: #f5f5f5;
   padding: 0.5rem 1rem;
   background-color: #2F4858;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+}
+.account__body_container_subtitle {
+  padding-left: 2rem;
 }
 .account__body_container_label {
   display: none;
@@ -1860,20 +1909,20 @@ a {
   margin-inline: 2rem;
   padding: 0.5rem;
   background-color: transparent;
-  border: 1px solid #FFE13F;
+  border: 1px solid #2F4858;
   border-radius: 10px;
-  color: #FFE13F;
+  color: #2F4858;
   outline: none;
 }
 .account__body_container_input::placeholder {
-  color: #FFE13F;
+  color: #2F4858;
 }
 .account__body_container_cta {
   width: 30%;
   align-self: center;
   padding-block: 0.5rem;
-  background-color: #FFE13F;
-  color: #26261F;
+  background-color: #2F4858;
+  color: #f5f5f5;
   border-color: transparent;
   border-radius: 10px;
   font-weight: 700;

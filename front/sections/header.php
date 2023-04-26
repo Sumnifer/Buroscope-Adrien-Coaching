@@ -59,10 +59,10 @@
         <?php
         if(isset($_SESSION['id_users'])){
           echo "<a href='front.php?action=logout' class='header__controls_detail_bloc_link'>
-        <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Déconnexion</a>";
+        <i class='fa-regular fa-sign-out header__controls_detail_bloc_link_icon'></i>Déconnexion</a>";
         } else {
           echo "<a href='front.php?action=logging' class='header__controls_detail_bloc_link'>
-        <i class='fa-regular fa-right-to-bracket header__controls_detail_bloc_link_icon'></i>Connexion</a>";}
+        <i class='fa-regular fa-sign-in header__controls_detail_bloc_link_icon'></i>Connexion</a>";}
         ?>
       </div>
     </details>
