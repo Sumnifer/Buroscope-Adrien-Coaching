@@ -331,6 +331,13 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
+
+            case "unloadSliders" :
+                $action_form = "newSliders";
+                foreach ($_POST as $cle => $valeur) {
+                    unset($_POST[$cle]);
+                }
+                break;
         }
     }
     $request = "SELECT * FROM sliders ORDER BY rank_sliders";
