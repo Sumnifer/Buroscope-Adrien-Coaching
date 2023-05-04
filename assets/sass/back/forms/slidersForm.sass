@@ -1,39 +1,41 @@
+.sliderFormSection
+  backdrop-filter: blur(2px)
+  position: absolute
+  height: 100vh
+  width: 100vw
+  top: 0
+  left: 0
+  display: grid
+  transform: translateY(-200%)
+  place-items: center
+  transition: transform 0.5s ease-in-out
+
+.sliderFormSection_display
+  transform: translateY(0)
+
 .slider__form
   display: flex
   flex-direction: column
   background-color: $white
-  width: 100%
+  width: 50%
   padding: 5%
   border: 2px solid $blue
   position: relative
-  &_label
+  &_icon
+    color: $blue
+    position: absolute
+    top: 5%
+    right: 5%
+    font-size: 1.5rem
+    cursor: pointer
+  &_title,
+  &_content,
+  &_alt,
+  &_illustation,
+  &_visible
     font-size: 1.3rem
     color: $blue
-  &_textarea
-    padding: .4rem
-    margin: .2rem 0 .5rem 0
-    background-color: #c8c8c8
-    color: $blue
-    border: 1px solid $blue
-    outline: none
-    min-width : 100%
-    min-height : 6.25rem
-    max-width : 100%
-    max-height : 45rem
-    font-family: Roboto, sans-serif
-    &::placeholder
-      color: $blue
-  &_imput
-    padding: .4rem
-    margin: .2rem 0 .5rem 0
-    background-color: #c8c8c8
-    color: $blue
-    border: 1px solid $blue
-    outline: none
-    &::placeholder
-      color: $blue
-  &_label_div
-    &_select
+  &_input
     padding: .4rem
     margin: .2rem 0 .5rem 0
     background-color: #c8c8c8
@@ -41,4 +43,54 @@
     border: 1px solid $blue
     border-radius: .625rem
     outline: none
+    &::placeholder
+      color: $blue
 
+  &_label
+    font-size: 1.3rem
+    color: $white
+  &_textarea
+    font-family: Roboto
+    font-weight: 500
+    padding: .4rem
+    margin: .2rem 0 .5rem 0
+    background-color: #c8c8c8
+    color: $blue
+    border: 1px solid $blue
+    border-radius: .625rem
+    outline: none
+    min-width : 100%
+    min-height : 6.25rem
+    max-width : 100%
+    max-height : 15rem
+    &::placeholder
+      color: $blue
+      font-family: Roboto
+      font-weight: 400
+
+  &_btn
+    padding: .5rem
+    align-self: center
+    width: 30%
+    margin-top: 1rem
+    border-radius: 30px
+    border: none
+    text-transform: uppercase
+    color: $white
+    cursor: pointer
+    background-color: $blue
+  &_div
+    &_select
+      width: 100%
+      padding: .4rem
+
+      background-color: #c8c8c8
+      color: $blue
+      border: 1px solid $blue
+      border-radius: .625rem
+      outline: none
+      &_value
+
+        background-color: #c8c8c8
+        color: $blue
+        padding: 0.5rem
