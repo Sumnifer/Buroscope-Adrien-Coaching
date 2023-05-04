@@ -244,15 +244,16 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
                                                    statut_users LIKE '%$searchResult%'
             ORDER BY id_users";
         } else {
-            $request = "SELECT * FROM users WHERE 
+            $request = "SELECT * FROM users WHERE statut_users != 'root' AND 
                                                    email_users LIKE '%$searchResult%' OR 
                                                    name_users LIKE '%$searchResult%' OR 
                                                    surname_users LIKE '%$searchResult%' OR 
                                                    date_users LIKE '%$searchResult%' OR 
-                                                   statut_users LIKE '%$searchResult%'
-            AND statut_users != 'root' ORDER BY id_users";
+                                                   statut_users LIKE '%$searchResult%' 
+                                                  
+             ORDER BY id_users";
         }
-    } elseif ($_GET["statut_users"] == "admin") {
+    } elseif ($_SESSION["statut_users"] == "admin") {
         $request =
             "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
     } else {

@@ -2,9 +2,13 @@
 
 $title = "Dashboard";
 $connexion = connexion();
+session_start();
 function counter($connexion, $table)
 {
     $request = "SELECT * FROM " . $table;
+    if(($table == 'users') && ($_SESSION['statut_users'] != 'root')){
+        $request .= " WHERE statut_users != 'root'";
+    }
     $result = mysqli_query($connexion, $request);
     return mysqli_num_rows($result);
 }

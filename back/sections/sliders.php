@@ -337,7 +337,8 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>POSITION</div>";
+    $content .= "<div>POSITION</div>"
+        
     $content .= "<div>SLIDERS</div>";
     $content .= "<div>IMAGE</div>";
     $content .= "<div>ACTIONS</div>";
