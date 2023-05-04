@@ -21,14 +21,13 @@ if (isset($_SESSION["id_users"])) {
                         "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
                 } else {
                     $request =
-                        "INSERT INTO articles SET 
-                      title_articles='" .
-                        $_POST["title_articles"] .
-                        "',
-                      content_articles='" .
-                        $_POST["content_articles"] .
-                        "'";
-                    $result = mysqli_query($connexion, $request);
+                        "INSERT INTO articles SET title_articles=?, content_articles=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    $title = $_POST["title_articles"];
+                    $content = $_POST["content_articles"];
+                    mysqli_stmt_bind_param($stmt, "ss", $title, $content);
+                    $result = mysqli_stmt_execute($stmt);
+
                     $confirmation =
                         "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> L'article a bien été crée </p>";
                 }
@@ -63,17 +62,13 @@ if (isset($_SESSION["id_users"])) {
                         $confirmation =
                             "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Le champs titre ne peut être vide </p>";
                     } else {
-                        $request =
-                            "UPDATE articles SET 
-                        title_articles='" .
-                            $_POST["title_articles"] .
-                            "',
-                        content_articles='" .
-                            $_POST["content_articles"] .
-                            "' WHERE id_articles='" .
-                            $_GET["id_articles"] .
-                            "'";
-                        $result = mysqli_query($connexion, $request);
+                        $request = "SELECT * FROM articles WHERE id_articles=?";
+                        $stmt = mysqli_prepare($connexion, $request);
+                        $id = $_GET["id_articles"];
+                        mysqli_stmt_bind_param($stmt, "i", $id);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+
                         $confirmation =
                             "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> L'article a bien été modifiée </p>";
                     }

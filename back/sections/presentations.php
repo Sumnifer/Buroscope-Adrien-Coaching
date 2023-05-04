@@ -32,25 +32,26 @@ if (isset($_SESSION["id_users"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
                 } else {
-                    $request =
-                        "INSERT INTO presentations SET 
-                      title_presentations='" .
-                        $_POST["title_presentations"] .
-                        "',
-                      content_presentations='" .
-                        $_POST["content_presentations"] .
-                        "',
-                        alt_presentations='" .
-                        $_POST["alt_presentations"] .
-                        "',
-                        rank_presentations=($rows->nb_presentations + 1),
-                        visibility_presentations='" .
-                        $_POST["visibility_presentations"] .
-                        "',
-                        direction_presentations='" .
-                        $_POST["direction_presentations"] .
-                        "'";
+
+                    $request = "SELECT COUNT(*) AS nb_presentations FROM presentations";
                     $result = mysqli_query($connexion, $request);
+                    $rows = mysqli_fetch_object($result);
+                    $request = "INSERT INTO presentations SET 
+                      title_presentations=?,
+                      content_presentations=?,
+                      alt_presentations=?,
+                      rank_presentations=?,
+                      visibility_presentations=?,
+                      direction_presentations=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    $title = $_POST["title_presentations"];
+                    $content = $_POST["content_presentations"];
+                    $alt = $_POST["alt_presentations"];
+                    $rank = $rows->nb_presentations + 1;
+                    $visibility = $_POST["visibility_presentations"];
+                    $direction = $_POST["direction_presentations"];
+                    mysqli_stmt_bind_param($stmt, "sssiss", $title, $content, $alt, $rank, $visibility, $direction);
+                    $result = mysqli_stmt_execute($stmt);
                     $last_Id = mysqli_insert_id($connexion);
 
                     if (
@@ -72,13 +73,12 @@ if (isset($_SESSION["id_users"])) {
                                 $file_path
                             )
                         ) {
-                            $request2 =
-                                "UPDATE presentations SET img_presentations='" .
-                                $file_path .
-                                "' WHERE id_presentations='" .
-                                $last_Id .
-                                "'";
-                            $result2 = mysqli_query($connexion, $request2);
+                            $request2 = "UPDATE presentations SET img_presentations=? WHERE id_presentations=?";
+                            $stmt2 = mysqli_prepare($connexion, $request2);
+                            $file_path = $_POST["file_path"];
+                            $last_Id = $_POST["last_Id"];
+                            mysqli_stmt_bind_param($stmt2, "si", $file_path, $last_Id);
+                            $result2 = mysqli_stmt_execute($stmt2);
                         }
                     }
 
@@ -210,13 +210,10 @@ if (isset($_SESSION["id_users"])) {
             case "visibilityPresentations":
                 if (isset($_GET["id_presentations"])) {
                     if (isset($_GET["visibility"])) {
-                        $requete =
-                            "UPDATE presentations SET visibility_presentations='" .
-                            $_GET["visibility"] .
-                            "' WHERE id_presentations='" .
-                            $_GET["id_presentations"] .
-                            "'";
-                        $resultat = mysqli_query($connexion, $requete);
+                        $request = "UPDATE presentations SET visibility_presentations=? WHERE id_presentations=?";
+                        $stmt = mysqli_prepare($connexion, $request);
+                        mysqli_stmt_bind_param($stmt, "ii", $_GET["visibility"], $_GET["id_presentations"]);
+                        $result = mysqli_stmt_execute($stmt);
                         if($_GET['visibility']==1){
                             $confirmation =
                                 "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais visible </p>";
@@ -248,7 +245,6 @@ if (isset($_SESSION["id_users"])) {
 
             case "deletePresentations":
                 if (isset($_GET["id_presentations"])) {
-                    // Récupérer le chemin du fichier image à supprimer
                     $request_img =
                         "SELECT img_presentations FROM presentations WHERE id_presentations='" .
                         $_GET["id_presentations"] .
@@ -274,13 +270,11 @@ if (isset($_SESSION["id_users"])) {
                     $result2 = mysqli_query($connexion, $request2);
                     $i = 1;
                     while ($rows2 = mysqli_fetch_object($result2)) {
-                        $request3 =
-                            "UPDATE presentations SET rank_presentations='" .
-                            $i .
-                            "' WHERE id_presentations='" .
-                            $rows2->id_presentations .
-                            "'";
-                        $result3 = mysqli_query($connexion, $request3);
+                        $request = "UPDATE presentations SET rank_presentations=? WHERE id_presentations=?";
+                        $stmt = mysqli_prepare($connexion, $request);
+                        mysqli_stmt_bind_param($stmt, "ii", $i, $rows2->id_presentations);
+                        $result = mysqli_stmt_execute($stmt);
+
                         $i++;
                     }
                 }
@@ -293,23 +287,16 @@ if (isset($_SESSION["id_users"])) {
                         case "up":
                             if (isset($_GET["rank"]) && $_GET["rank"] > 1) {
                                 $rank = $_GET["rank"] - 1;
-                                $requete =
-                                    "UPDATE presentations SET rank_presentations='" .
-                                    $_GET["rank"] .
-                                    "' WHERE rank_presentations='" .
-                                    $rank .
-                                    "'";
-                                $resultat = mysqli_query($connexion, $requete);
-                                $requete2 =
-                                    "UPDATE presentations SET rank_presentations='" .
-                                    $rank .
-                                    "' WHERE id_presentations='" .
-                                    $_GET["id_presentations"] .
-                                    "'";
-                                $resultat2 = mysqli_query(
-                                    $connexion,
-                                    $requete2
-                                );
+                                $request = "UPDATE presentations SET rank_presentations=? WHERE rank_presentations=?";
+                                $stmt1 = mysqli_prepare($connexion, $request);
+                                mysqli_stmt_bind_param($stmt1, "ii", $_GET["rank"], $rank);
+                                mysqli_stmt_execute($stmt1);
+
+                                $request2 = "UPDATE presentations SET rank_presentations=? WHERE id_presentations=?";
+                                $stmt2 = mysqli_prepare($connexion, $request2);
+                                mysqli_stmt_bind_param($stmt2, "ii", $rank, $_GET["id_presentations"]);
+                                mysqli_stmt_execute($stmt2);
+
                             }
                             break;
 

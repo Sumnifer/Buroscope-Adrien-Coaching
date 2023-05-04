@@ -53,6 +53,7 @@
       <div class="header__controls_detail_bloc">
         <?php if(($_SESSION['statut_users']=='admin') || ($_SESSION['statut_users']=='root')){
           echo "<a href='../back/back.php' class='header__controls_detail_bloc_link'><i class='fa-regular fa-table header__controls_detail_bloc_link_icon'></i>Tableau de Bord</a>";
+          echo "<a href='front.php?action=account' class='header__controls_detail_bloc_link'><i class='fa-regular fa-user header__controls_detail_bloc_link_icon'></i>Mon Compte</a>";
         } else {
         echo "<a href='front.php?action=account' class='header__controls_detail_bloc_link'><i class='fa-regular fa-user header__controls_detail_bloc_link_icon'></i>Mon Compte</a>";
         } ?>

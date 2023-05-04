@@ -30,7 +30,7 @@
   <aside class="aside">
     <nav class="aside_navbar">
       <menu class="aside_navbar_menu">
-        <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-house aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='dashboard'){echo "<span class='selected'></span>";} ?></a></li>
+        <li class="aside_navbar_menu_list"><a href="back.php?action=dashboard" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gauge-high aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='dashboard'){echo "<span class='selected'></span>";} ?></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=settings" class="aside_navbar_menu_list_link"><i class="fa-solid fa-gear aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='settings'){echo "<span class='selected'></span>";} ?></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=users" class="aside_navbar_menu_list_link"><i class="fa-solid fa-user aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='users'){echo "<span class='selected'></span>";} ?></a></li>
         <li class="aside_navbar_menu_list"><a href="back.php?action=pages" class="aside_navbar_menu_list_link"><i class="fa-solid fa-page aside_navbar_menu_list_link_icons"></i><?php if($_GET['action']=='pages'){echo "<span class='selected'></span>";} ?></a></li>
@@ -47,6 +47,10 @@
   </aside>
   <section class="content" id="content">
     <div class="content__div">
+      <?php if($_GET['case']=='searchUsers'){
+      echo "<a href='back.php?action=users' class='content__div_button-back' '>Retour<i class='fa-solid fa-arrow-left content__div_button_icon'></i></a> &nbsp ";
+      }
+      ?>
       <?php if($_GET['action']!='dashboard') {
           if ($_GET['action']== 'users'){
           echo "<a href='back.php?action=users&case=unloadUsers' class='content__div_button' id='newButton'>Nouveau<i class='fa-solid fa-plus content__div_button_icon'></i></a>";
@@ -70,8 +74,10 @@
     <?php } ?>
     </div>
     <?php if(isset($confirmation)){echo $confirmation;} ?>
+
     <?php if(isset($content)){echo $content;} ?>
     <?php if(isset($form)){include($form);} ?>
+    <?php if(isset($scheduleCalendar)){echo $scheduleCalendar;} ?>
   </section>
 <script src="../script.js"></script>
 <script>

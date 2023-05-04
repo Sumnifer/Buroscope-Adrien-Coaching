@@ -18,5 +18,22 @@
 </footer>
 
 <script src="../script.js"></script>
+<script>
+    // Récupérez tous les éléments avec la classe "confirmation"
+    // Récupérez tous les éléments avec la classe "confirmation"
+    let confirmations = document.querySelectorAll('.confirmation');
+
+    // Pour chaque élément avec la classe "confirmation"
+    confirmations.forEach(function(confirmation) {
+        // Utilisez la fonction setTimeout pour définir l'opacité de la confirmation sur 0 après 5 secondes
+        setTimeout(function() {
+            confirmation.style.opacity = 0;
+        }, 5000);
+        setTimeout(function () {
+            confirmation.style.display = 'none';
+        }, 5500);
+    });
+
+</script>
   </body>
 </html>

@@ -4,80 +4,107 @@ if (isset($_SESSION["id_users"])) {
     $action_form = "accountForm";
     $connexion = connexion();
 
-    $request = "SELECT * FROM users WHERE id_users ='" . $_SESSION['id_users'] . "'";
+    $request =
+        "SELECT * FROM users WHERE id_users ='" . $_SESSION["id_users"] . "'";
     $result = mysqli_query($connexion, $request);
     $rows = mysqli_fetch_object($result);
 
-    
-
+    if (isset($_GET["case"])) {
+        switch ($_GET["case"]) {
+            case "updateUsers":
+                if (!empty($_POST["phone"])) {
+                    $request =
+                        "UPDATE users SET phone_users = '" .
+                        $_POST["phone"] .
+                        "' WHERE id_users = '" .
+                        $_SESSION["id_users"] .
+                        "'";
+                    $result = mysqli_query($connexion, $request);
+                    $confirmation =
+                        "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i>Votre numéro de téléphone a bien été modifié</p>";
+                    unset($_POST["phone"]);
+                    header("Refresh: 2; url=front.php?action=account");
+                } elseif (
+                    !empty($_POST["email"]) &&
+                    $_POST["email"] == $_POST["emailConfirm"]
+                ) {
+                    $mail = $_POST["email"];
+                    $request =
+                        "UPDATE users SET email_users = '$mail' WHERE id_users = '" .
+                        $_SESSION["id_users"] .
+                        "'";
+                    $result = mysqli_query($connexion, $request);
+                    $confirmation =
+                        "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i>Votre adresse email a bien été modifiée</p>";
+                    header("Refresh: 2; url=front.php?action=account");
+                } elseif (!empty($_POST["oldPassword"])) {
+                    if (
+                        !empty($_POST["newPassword"]) &&
+                        !empty($_POST["confirmPassword"])
+                    ) {
+                        if (
+                            $_POST["newPassword"] == $_POST["confirmPassword"]
+                        ) {
+                            $request =
+                                "SELECT pass_users FROM users WHERE id_users = '" .
+                                $_SESSION["id_users"] .
+                                "'";
+                            $result = mysqli_query($connexion, $request);
+                            $rows = mysqli_fetch_object($result);
+                            $oldPassword = htmlspecialchars(
+                                $_POST["oldPassword"],
+                                ENT_QUOTES,
+                                "UTF-8"
+                            );
+                            $newPassword = password_hash(
+                                htmlspecialchars(
+                                    $_POST["newPassword"],
+                                    ENT_QUOTES,
+                                    "UTF-8"
+                                ),
+                                PASSWORD_DEFAULT
+                            );
+                            if (
+                                password_verify($oldPassword, $rows->pass_users)
+                            ) {
+                                $request1 =
+                                    "UPDATE users SET pass_users = '$newPassword' WHERE id_users = '" .
+                                    $_SESSION["id_users"] .
+                                    "'";
+                                $result1 = mysqli_query($connexion, $request1);
+                                $confirmation =
+                                    "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i>Votre mot de passe a bien été modifiée</p>";
+                                header(
+                                    "Refresh: 2; url=front.php?action=account"
+                                );
+                            } else {
+                                $confirmation =
+                                    "<p class='warning confirmation'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Mot de passe incorrect ! </p>";
+                                header(
+                                    "Refresh: 2; url=front.php?action=account"
+                                );
+                            }
+                        }
+                    } else {
+                        $confirmation =
+                            "<p class='warning confirmation'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez remplir tous les champs</p>";
+                    }
+                }
+                break;
+        }
+    }
+    if ($_GET["case"] == "" || $_GET["case"] == "updateUsers") {
+        include "accountInfos.php";
+    }
+    if($_GET["case"] == "accountSchedules"){
+        $today = date("Y-m-d")." 00:00:00";
+        $request="SELECT * FROM schedules WHERE date_schedules >= '$today' AND id_users = '".$_SESSION["id_users"]."' ORDER BY date_schedules ASC";
+        $result=mysqli_query($connexion,$request);
+        $request2="SELECT * FROM schedules WHERE date_schedules < '$today' AND id_users = ".$_SESSION["id_users"]." ORDER BY date_schedules ASC";
+        $result2=mysqli_query($connexion,$request2);
+        include "accountSchedules.php";
+    }
 } else {
     header("Location: front.php?action=logging");
-}
-?>
-<div class="account_reference">
-<nav class="account__nav">
-    <ul class="account__nav_ul">
-        <li class="account__nav_ul_li"><a href="#" class="account__nav_ul_li_link"><i class="fa-solid fa-globe account__nav_ul_li_link_icon"></i>Retour</a> <i class="fa-solid fa-chevron-right"></i></li>
-        <li class="account__nav_ul_li"><a href="#" class="account__nav_ul_li_link"><i class="fa-solid fa-user account__nav_ul_li_link_icon"></i>Mes Informations</a> <i class="fa-solid fa-chevron-right"></i></li>
-        <li class="account__nav_ul_li"><a href="#" class="account__nav_ul_li_link"><i class="fa-solid fa-dumbbell account__nav_ul_li_link_icon"></i>Mes Séances</a> <i class="fa-solid fa-chevron-right"></i></li>
-        <li class="account__nav_ul_li"><a href="#" class="account__nav_ul_li_link"><i class="fa-solid fa-gear account__nav_ul_li_link_icon"></i>Paramètres</a> <i class="fa-solid fa-chevron-right"></i></li>
-        <li class="account__nav_ul_li"><a href="#" class="account__nav_ul_li_link"><i class="fa-solid fa-sign-out account__nav_ul_li_link_icon"></i>Deconnexion</a> <i class="fa-solid fa-chevron-right"></i></li>
-    </ul>
-</nav>
-<section class="account__body">
-    <h1 class="account__body_title">Mes informations personnelles</h1>
-    <div class="account__body_container-first">
-        <h3 class="account__body_container-first_title"><i class="fa-solid fa-user"></i> Informations générales</h3>
-        <p class="account__body_container-first_info"><span class="account__body_container-first_info_span"><i class="fa-solid fa-venus-mars"></i> Civilité :</span>
-            <?php echo $rows->gender_users ?>
-        </p>
-        <p class="account__body_container-first_info"><span class="account__body_container-first_info_span"><i class="fa-solid fa-id-card"></i> Nom :</span>
-            <?php echo $rows->surname_users." ".$rows->name_users ?>
-        </p>
+} ?>
 
-        <p class="account__body_container-first_info"><span class="account__body_container-first_info_span"><i class="fa-solid fa-cake-candles"></i> Dâte de Naissance : </span>
-            <?php $date_format_fr = date('d/m/Y', strtotime($rows->date_users));
-            echo $date_format_fr;
-            ?>
-        </p>
-
-    </div>
-    <form class="account__body_form" name="accountForm" method="post" enctype="multipart/form-data">
-        <div class="account__body_container">
-            <h3 class="account__body_container_title"><i class="fa-solid fa-address-book"></i> Coordonnées</h3>
-            <p class="account__body_container-first_info"><span class="account__body_container-first_info_span"><i class="fa-solid fa-envelope"></i> Adresse Email : </span>
-                <?php echo $rows->email_users ?>
-            </p>
-            <p class="account__body_container-first_info"><span class="account__body_container-first_info_span"><i class="fa-solid fa-phone"></i> Numéro de Téléphone : </span>
-                <?php echo $rows->phone_users ?>
-            </p>
-            <h3 class="account__body_container_subtitle"><i class="fa-solid fa-pen"></i>&nbsp; Changer mon numéro de téléphone</h3>
-            <label class="account__body_container_label" for="phone">Nouveau numéro de téléphone</label>
-            <input type="tel" name="phone" id="phone" class="account__body_container_input"
-                   placeholder="Nouveau numéro de téléphone">
-            <button class="account__body_container_cta" type="submit">Modifier</button>
-            <h3 class="account__body_container_subtitle"><i class="fa-solid fa-pen"></i>&nbsp; Modification de l'adresse email</h3>
-            <label class="account__body_container_label" for="email">Nouvelle adresse mail</label>
-            <input type="email" name="email" id="email" class="account__body_container_input"
-                placeholder="Nouvelle adresse mail">
-            <label class="account__body_container_label" for="emailConfirm">Confirmez la nouvelle adresse email</label>
-            <input type="email" name="emailConfirm" id="emailConfirm" class="account__body_container_input"
-                placeholder="Confirmez l'adresse mail">
-            <button class="account__body_container_cta" type="submit">Modifier</button>
-        </div>
-
-        <div class="account__body_container">
-            <h3 class="account__body_container_title"><i class="fa-solid fa-gear"></i> Informations de Connexion</h3>
-            <label class="account__body_container_label" for="oldPassword">Renseignez votre mot de passe actuel</label>
-            <input type="password" name="oldPassword" id="oldPassword" class="account__body_container_input"
-                placeholder="Mot de passe actuel">
-            <label class="account__body_container_label" for="newPassword">Renseignez votre nouveau mot de passe</label>
-            <input type="password" name="newPassword" id="newPassword" class="account__body_container_input"
-                placeholder="Nouveau mot de passe">
-            <label class="account__body_container_label" for="confirmPassword">Confirmez le nouveau mot de passe</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" class="account__body_container_input"
-                placeholder="Confirmez le mot de passe">
-            <button class="account__body_container_cta" type="submit">Modifier</button>
-        </div>
-</section>
-</div>

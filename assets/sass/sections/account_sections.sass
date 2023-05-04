@@ -17,20 +17,22 @@
             display: flex
             align-items: center
             justify-content: space-between
-            padding-block: 2rem
             transition: all 0.5s ease-in-out
             &:hover
                 background-color: #243742
                 cursor: pointer
             &_link
                 color: $white
+                padding-block: 2rem
                 text-transform: uppercase
                 font-weight: 700
+                width: 100%
+                height: 100%
                 &_icon
                     margin-right: .5rem
 .account__body
     position: relative
-    background-color: $white
+    background-color: $primary
     padding-block: 3rem
     padding-inline: 35% 20%
 
@@ -40,7 +42,7 @@
         text-transform: uppercase
         font-size: 1.5rem
         font-weight: 700
-        color: $blue
+        color: $secondary
         padding-block: 1rem
         margin-bottom: 2rem
 
@@ -56,13 +58,13 @@
         gap: 1rem
         padding: 0 0 1rem
         border-radius: 10px
-        border: 1px solid $blue
-        color: $blue
+        border: 1px solid $secondary
+        color: $white
         overflow: hidden
         &_title
-            color: $white
+            color: $primary
             padding: .5rem 1rem
-            background-color: $blue
+            background-color: $secondary
         &_info
             margin-inline: 2rem
             padding-bottom: 1rem
@@ -79,9 +81,9 @@
         gap: 1rem
         padding: 0 0 1rem
         border-radius: 10px
-        border: 2px solid $blue
+        border: 2px solid $secondary
         overflow: hidden
-        color: $blue
+        color: $white
 
         &:last-of-type
             margin-bottom: 5rem
@@ -89,9 +91,9 @@
 
 
         &_title
-            color: $white
+            color: $primary
             padding: .5rem 1rem
-            background-color: $blue
+            background-color: $secondary
         &_subtitle
             padding-left: 2rem
 
@@ -102,19 +104,19 @@
             margin-inline: 2rem
             padding: .5rem
             background-color: transparent
-            border: 1px solid $blue
+            border: 1px solid $secondary
             border-radius: 10px
-            color: $blue
+            color: $secondary
             outline: none
             &::placeholder
-                color: $blue
+                color: $secondary
 
         &_cta
             width: 30%
             align-self: center
             padding-block: .5rem
-            background-color: $blue
-            color: $white
+            background-color: $secondary
+            color: $primary
             border-color: transparent
             border-radius: 10px
             font-weight: 700

@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Calendrier</title>
-<meta name="robots" content="index,follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css" href="../css/calendrier.css" />
-</head>
-<body>
-
-<div id="conteneur_calendrier">
-<form id="calendrier" method="POST" action="#ss_conteneur">
-<select name="mois" id="mois" onChange="document.location.href='';reload(this.form)">
-<?php echo $ldMois; ?>
-</select>
-<select name="annee" id="annee" onChange="document.location.href='';reload(this.form)">
-<?php echo $ldAnnees; ?>
-</select>
-</form>
-<?php echo $calEven; ?>
+<?php if(isset($confirmation)){echo $confirmation;} ?>
+<section class="calendar">
+    <div id="conteneur_calendrier">
+        <form id="calendrier" method="POST" action="">
+            <select name="mois" id="mois" onChange="document.location.href='';reload(this.form)">
+                <?php echo $ldMois; ?>
+            </select>
+            <select name="annee" id="annee" onChange="document.location.href='';reload(this.form)">
+                <?php echo $ldAnnees; ?>
+            </select>
+        </form>
+        <?php echo $calEven; ?>
+    </div>
+    <div class="schedule">
+        <h2 class="schedule__title">Votre Séance</h2>
+        <?php echo $schedules; ?>
+    </div>
+</section>
 <?php echo $legende_cal; ?>
-</div>
+
 
 <script type="text/javascript">
-    let checkzero = "<?php if(isset($checkzero)){echo $checkzero;} ?>";
-    let format = "<?php echo $format; ?>";
-    let ordre = ["<?php echo strtoupper(implode('", "', $ordre)); ?>"];
+    var checkzero = "<?php if(isset($checkzero)){echo $checkzero;} ?>";
+    var format = "<?php echo $format; ?>";
+    var ordre = new Array("<?php echo strtoupper(implode('", "', $ordre)); ?>");
 
     /**
      * Reload la fenêtre avec les nouveaux mois et année choisis
@@ -32,11 +30,11 @@
      * @param   object      frm     L'object document du formulaire
      */
     function reload(frm){
-        let mois = frm.elements["mois"];
-        let annee = frm.elements["annee"];
+        var mois = frm.elements["mois"];
+        var annee = frm.elements["annee"];
         //Debug du mois et année
-        let index1 = mois.options[mois.selectedIndex].value;
-        let index2 = annee.options[annee.selectedIndex].value;
+        var index1 = mois.options[mois.selectedIndex].value;
+        var index2 = annee.options[annee.selectedIndex].value;
         //Envoi du formulaire
         frm.submit();
     }
@@ -48,7 +46,7 @@
      * @param   integer     mois        Le numéro du mois
      */
     function checkNum(jour, mois){
-        tab = [];
+        tab = new Array();
         tab[0] = jour;
         tab[1] = mois;
         if (this.checkzero){
@@ -62,5 +60,3 @@
         return tab;
     }  
 </script> 
-</body>
-</html>

@@ -7,28 +7,28 @@ $connexion=connexion();
  * $anneeMax : Permet la s�lection d'ann�es post�rieures � celle actuelle (3 = 3 ans post�rieur)
  */
 $anneeMin =0;
-$anneeMax = 3;
-
-/**
- * Formatage de la date (par exemple : JJ-MM-AAAA ou JJ|MM|AAAA)
- * $checkzero : ajoute un z�ro devant le mois ou le jour s'ils sont inf�rieur � 10
- *              "false" ou "true"
- * $format    : repr�sente la string qui s�pare le mois du jour de l'ann�e
- * $ordre     : d�termine l'ordre, de gauche � droite, du jour, mois et ann�e
- *              "a" pour ann�e, "m" pour mois, "j" pour jour
- * $affichage : Pour pr�senter le calendrier au format anglais ou fran�ais
- *              "fr" = commencer par lundi ou "en" = commencer par dimanche
- */
+$anneeMax = 2;
+//
+///**
+// * Formatage de la date (par exemple : JJ-MM-AAAA ou JJ|MM|AAAA)
+// * $checkzero : ajoute un z�ro devant le mois ou le jour s'ils sont inf�rieur � 10
+// *              "false" ou "true"
+// * $format    : repr�sente la string qui s�pare le mois du jour de l'ann�e
+// * $ordre     : d�termine l'ordre, de gauche � droite, du jour, mois et ann�e
+// *              "a" pour ann�e, "m" pour mois, "j" pour jour
+// * $affichage : Pour pr�senter le calendrier au format anglais ou fran�ais
+// *              "fr" = commencer par lundi ou "en" = commencer par dimanche
+// */
 $checkzero = "true";
 $format = "/";
 $ordre = array("j", "m", "a");
 $affichage = "fr";
-
-
-/**
- * Ci-dessous, le nom des mois et des jours. A changer si on veut d'autres langues (ou utiliser
- * la fonction gettext() de PHP. Ne pas changer les positions dans le tableau
- */
+//
+//
+///**
+// * Ci-dessous, le nom des mois et des jours. A changer si on veut d'autres langues (ou utiliser
+// * la fonction gettext() de PHP. Ne pas changer les positions dans le tableau
+// */
 $nomj[0] = "D";
 $nomj[1] = "L";
 $nomj[2] = "M";
@@ -36,7 +36,7 @@ $nomj[3] = "Me";
 $nomj[4] = "J";
 $nomj[5] = "V";
 $nomj[6] = "S";
-
+//
 $nomm[0] = "Janvier";
 $nomm[1] = "F&eacute;vrier";
 $nomm[2] = "Mars";
@@ -55,6 +55,7 @@ $nomm[11] = "D&eacute;cembre";
  * un peu plus bas. Celle-l� est parfaitement modifiable (c'est d'ailleurs recommand�, c'est
  * toujours mieux de personnaliser un peu le truc)
  */
+
 $ajd = getdate();
 $mois = $ajd['mon'];
 $annee = $ajd['year'];
@@ -66,7 +67,6 @@ if(isset($_POST['mois']))
 	$annee = $_POST['annee'];
 	}
 
-//===================================================
 
 $aujourdhui = array($ajd["mday"], $ajd["mon"], $ajd["year"]);
 
@@ -150,15 +150,16 @@ for ($jour = 1; $jour <= $dernierJour; $jour++)
       {
       $ligne0=@mysqli_fetch_object($resultat0);
 
-      if($ligne0->link_events!="")// si il y a une url de page vers laquelle pointer
+      if($ligne0->lien_evenement!="")// si il y a une url de page vers laquelle pointer
         {
-        $lien=" href=\"" . $ligne0->link_events . "\" target=\"_blank\"";//lien externe ou interne
+        $lien=" href=\"" . $ligne0->lien_evenement . "\" target=\"_blank\"";//lien externe ou interne
         }
-      $calEven.="<a href=''><td " . $classe . "><a " . $lien . " " . $style . "><span data-tip=\"" . $ligne0->titre_evenement . "\">" . $jour . "</span></a></td></a>\n";
+      $calEven.="<td " . $classe . "><a " . $lien . " " . $style . "><span data-tip=\"" . $ligne0->titre_evenement . "\">" . $jour . "</span></a></td>\n";
       }
     else
       {
-      $calEven.="<td " . $classe . "><a href=''>" . $jour . "</a></td>\n";
+          $date = date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
+      $calEven.="<td " . $classe . "><a href='front.php?action=calendar&case=loadSchedules&date=$date'>" . $jour . "</a></td>\n";
       }
 
     if(is_int(($jour + $prems) / 7))
@@ -172,7 +173,7 @@ for ($jour = 1; $jour <= $dernierJour; $jour++)
       }
    }
 
- //Affichage des cellules vides en fin de mois, s'il y en a
+//// Affichage des cellules vides en fin de mois, s'il y en a
 if ($cptJour != 0)
    {
     for($i = 0; $i < (7 - $cptJour); $i++)
@@ -183,69 +184,54 @@ if ($cptJour != 0)
    }
 $calEven.="</tr>\n</table>\n";
 
+
+if (isset($_GET['case'])){
+    switch ($_GET['case']){
+        case "loadSchedules" :
+            $schedules = '';
+            $request1="SELECT * FROM  prestations";
+            $result1=mysqli_query($connexion, $request1);
+
+            $schedules .= "<form method='post' name='prestation_schedules'>
+            <select name='schedulesPrestations' id='schedulesPrestations'>
+            <option value=''>Choisissez une prestation</option>";
+            while($rows1=mysqli_fetch_object($result1)){
+                $schedules .= "<option value='$rows1->id_prestations'>$rows1->title_prestations $rows1->price_prestations €</option>";
+            };
+            $schedules .= "</select></form>";
+            $date = $_GET['date']." 00:00:00";
+            $resquest = "SELECT * FROM schedules WHERE date_schedules = '$date'";
+            $result = mysqli_query($connexion, $resquest);
+            while($rows = mysqli_fetch_object($result)){
+                if ($rows->reserved_schedules == 1)
+                $schedules .= "<a href='front.php?action=calendar&case=confirmSchedules&date=$date&id=$rows->id_schedules&hours=$rows->hours_schedules' class='schedule__buttons available'>$rows->hours_schedules</a>";
+                else {
+                    $schedules .="<p class='schedule__buttons reserved'>$rows->hours_schedules</p>";
+                }
+            }
+
+            break;
+        case "confirmSchedules" :
+            $date= $_GET["date"];
+            $dateFR = strftime("%A %d %B %Y", strtotime($_GET["date"]));
+            $id= $_GET["id"];
+            $confirmation = "<div class='confirm' style='margin: 2rem 25%;'>";
+            $confirmation .=
+                "<p class='confirm__paragraph'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Voulez vous vraiment reserver une séance le $dateFR à  ". $_GET["hours"] . " ?</p>";
+            $confirmation .=
+                "<a class='confirm__paragraph_link' href='front.php?action=calendar&case=newSchedules&id=$id'>OUI<i class='fa-light fa-check confirm__paragraph_link_icons'></i></a>";
+            $confirmation .=
+                "<a class='confirm__paragraph_link' href='front.php?action=calendar'>NON<i class='fa-light fa-xmark confirm__paragraph_link_icons'></i></a></div>";
+            break;
+        case "newSchedules" :
+            $request="UPDATE schedules SET reserved_schedules = 2,
+                                           id_users = ".$_SESSION['id_users']."                        
+                 WHERE id_schedules = ".$_GET['id'];
+            $result=mysqli_query($connexion, $request);
+            $confirmation = "<p class='success confirmation' style='margin: 2rem 25%;'><i class='success_icon fa-solid fa-circle-check'></i>Votre séance a bien été réservée</p>";
+            break;
+    }
+}
+
 mysqli_close($connexion);
-?>
-<section class="calendar">
-    <div id="conteneur_calendrier">
-        <form id="calendrier" method="POST" action="">
-            <select name="mois" id="mois" onChange="document.location.href='';reload(this.form)">
-                <?php echo $ldMois; ?>
-            </select>
-            <select name="annee" id="annee" onChange="document.location.href='';reload(this.form)">
-                <?php echo $ldAnnees; ?>
-            </select>
-        </form>
-        <?php echo $calEven; ?>
-    </div>
-    <div class="schedule">
-        <h2 class="schedule__title">Votre Séance</h2>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-        <a href="" class="schedule__buttons">sqjkndq</a>
-    </div>
-</section>
-
-<script type="text/javascript">
-    let checkzero = "<?php if(isset($checkzero)){echo $checkzero;} ?>";
-    let format = "<?php echo $format; ?>";
-    let ordre = ["<?php echo strtoupper(implode('", "', $ordre)); ?>"];
-
-    /**
-     * Reload la fenêtre avec les nouveaux mois et année choisis
-     *
-     * @param   object      frm     L'object document du formulaire
-     */
-    function reload(frm){
-        let mois = frm.elements["mois"];
-        let annee = frm.elements["annee"];
-        //Debug du mois et année
-        let index1 = mois.options[mois.selectedIndex].value;
-        let index2 = annee.options[annee.selectedIndex].value;
-        //Envoi du formulaire
-        frm.submit();
-    }
-
-    /**
-     * Ajoute un zéro devant le jour et le mois s'ils sont plus petit que 10
-     *
-     * @param   integer     jour        Le numéro du jour dans le mois
-     * @param   integer     mois        Le numéro du mois
-     */
-    function checkNum(jour, mois){
-        tab = [];
-        tab[0] = jour;
-        tab[1] = mois;
-        if (this.checkzero){
-            if (jour < 10){
-                tab[0] = "0" + jour;
-            }
-            if (mois < 10){
-                tab[1] = "0" + mois;
-            }
-        }
-        return tab;
-    }
-</script>
+include("calendrier.html");

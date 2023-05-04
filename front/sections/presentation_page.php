@@ -2,11 +2,22 @@
 require_once "../tools/fonctions.php";
 $connexion = connexion();
 mysqli_set_charset($connexion, "utf8");
-$request = "SELECT * FROM presentations WHERE visibility_presentations != 2  ORDER BY rank_presentations ASC";
-$result=mysqli_query($connexion, $request);
 
-$request1 = "SELECT * FROM sliders where visibility_sliders=1";
-$result1=mysqli_query($connexion, $request1); ?>
+$request = "SELECT * FROM presentations WHERE visibility_presentations != ? ORDER BY rank_presentations ASC";
+$stmt = mysqli_prepare($connexion, $request);
+$visibility = 2;
+mysqli_stmt_bind_param($stmt, "i", $visibility);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+$request1 = "SELECT * FROM sliders WHERE visibility_sliders = ?";
+$stmt1 = mysqli_prepare($connexion, $request1);
+$visibility1 = 1;
+mysqli_stmt_bind_param($stmt1, "i", $visibility1);
+mysqli_stmt_execute($stmt1);
+$result1 = mysqli_stmt_get_result($stmt1);
+?>
+
 <div class="slider">
     <?php
     while ($rows1=mysqli_fetch_object($result1)){

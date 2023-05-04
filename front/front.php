@@ -2,7 +2,7 @@
 session_start();
 require_once "../tools/fonctions.php";
 $connexion = connexion(); // ? ==> Connexion DB <==
-$confirmation = "";
+$confirmation = null;
 include "sections/header.php";
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {

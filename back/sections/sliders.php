@@ -9,8 +9,7 @@ if (isset($_SESSION["id_users"])) {
     if (isset($_GET["case"])) {
         switch ($_GET["case"]) {
             case "newSliders":
-                $request =
-                    "SELECT COUNT(*) AS nb_sliders FROM sliders";
+                $request = "SELECT COUNT(*) AS nb_sliders FROM sliders";
                 $result = mysqli_query($connexion, $request);
                 $rows = mysqli_fetch_object($result);
                 if (empty($_POST["title_sliders"])) {
@@ -29,23 +28,24 @@ if (isset($_SESSION["id_users"])) {
                     $confirmation =
                         "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
                 } else {
-                    $request =
-                        "INSERT INTO sliders SET 
-                      title_sliders='" .
-                        $_POST["title_sliders"] .
-                        "',
-                      content_sliders='" .
-                        $_POST["content_sliders"] .
-                        "',
-                        alt_sliders='" .
-                        $_POST["alt_sliders"] .
-                        "',
-                        rank_sliders=($rows->nb_sliders + 1),
-                        visibility_sliders='" .
-                        $_POST["visibility_sliders"] .
-                        "'";
+                    $request = "INSERT INTO sliders SET 
+              title_sliders=?,
+              content_sliders=?,
+              alt_sliders=?,
+              rank_sliders=?,
+              visibility_sliders=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    mysqli_stmt_bind_param(
+                        $stmt,
+                        "sssisi",
+                        $_POST["title_sliders"],
+                        $_POST["content_sliders"],
+                        $_POST["alt_sliders"],
+                        $rows->nb_sliders + 1,
+                        $_POST["visibility_sliders"]
+                    );
+                    $result = mysqli_stmt_execute($stmt);
 
-                    $result = mysqli_query($connexion, $request);
                     $last_Id = mysqli_insert_id($connexion);
 
                     if (
@@ -88,8 +88,7 @@ if (isset($_SESSION["id_users"])) {
             case "loadSliders":
                 if (isset($_GET["id_sliders"])) {
                     $action_form =
-                        "modifySliders&id_sliders=" .
-                        $_GET["id_sliders"];
+                        "modifySliders&id_sliders=" . $_GET["id_sliders"];
                     $request =
                         "SELECT * FROM sliders WHERE id_sliders='" .
                         $_GET["id_sliders"] .
@@ -97,15 +96,13 @@ if (isset($_SESSION["id_users"])) {
                     $result = mysqli_query($connexion, $request);
                     $rows = mysqli_fetch_object($result);
                     $_POST["title_sliders"] = $rows->title_sliders;
-                    $_POST["content_sliders"] =
-                        $rows->content_sliders;
+                    $_POST["content_sliders"] = $rows->content_sliders;
                     $_POST["alt_sliders"] = $rows->alt_sliders;
                     $visibility = $rows->visibility_sliders;
                 }
                 break;
 
             case "modifySliders":
-
                 $id_sliders = $_GET["id_sliders"];
                 $title_sliders = $_POST["title_sliders"];
                 $content_sliders = $_POST["content_sliders"];
@@ -134,18 +131,27 @@ if (isset($_SESSION["id_users"])) {
 
                 if (empty($error)) {
                     $request = "UPDATE sliders SET 
-                    title_sliders='$title_sliders',
-                    content_sliders='$content_sliders',
-                    alt_sliders='$alt_sliders',
-                    visibility_sliders='$visibility_sliders'
-                    WHERE id_sliders='$id_sliders'";
-                    $result = mysqli_query($connexion, $request);
+              title_sliders=?,
+              content_sliders=?,
+              alt_sliders=?,
+              visibility_sliders=?
+              WHERE id_sliders=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    mysqli_stmt_bind_param(
+                        $stmt,
+                        "ssssi",
+                        $title_sliders,
+                        $content_sliders,
+                        $alt_sliders,
+                        $visibility_sliders,
+                        $id_sliders
+                    );
+                    $result = mysqli_stmt_execute($stmt);
 
                     if (
                         isset($_FILES["img_sliders"]) &&
                         $_FILES["img_sliders"]["error"] == 0
                     ) {
-
                         $request_img =
                             "SELECT img_sliders FROM sliders WHERE id_sliders='" .
                             $_GET["id_sliders"] .
@@ -236,8 +242,7 @@ if (isset($_SESSION["id_users"])) {
                         $_GET["id_sliders"] .
                         "'";
                     $result_img = mysqli_query($connexion, $request_img);
-                    $img_path = mysqli_fetch_object($result_img)
-                        ->img_sliders;
+                    $img_path = mysqli_fetch_object($result_img)->img_sliders;
 
                     if (file_exists($img_path)) {
                         unlink($img_path);
@@ -251,8 +256,7 @@ if (isset($_SESSION["id_users"])) {
                     $confirmation =
                         "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été supprimée </p>";
 
-                    $request2 =
-                        "SELECT * FROM sliders ORDER BY rank_sliders";
+                    $request2 = "SELECT * FROM sliders ORDER BY rank_sliders";
                     $result2 = mysqli_query($connexion, $request2);
                     $i = 1;
                     while ($rows2 = mysqli_fetch_object($result2)) {
@@ -356,8 +360,7 @@ if (isset($_SESSION["id_users"])) {
             "'><i class='fa-solid fa-arrow-down' style='margin-inline: 0.2rem'></i></a></div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_sliders</div>";
 
-        $content .=
-            "<div class='content__details_summary_items'><img src='$rows->img_sliders' alt='' class='content__details_summary_items_img''></div>";
+        $content .= "<div class='content__details_summary_items'><img src='$rows->img_sliders' alt='' class='content__details_summary_items_img''></div>";
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_sliders == 1) {
             $content .=

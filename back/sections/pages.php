@@ -15,20 +15,13 @@ if (isset($_SESSION["id_users"])) {
                 if (empty($_POST["title_pages"])) {
                     $confirmation =
                         "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";
-                }
-                if (empty($_POST["content_pages"])) {
-                    $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
                 } else {
-                    $request =
-                        "INSERT INTO pages SET 
-                      title_pages='" .
-                        $_POST["title_pages"] .
-                        "',
-                      content_pages='" .
-                        $_POST["content_pages"] .
-                        "'";
-                    $result = mysqli_query($connexion, $request);
+                    $request = "INSERT INTO pages SET title_pages=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    $title = $_POST["title_pages"];
+                    mysqli_stmt_bind_param($stmt, "s", $title);
+                    $result = mysqli_stmt_execute($stmt);
+
                     $confirmation =
                         "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été crée </p>";
                 }
@@ -42,14 +35,15 @@ if (isset($_SESSION["id_users"])) {
 
             case "loadPages":
                 if (isset($_GET["id_pages"])) {
-                    echo $_GET["id_pages"];
 
                     $action_form = "modifyPages&id_pages=" . $_GET["id_pages"];
-                    $request =
-                        "SELECT * FROM pages WHERE id_pages='" .
-                        $_GET["id_pages"] .
-                        "'";
-                    $result = mysqli_query($connexion, $request);
+                    $request = "SELECT * FROM pages WHERE id_pages=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    $id = $_GET["id_pages"];
+                    mysqli_stmt_bind_param($stmt, "i", $id);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+
                     $rows = mysqli_fetch_object($result);
                     $_POST["title_pages"] = $rows->title_pages;
                     $_POST["content_pages"] = $rows->content_pages;
@@ -60,22 +54,17 @@ if (isset($_SESSION["id_users"])) {
 
             case "modifyPages":
                 if (isset($_GET["id_pages"])) {
-                    echo $_GET["id_pages"];
                     if (empty($_POST["title_pages"])) {
                         $confirmation =
                             "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Le champs titre ne peut être vide </p>";
                     } else {
-                        $request =
-                            "UPDATE pages SET 
-                        title_pages='" .
-                            $_POST["title_pages"] .
-                            "',
-                        content_pages='" .
-                            $_POST["content_pages"] .
-                            "' WHERE id_pages='" .
-                            $_GET["id_pages"] .
-                            "'";
-                        $result = mysqli_query($connexion, $request);
+                        $request = "UPDATE pages SET title_pages=? WHERE id_pages=?";
+                        $stmt = mysqli_prepare($connexion, $request);
+                        $title = $_POST["title_pages"];
+                        $id = $_GET["id_pages"];
+                        mysqli_stmt_bind_param($stmt, "si", $title,$id);
+                        $result = mysqli_stmt_execute($stmt);
+
                         $confirmation =
                             "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été modifiée </p>";
                     }
@@ -85,11 +74,12 @@ if (isset($_SESSION["id_users"])) {
             // * <=========================================================>
 
             case "deletePages":
-                $request =
-                    "DELETE FROM pages WHERE id_pages='" .
-                    $_GET["id_pages"] .
-                    "'";
-                $result = mysqli_query($connexion, $request);
+                $request = "DELETE FROM pages WHERE id_pages=?";
+                $stmt = mysqli_prepare($connexion, $request);
+                $id = $_GET["id_pages"];
+                mysqli_stmt_bind_param($stmt, "i", $id);
+                $result = mysqli_stmt_execute($stmt);
+
                 $confirmation =
                     "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été supprimer </p>";
                 break;

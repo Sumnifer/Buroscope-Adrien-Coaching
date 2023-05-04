@@ -1,5 +1,5 @@
 <?php
-if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
+if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
     $title = "Gestion des Utilisateurs";
     $form = "forms/formUsers.php";
     $action_form = "newUsers";
@@ -20,7 +20,7 @@ if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
                     "statut_users" => "Veuillez sélectionner un statut",
                 ];
 
-                $confirmation = "";
+                $confirmation = null;
                 foreach ($requiredFields as $field => $message) {
                     if (empty($_POST[$field])) {
                         $confirmation = "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon mr-1'></i>$message</p>";
@@ -139,42 +139,41 @@ if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
                             "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i>Numéro de téléphone invalide</p>";
                         break;
                     }
+                    $hashed_password = password_hash(
+                        htmlspecialchars(
+                            $_POST["pass_users"],
+                            ENT_QUOTES,
+                            "UTF-8"
+                        ),
+                        PASSWORD_DEFAULT
+                    );
+
                     $request =
                         "UPDATE users SET 
-                surname_users='" .
+        surname_users='" .
                         $_POST["surname_users"] .
                         "',
-                name_users='" .
+        name_users='" .
                         $_POST["name_users"] .
                         "',
-                phone_users='" .
+        phone_users='" .
                         $phone .
                         "',
-                email_users='" .
+        email_users='" .
                         $_POST["email_users"] .
                         "',
-                statut_users='" .
+        statut_users='" .
                         $_POST["statut_users"] .
                         "',
-                date_users='" .
+        date_users='" .
                         $_POST["date_users"] .
                         "',
-                gender_users='" .
+        gender_users='" .
                         $_POST["gender_users"] .
                         "'";
 
                     if (!empty($_POST["pass_users"])) {
-                        $request .=
-                            ", pass_users ='" .
-                            password_hash(
-                                htmlspecialchars(
-                                    $_POST["pass_users"],
-                                    ENT_QUOTES,
-                                    "UTF-8"
-                                ),
-                                PASSWORD_DEFAULT
-                            ) .
-                            "'";
+                        $request .= ", pass_users ='" . $hashed_password . "'";
                     }
 
                     $request .= " WHERE id_users='" . $_GET["id_users"] . "'";
@@ -227,27 +226,36 @@ if ((isset($_SESSION["id_users"])) && ($_SESSION["statut_users"] != "user")){
                     }
                 }
                 break;
-                case "searchUsers":
-                    if (isset($_POST["formUsersSearch"])) {
-                        $searchResult = $_POST["formUsersSearch"];
-                    }
-                    break;
+            case "searchUsers":
+                if (isset($_POST["formUsersSearch"])) {
+                    $searchResult = $_POST["formUsersSearch"];
+                }
+                break;
         }
     }
 
-    // Affichage des utilisateurs
-
-    if ($_SESSION["statut_users"] != "root") {
+    if ($_GET["case"] == "searchUsers") {
+        if ($_SESSION["statut_users"] == "root") {
+            $request = "SELECT * FROM users WHERE 
+                                                   email_users LIKE '%$searchResult%' OR 
+                                                   name_users LIKE '%$searchResult%' OR 
+                                                   surname_users LIKE '%$searchResult%' OR 
+                                                   date_users LIKE '%$searchResult%' OR 
+                                                   statut_users LIKE '%$searchResult%'
+            ORDER BY id_users";
+        } else {
+            $request = "SELECT * FROM users WHERE 
+                                                   email_users LIKE '%$searchResult%' OR 
+                                                   name_users LIKE '%$searchResult%' OR 
+                                                   surname_users LIKE '%$searchResult%' OR 
+                                                   date_users LIKE '%$searchResult%' OR 
+                                                   statut_users LIKE '%$searchResult%'
+            AND statut_users != 'root' ORDER BY id_users";
+        }
+    } elseif ($_GET["statut_users"] == "admin") {
         $request =
             "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
-    }
-    //if (
-
-       // $_GET["case"] == "searchUsers"
-    //) {
-      //  $request = "SELECT * FROM users WHERE name_users LIKE '%$searchResult%' ORDER BY id_users";
-    //}
-else {
+    } else {
         $request = "SELECT * FROM users ORDER BY id_users";
     }
 

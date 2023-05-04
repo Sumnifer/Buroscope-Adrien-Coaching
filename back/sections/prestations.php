@@ -5,55 +5,50 @@ if (isset($_SESSION["id_users"])) {
     $title = "Gestion des Prestations";
     $form = "forms/formPrestations.php";
 
-
-
     if (isset($_GET["case"])) {
-
         switch ($_GET["case"]) {
             case "newPrestations":
                 $action_form = "newPrestations";
-                $request =
-                    "SELECT COUNT(*) AS nb_prestations FROM prestations";
+                $request = "SELECT COUNT(*) AS nb_prestations FROM prestations";
                 $result = mysqli_query($connexion, $request);
                 $rows = mysqli_fetch_object($result);
+                $newRank = $rows->nb_prestations + 1;
                 if (empty($_POST["title_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";
-                }
-                elseif (empty($_POST["content_prestations"])) {
+                } elseif (empty($_POST["content_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
-                }
-                elseif (empty($_POST["alt_prestations"])) {
+                } elseif (empty($_POST["alt_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer un alt </p>";
-                }
-                elseif (empty($_POST["visibility_prestations"])) {
+                } elseif (empty($_POST["visibility_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
-                }elseif (empty($_POST["price_prestations"])) {
+                } elseif (empty($_POST["price_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
                 } else {
-                    $request =
-                        "INSERT INTO prestations SET 
-                      title_prestations='" .
-                        $_POST["title_prestations"] .
-                        "',
-                      content_prestations='" .
-                        $_POST["content_prestations"] .
-                        "',
-                        alt_prestations='" .
-                        $_POST["alt_prestations"] .
-                        "',
-                        rank_prestations=($rows->nb_prestations + 1),
-                        visibility_prestations='" .
-                        $_POST["visibility_prestations"] .
-                        "',
-                        price_prestations='" .
-                        $_POST["price_prestations"] .
-                        "'";
-                    $result = mysqli_query($connexion, $request);
+                    $request = "INSERT INTO prestations SET 
+              title_prestations=?,
+              content_prestations=?,
+              alt_prestations=?,
+              rank_prestations=?,
+              visibility_prestations=?,
+              price_prestations=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    mysqli_stmt_bind_param(
+                        $stmt,
+                        "sssiis",
+                        $_POST["title_prestations"],
+                        $_POST["content_prestations"],
+                        $_POST["alt_prestations"],
+                        $newRank,
+                        $_POST["visibility_prestations"],
+                        $_POST["price_prestations"]
+                    );
+                    $result = mysqli_stmt_execute($stmt);
+
                     $last_Id = mysqli_insert_id($connexion);
 
                     if (
@@ -105,10 +100,9 @@ if (isset($_SESSION["id_users"])) {
                     $result = mysqli_query($connexion, $request);
                     $rows = mysqli_fetch_object($result);
                     $_POST["title_prestations"] = $rows->title_prestations;
-                    $_POST["content_prestations"] =
-                        $rows->content_prestations;
+                    $_POST["content_prestations"] = $rows->content_prestations;
                     $_POST["alt_prestations"] = $rows->alt_prestations;
-                    $_POST['price_prestations'] = $rows->price_prestations;
+                    $_POST["price_prestations"] = $rows->price_prestations;
                     $visibility = $rows->visibility_prestations;
                 }
                 break;
@@ -124,7 +118,7 @@ if (isset($_SESSION["id_users"])) {
                 $price_prestations = $_POST["price_prestations"];
                 $visibility_prestations = $_POST["visibility_prestations"];
 
-                $error = "";
+                $error = null;
 
                 if (empty($title_prestations)) {
                     $error .=
@@ -147,16 +141,26 @@ if (isset($_SESSION["id_users"])) {
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la visibilité</p>";
                 }
 
-
                 if (empty($error)) {
                     $request = "UPDATE prestations SET 
-                    title_prestations='$title_prestations',
-                    content_prestations='$content_prestations',
-                    alt_prestations='$alt_prestations',
-                    price_prestations='$price_prestations',
-                    visibility_prestations='$visibility_prestations'
-                    WHERE id_prestations='$id_prestations'";
-                    $result = mysqli_query($connexion, $request);
+              title_prestations=?,
+              content_prestations=?,
+              alt_prestations=?,
+              price_prestations=?,
+              visibility_prestations=?
+              WHERE id_prestations=?";
+                    $stmt = mysqli_prepare($connexion, $request);
+                    mysqli_stmt_bind_param(
+                        $stmt,
+                        "sssisi",
+                        $title_prestations,
+                        $content_prestations,
+                        $alt_prestations,
+                        $price_prestations,
+                        $visibility_prestations,
+                        $id_prestations
+                    );
+                    $result = mysqli_stmt_execute($stmt);
 
                     if (
                         isset($_FILES["img_prestations"]) &&
@@ -220,11 +224,11 @@ if (isset($_SESSION["id_users"])) {
                             $_GET["id_prestations"] .
                             "'";
                         $resultat = mysqli_query($connexion, $requete);
-                        if($_GET['visibility']==1){
+                        if ($_GET["visibility"] == 1) {
                             $confirmation =
                                 "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais visible </p>";
                         }
-                        if($_GET['visibility']==2){
+                        if ($_GET["visibility"] == 2) {
                             $confirmation =
                                 "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La prestation est désormais invisible </p>";
                         }
@@ -347,14 +351,12 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
-            case "unloadPrestations" :
+            case "unloadPrestations":
                 $action_form = "newPrestations";
                 foreach ($_POST as $cle => $valeur) {
                     unset($_POST[$cle]);
                 }
                 break;
-
-
         }
     }
     $request = "SELECT * FROM prestations ORDER BY rank_prestations";
@@ -384,8 +386,7 @@ if (isset($_SESSION["id_users"])) {
             "'><i class='fa-solid fa-arrow-down'></i></a></div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_prestations</div>";
 
-        $content .=
-            "<div class='content__details_summary_items'><img src='$rows->img_prestations' alt='' class='content__details_summary_items_img''></div>";
+        $content .= "<div class='content__details_summary_items'><img src='$rows->img_prestations' alt='' class='content__details_summary_items_img''></div>";
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_prestations == 1) {
             $content .=
@@ -401,7 +402,6 @@ if (isset($_SESSION["id_users"])) {
         $content .=
             "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=prestations&case=loadPrestations&id_prestations=" .
             $rows->id_prestations .
-
             " '><i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
         $content .=
             "<a class='content__details_summary_actions_link-trash' href='back.php?action=prestations&case=warningPrestations&id_prestations=" .
