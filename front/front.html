@@ -14,7 +14,7 @@
       personnel de vivre de ma passion en aidant les personnes à repousser
       leurs limites physiquement et mentalement.
     </p>
-    <button class="about__container_cta">en savoir plus</button>
+    <a href="#" class="about__container_cta">En savoir plus <i class="fa-solid fa-chevron-right"></i></a>
   </div>
   <div class="about__container">
     <img
@@ -24,7 +24,8 @@
     />
   </div>
 </section>
-<?php include "sections/prestation.php"; ?>
+<?php if(isset($prestations)){ include $prestations;}?>
+
 <section class="testimonials">
   <h2 class="testimonials__comment">Ils nous ont fait confiance</h2>
   <h1 class="testimonials__title">Témoignages</h1>
@@ -52,7 +53,7 @@
         </div>
       </div>
       <p class="testimonials__cards_card_paragraph">
-        Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien! Il est toujours disponible selon mes besoins. Il s’adapte à mon rythme, et cela est redevenu un réel plaisir de refaire du sport. Il m’a permis de me sentir mieux dans mon corps aussi bien physiquement que mentalement.
+        Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
       </p>
     </div><div class="testimonials__cards_card">
     <div class="testimonials__cards_card_header">
@@ -77,9 +78,10 @@
       </div>
     </div>
     <p class="testimonials__cards_card_paragraph">
-      Ma famille et mon travail ne me laissant plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien! Il est toujours disponible selon mes besoins. Il s’adapte à mon rythme, et cela est redevenu un réel plaisir de refaire du sport. Il m’a permis de me sentir mieux dans mon corps aussi bien physiquement que mentalement.
+      Ma famille et mon travail ne me laissant plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
     </p>
-  </div><div class="testimonials__cards_card">
+  </div>
+    <div class="testimonials__cards_card">
     <div class="testimonials__cards_card_header">
       <img src="../assets/img/image_card.png" alt="" class="testimonials__cards_card_header_img" />
       <h3 class="testimonials__cards_card_header_title">ISABELLE DUPONT</h3>
@@ -102,9 +104,10 @@
       </div>
     </div>
     <p class="testimonials__cards_card_paragraph">
-      Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien! Il est toujours disponible selon mes besoins. Il s’adapte à mon rythme, et cela est redevenu un réel plaisir de refaire du sport. Il m’a permis de me sentir mieux dans mon corps aussi bien physiquement que mentalement.
+      Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
     </p>
-  </div><div class="testimonials__cards_card">
+  </div>
+    <div class="testimonials__cards_card">
     <div class="testimonials__cards_card_header">
       <img src="../assets/img/image_card.png" alt="" class="testimonials__cards_card_header_img" />
       <h3 class="testimonials__cards_card_header_title">ISABELLE DUPONT</h3>
@@ -127,47 +130,54 @@
       </div>
     </div>
     <p class="testimonials__cards_card_paragraph">
-      Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien! Il est toujours disponible selon mes besoins. Il s’adapte à mon rythme, et cela est redevenu un réel plaisir de refaire du sport. Il m’a permis de me sentir mieux dans mon corps aussi bien physiquement que mentalement.
+      Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
     </p>
   </div>
+  <div class="testimonials__cards_card-plus">
+    <a href="" class="testimonials__cards_card-plus_link">
+      <i class="fa-solid fa-plus testimonials__cards_card-plus_link_icon"></i>
+      <h2 class="testimonials__cards_card-plus_link_content">Laisser un Avis</h2>
+    </a>
+  </div>
 
 
   </div>
-  <button class="testimonials__cta"><i class="fa-brands fa-google testimonials__cta_icon"></i>voir les avis google</button>
+
 </section>
-
 <section class="reseau" id="reseau">
   <h1 class="reseau__title">me suivre sur les <span class="reseau__title_span">réseaux</span></h1>
   <div class="reseau__container">
-    <div class="reseau__container_items">
-      <img src="../assets/img/edgar-chaparro-sHfo3WOgGTU-unsplash%201.png" alt="" class="reseau__container_items_img">
-    </div>
-    <div class="reseau__container_items">
-      <p class="reseau__container_items_paragraph">SUIVEZ-moi sur
-        les réseaux sociaux pour en savoir plus sur mes prestations !</p>
-      <div class="reseau__container_items_social">
-        <i class="fa-brands fa-instagram reseau__container_items_social_icon"></i>
-        <i class="fa-brands fa-facebook-f reseau__container_items_social_icon"></i>
-        <i class="fa-brands fa-tiktok reseau__container_items_social_icon"></i>
+    <img src="../assets/img/edgar-chaparro-sHfo3WOgGTU-unsplash%201.png" alt="" class="reseau__container_img">
+    <div class="reseau__container_block">
+    <div class="reseau__container_block_items">
+      <p class="reseau__container_block_items_paragraph">Suivez-moi sur
+        les réseaux sociaux pour en savoir plus sur mes prestations !
+      </p>
+      <div class="reseau__container_block_items_social">
+        <i class="fa-brands fa-instagram reseau__container_block_items_social_icon"></i>
+        <i class="fa-brands fa-facebook-f reseau__container_block_items_social_icon"></i>
+        <i class="fa-brands fa-tiktok reseau__container_block_items_social_icon"></i>
       </div>
-      <p class="reseau__container_items_paragraph">Et Abonnez-vous à ma Newsletter pour en savoir plus sur mes actualités !</p>
-      <div class="reseau__container_items_newsletter">
-        <form action="front.php?action=newsletters" method="post" enctype="multipart/form-data" id="newsletters">
+    </div>
+    <div class="reseau__container_block_items">
+      <p class="reseau__container_block_items_paragraph">Vous souhaitez recevoir les dernières actualités ? Abonnez-vous à ma Newsletter !</p>
+      <form action="front.php?action=newsletters" method="post" enctype="multipart/form-data" id="newsletters" class="reseau__container_block_items_form">
         <?php if (isset($confirmation)) {echo $confirmation;} ?>
-          <input type='email' name='email_newsletters' id='email_newsletters' class='reseau__container_items_newsletter_input'>
-          <button type='submit' class='reseau__container_items_newsletter_cta'>S’abonner</button>
-        </form>
-      </div>
+        <input type='email' name='email_newsletters' id='email_newsletters' class='reseau__container_block_items_form_input' placeholder="Votre adresse email">
+        <button type='submit' class='reseau__container_block_items_form_cta'>S’abonner</button>
+      </form>
     </div>
+    </div>
+
   </div>
 </section>
 <script type="text/javascript">
     $('#slider').sss({
-        slideShow : true, // Set to false to prevent SSS from automatically animating.startOn : 0, // Slide to display first. Uses array notation (0 = first slide).transition : 400, // Length (in milliseconds) of the fade transition.speed : 3500, // Slideshow speed in milliseconds.showNav : true // Set to false to hide navigation arrows.
-        startOn : 0, // Slide to display first. Uses array notation (0 = first slide).
-        transition : 400, // Length (in milliseconds) of the fade transition.
-        speed : 3500, // Slideshow speed in milliseconds.</span>
-        showNav : true // Set to false to hide navigation arrows.
+        slideShow : true, howNav : true,
+        startOn : 0,
+        transition : 400,
+        speed : 3500,
+        showNav : true
     });
 </script>
 

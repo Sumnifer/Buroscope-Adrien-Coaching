@@ -2,8 +2,10 @@
 if (isset($_SESSION["id_users"])) {
     $connexion = connexion();
     mysqli_set_charset($connexion, "utf8");
-    $title = "Gestion des Presentations";
+    $title = "Gestion des Activités";
     $form = "forms/formPresentations.php";
+    $dateInput = '';
+
 
 
 
@@ -338,6 +340,13 @@ if (isset($_SESSION["id_users"])) {
                     unset($_POST[$cle]);
                 }
                 break;
+            case "modifyDateInput" :
+                break;
+
+            case "modifyDate" :
+                if(!empty($_POST['modifyDateInput'])){
+                }
+                break;
 
 
         }
@@ -347,11 +356,12 @@ if (isset($_SESSION["id_users"])) {
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
     $content .= "<div>POSITION</div>";
-    $content .= "<div>PRESENTATIONS</div>";
+    $content .= "<div>ACTIVITÉ</div>";
     $content .= "<div>IMAGE</div>";
     $content .= "<div>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
+        $id = $rows->id_presentations;
         $content .= "<details class='content__details'>";
         $content .= "<summary class='content__details_summary'>";
         $content .=
@@ -367,11 +377,13 @@ if (isset($_SESSION["id_users"])) {
             "&rank=" .
             $rows->rank_presentations .
             "'><i class='fa-solid fa-arrow-down'></i></a></div>";
+
         $content .= "<div class='content__details_summary_items'>$rows->title_presentations</div>";
 
         $content .=
-            "<div class='content__details_summary_items'><img src='$rows->img_presentations' alt='' class='content__details_summary_items_img''></div>";
+            "<div class='content__details_summary_items'><a href='$rows->img_presentations'><img src='$rows->img_presentations' alt='' class='content__details_summary_items_img''></a></div>";
         $content .= "<div class='content__details_summary_actions'>";
+
         if ($rows->visibility_presentations == 1) {
             $content .=
                 "<a class='content__details_summary_actions_link-eyes' href='back.php?action=presentations&case=visibilityPresentations&visibility=2&id_presentations=" .
@@ -383,6 +395,7 @@ if (isset($_SESSION["id_users"])) {
                 $rows->id_presentations .
                 "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
         }
+
         $content .=
             "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=presentations&case=loadPresentations&id_presentations=" .
             $rows->id_presentations .
@@ -394,4 +407,5 @@ if (isset($_SESSION["id_users"])) {
             "'><i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
         $content .= "</summary></details>";
     }
+
 }

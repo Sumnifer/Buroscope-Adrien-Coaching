@@ -1,85 +1,78 @@
 <?php
-if (isset($_SESSION["id_users"])) {
-    $connexion = connexion();
-    $title = "Gestion du Calendrier";
-    $form = "forms/formCalendar.php";
-    $action = "calendar";
+$content = '
+<style>
+    table {
+        color: black;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+</style>
 
-    $allMonths = [
-        '0' => 'Choisir un mois',
-        '01' => 'Janvier',
-        '02' => 'Février',
-        '03' => 'Mars',
-        '04' => 'Avril',
-        '05' => 'Mai',
-        '06' => 'Juin',
-        '07' => 'Juillet',
-        '08' => 'Août',
-        '09' => 'Septembre',
-        '10' => 'Octobre',
-        '11' => 'Novembre',
-        '12' => 'Décembre',
-    ];
+<h2 id="weekNumber"></h2>
+<table id="calendar">
+    <tr>
+        <th><button id="prevWeek">&lt;</button></th>
+        <th colspan="5">Semaine : <span id="currentWeekNumber"></span></th>
+        <th><button id="nextWeek">&gt;</button></th>
+    </tr>
+    <tr>
+        <th>Lundi</th>
+        <th>Mardi</th>
+        <th>Mercredi</th>
+        <th>Jeudi</th>
+        <th>Vendredi</th>
+        <th>Samedi</th>
+        <th>Dimanche</th>
+    </tr>
+</table>';
+?>
+<script>
+    // Fonction pour obtenir le numéro de la semaine à partir d'une date donnée
+    Date.prototype.getWeek = function() {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    };
 
-    $allYears = ['Choisir une année', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'];
+    // Fonction pour mettre à jour le calendrier avec la semaine donnée
+    function updateCalendar(week) {
+        // Obtenir la date de début de la semaine
+        var startDate = new Date();
+        startDate.setDate(startDate.getDate() + (week - startDate.getDay()) - 1);
 
-    if (isset($_POST['months']) && ($_POST['years'])) {
-        setlocale(LC_TIME, 'fr_FR.utf8');
-        $month = $_POST['months'];
-        $year = $_POST['years'];
-        // Calculer le nombre de jours dans le mois
-        $num_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        // Mettre à jour le numéro de semaine affiché
+        document.getElementById("currentWeekNumber").innerHTML = week;
 
-        // Obtenir le premier jour du mois
-        $first_day_of_week = date('N', strtotime("$year-$month-01"));
-
-        $scheduleCalendar = "<section>";
-        $scheduleCalendar .= "<table class='formCalendar'>";
-        $scheduleCalendar .= "<thead><tr>";
-        for ($day = 1; $day <= 7; $day++) {
-            $scheduleCalendar .= "<th>" . date('D', strtotime("Sunday +{$day} days")) . "</th>";
+        // Mettre à jour les dates du calendrier
+        var table = document.getElementById("calendar");
+        var row = table.insertRow(2); // Insérer une nouvelle ligne
+        for (var i = 0; i < 7; i++) {
+            var cell = row.insertCell(i);
+            var currentDate = new Date(startDate);
+            currentDate.setDate(currentDate.getDate() + i);
+            cell.innerHTML = currentDate.getDate();
         }
-        $scheduleCalendar .= "</tr></thead>";
+    }
 
-        $scheduleCalendar .= "<tbody>";
-        $day_counter = 1;
-        $num_weeks = ceil(($num_days + $first_day_of_week - 1) / 7);
-        $day_of_week_counter = 1;
-        $scheduleCalendar .= "<tr style='height: 60px;'>";
-        // Gérer les jours manquants de la semaine précédente
-        for ($i = 1; $i < $first_day_of_week; $i++) {
-            $scheduleCalendar .= "<td></td>";
-            $day_of_week_counter++;
-        }
-        // Afficher les jours du mois
-        for ($day = 1; $day <= $num_days; $day++) {
+    // Gérer le clic sur la flèche précédente
+    document.getElementById("prevWeek").addEventListener("click", function() {
+        var currentWeek = parseInt(document.getElementById("currentWeekNumber").innerText);
+        updateCalendar(currentWeek - 1);
+    });
 
-            $scheduleCalendar .= "<td style='width: 60px; height=60px; text-align: center'><a href='back.php?action=calendar'>{$day}</a></td>";
-            if ($day_of_week_counter % 7 == 0) {
-                $scheduleCalendar .= "</tr><tr style='height: 60px;'>";
-            }
-            $day_of_week_counter++;
-        }
-        // Gérer les jours manquants de la semaine suivante
-        for ($i = $day_of_week_counter; $i <= 7; $i++) {
-            $scheduleCalendar .= "<td></td>";
-        }
-        $scheduleCalendar .= "</tr>";
-        $scheduleCalendar .= "</tbody></table>";
+    // Gérer le clic sur la flèche suivante
+    document.getElementById("nextWeek").addEventListener("click", function() {
+        var currentWeek = parseInt(document.getElementById("currentWeekNumber").innerText);
+        updateCalendar(currentWeek + 1);
+    });
 
-            $content = "<div class='enterSchedules'>";
-            $content .= "<p>dskjfbsdkjf</p>";
-            $content .= "<p>qskdbqskjbd</p>";
-            $content .= "<p>qskdbqskjbd</p></div>";
-        }
-
-    
-}
-
-
-
-
-
-
-
-
+    // Charger le calendrier avec la semaine actuelle au chargement de la page
+    var currentDate = new Date();
+    var currentWeek = currentDate.getWeek();
+    document.getElementById("weekNumber").innerHTML = "Semaine : " + currentWeek;
+    updateCalendar(currentWeek);
+</script>
+</body>
+</html>

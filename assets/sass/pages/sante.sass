@@ -1,94 +1,54 @@
-.inscription_body
-    position: relative
-
-.header__inscription
-    display: flex
-    justify-content: center
-    border-bottom: 3px solid $white
-    &_logo
-        &_img
-            width: 200px
-            object-fit: cover
-
-.questionnaire
-    padding-block: 5rem
-    padding-left: 45%
-    background-color: $blue
+.healthForm
+  padding: 4rem 12.5rem
+  &__title
+    font-size: 3rem
+    text-align: center
     color: $white
-    line-height: 2rem
-    border-bottom: 3px solid $white
-    &__title
-        font-weight: 700
-        font-size: 1.5rem
-        padding-bottom: 1rem
-
-
-.info
+    margin-bottom: 2rem
+  &__form
     display: flex
-    justify-content: center
-    padding-top: 4%
-    &__form
-        display: flex
-        justify-content: space-between
-        gap: 10rem
-        &_label
-            display: none    
-        &_item
-            display: flex
-            gap: 2rem
-        &_input
-            width: 100%
-            padding: .8rem 8rem .8rem 1.2rem
-            background-color: transparent
-            border: 1px solid $secondary
-            border-radius: 10px
-            color: $secondary
-            outline: none
-            &::placeholder
-                color: $secondary
+    flex-direction: column
+    align-items: center
+    gap: 1rem
+    &_container
+      width: 100%
+      display: flex
+      justify-content: center
+      gap: 2rem
+      &_input
+        border: 1px solid $secondary
+        background-color: transparent
+        color: $secondary
+        padding: .5rem 1rem
+        outline: none
+        &::placeholder
+          color: $secondary
 
-.sante
-    &__title
-        display: flex
-        justify-content: center
-        padding-top: 4%
-        font-size: 1.8rem
-        color: $white
-    &__oui
-        text-align: center
-        padding-top: 4%
-        padding-inline: 20%
+    &_title
+      color: $secondary
+      font-size: 2rem
+    &_table
+      width: 70%
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      gap: 1rem
+      color: $blue
+      &_row
+        border: 2px solid $blue
+        padding: 1rem
+        border-radius: 10px
+        width: 100%
         display: grid
-        grid-template-columns: 2% 80% 9% 9%
-        gap: 1rem
-        color: $white
-        text-transform: uppercase
-        font-size: .8rem
-    &__text
-        padding-inline: 20%
-        &_global
-            display: grid
-            grid-template-columns: 2% 80% 9% 9%
-            gap: 1rem
-            padding-block: .5rem
-            color: $secondary
-            align-items: center
-            &_input
-                border: 1px solid $secondary
-                background-color: initial
-                width: 20px
-                margin: 0 auto
-    &__button
-        display: flex
-        justify-content: center
-        padding-block: 5%
-        &_text
-            text-decoration: none
-            color: $primary
-            padding: 10px 30px
-            background-color: $secondary
-            border-radius: 10px
-        a:hover
-            color: $secondary
-            background-color: initial
-            border: 1px solid $secondary
+        grid-template-columns: 2% 86% 12%
+        &_question
+          color: $white
+        &_bloc
+          display: flex
+          gap: 1rem
+          color: $white
+
+
+
+

@@ -15,10 +15,10 @@ if(isset($_GET['case'])){
         <h1 class="presentation__form_div_title">
             <?php
             if ($_GET['case'] == "loadPresentations"){
-                echo "Modifier une presentation";
+                echo "Modifier une activité";
             }
             if($_GET['case']=="unloadPresentations")
-                echo "Ajouter une presentation";
+                echo "Ajouter une activité";
                 ?>
             </h1>
     <i class="presentation__form_div_button fa-solid fa-xmark" id="closeButton"></i>

@@ -13,29 +13,33 @@
     <div class='accountSchedule__container'>
     <h2 class="accountSchedule__container_title"><i class="fa-solid fa-calendar accountSchedule__container_title_icon"></i> Mes prochaines séances <i class="fa-solid fa-arrow-up-right"></i></h2>
     <?php
-while($rows=mysqli_fetch_object($result)){
+    if (isset($result)){
+while($rows=mysqli_fetch_object($result)) {
     echo "<div class='accountSchedule__container_items'>";
-    echo "<p class='accountSchedule__container_items_date'>Le ".strftime("%A %d %B %Y", strtotime($rows->date_schedules))." </p>";
-    echo "<p class='accountSchedule__container_items_hours'>&nbsp;à ". $rows->hours_schedules."</p>";
+    echo "<p class='accountSchedule__container_items_date'>Le " . strftime("%A %d %B %Y", strtotime($rows->date_schedules)) . " </p>";
+    echo "<p class='accountSchedule__container_items_hours'>&nbsp;à " . $rows->hours_schedules . "</p>";
     echo "</div>";
+}
 } ?>
     </div>
         <div class='accountSchedule__container'>
         <h2 class="accountSchedule__container_title"><i class="fa-solid fa-calendar accountSchedule__container_title_icon"></i> Mes séances Passées <i class="fa-solid fa-arrow-down-right"></i></h2>
 
   <?php
+  if (isset($result2)) {
       while ($rows2 = mysqli_fetch_object($result2)) {
-    echo "<div class='accountSchedule__container_items'>";
-    echo "<p class='accountSchedule__container_items_date'>Le " . strftime("%A %d %B %Y", strtotime($rows2->date_schedules)) . " </p>";
-    echo "<p class='accountSchedule__container_items_hours'>&nbsp;à " . $rows2->hours_schedules . "</p>";
-    echo "</div>";
-}
+          echo "<div class='accountSchedule__container_items'>";
+          echo "<p class='accountSchedule__container_items_date'>Le " . strftime("%A %d %B %Y", strtotime($rows2->date_schedules)) . " </p>";
+          echo "<p class='accountSchedule__container_items_hours'>&nbsp;à " . $rows2->hours_schedules . "</p>";
+          echo "</div>";
+      }
 
-if (mysqli_num_rows($result2) == 0) {
-    echo "<div class='accountSchedule__container_items'>";
-    echo "<p class='accountSchedule__container_items_date'>Aucunes séances à afficher</p>";
-    echo "</div>";
-} ?>
+      if (mysqli_num_rows($result2) == 0) {
+          echo "<div class='accountSchedule__container_items'>";
+          echo "<p class='accountSchedule__container_items_date'>Aucunes séances à afficher</p>";
+          echo "</div>";
+      }
+  } ?>
 
         </div>
     <a href="front.php?action=calendar" class="accountSchedule__cta"><i class="fa-solid fa-dumbbell"></i> Réserver une nouvelle Séance !</a>

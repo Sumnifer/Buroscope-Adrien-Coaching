@@ -23,8 +23,8 @@ $nb_prestations = $rows1['nb_prestations'];
 $content = "<section class='prestation' id='prestation'>
 <h1 class='prestation__title'>
 Découvrez <span class='prestation__title_span'>mes prestations</span></h1>";
-    if(($nb_prestations == '4') || ($nb_prestations == '8')){
-    $content .= "<div class='prestation__container' style='grid-template-columns: repeat(4, 1fr);'>";
+    if(($nb_prestations == '3') || ($nb_prestations == '7')){
+    $content .= "<div class='prestation__container' style='grid-template-columns: repeat(4, 1fr); gap: 2rem'>";
     }
     else{
     $content .= "<div class='prestation__container' style='grid-template-columns: repeat(3, 1fr);'>";
@@ -40,6 +40,11 @@ while($rows = mysqli_fetch_object($result)) {
     $content .= "<span class='prestation__container_card_title_span'> : $rows->price_prestations €</span></h3>";
     $content .= "<p class='prestation__container_card_paragraph'>$rows->content_prestations</p></div>";
 }
+$content .= "<div class='prestation__container_card-plus'>";
+$content .= "<a href='front.php?action=prestation' class='prestation__container_card-plus_link'>";
+$content .= "<i class='fa-solid fa-plus prestation__container_card-plus_link_icon'></i>";
+$content .= "<p class='prestation__container_card-plus_link_paragraph'>Découvrir toutes<br> les préstations</p></a></div>";
+
 
 if(isset($content)){echo $content;} ?>
 

@@ -1,107 +1,79 @@
-  <div class="inscription_body">
-    <section class="info">
-      <form action="inscription.php" method="post" class="info__form">
-        <div class="info__form">
-          <label for="poids" class="info__form_label">Poids en Kg</label>
-          <input
-            type="text"
-            name="poids"
-            id="poids"
-            placeholder="Poids en Kg"
-            class="info__form_input"
-          />
+<section class="healthForm">
+    <h1 class="healthForm__title">Questionnaire de Santé</h1>
+    <form action="" class="healthForm__form" method="post" enctype="multipart/form-data">
+        <div class="healthForm__form_container">
+            <input type="text" placeholder="Poids en Kg" name="user_weight" id="user_weight" class="healthForm__form_container_input">
+            <input type="text" placeholder="Taille en Cm" name="user_height" id="user_height" class="healthForm__form_container_input">
         </div>
-        <div class="info__form">
-          <label for="taille" class="info__form_label">Taille en cm</label>
-          <input
-            type="text"
-            name="taille"
-            id="taille"
-            placeholder="Taille en cm"
-            class="info__form_input"
-          />
+        <h3 class="healthForm__form_title">Durant les 12 derniers mois</h3>
+        <div class="healthForm__form_table">
+            <div class="healthForm__form_table_row">
+                <div class="healthForm__form_table_row_icon">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="healthForm__form_table_row_question">Un membre de votre famille est-il décédé subitement d'une cause cardiaque inexpliqué ?</div>
+                <div class="healthForm__form_table_row_bloc">
+                    <div>
+                        <label for="" class="healthForm__form_table_row_bloc_label">Oui</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                    <div>
+                        <label for="" class="healthForm__form_table_row_bloc_label">Non</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                </div>
+            </div>
+            <div class="healthForm__form_table_row">
+                <div class="healthForm__form_table_row_icon">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="healthForm__form_table_row_question">Un membre de votre famille est-il décédé subitement d'une cause cardiaque inexpliqué ?</div>
+                <div class="healthForm__form_table_row_bloc">
+                    <div class="healthForm__form_table_row_bloc_checkboxes">
+                        <label for="" class="healthForm__form_table_row_bloc_checkboxes_label">Oui</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                    <div class="healthForm__form_table_row_bloc_checkboxes">
+                        <label for="" class="healthForm__form_table_row_bloc_checkboxes_label">Non</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                </div>
+            </div>
         </div>
-      </form>
-    </section>
-
-    <section class="sante">
-      <h2 class="sante_title">Durant les 12 derniers mois</h2>
-        <div class="sante__oui">
-          <p>Oui</p>
-          <p>Non</p>
+        <h3 class="healthForm__form_title">Durant les 12 derniers mois</h3>
+        <div class="healthForm__form_table">
+            <div class="healthForm__form_table_row">
+                <div class="healthForm__form_table_row_icon">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="healthForm__form_table_row_question">Un membre de votre famille est-il décédé subitement d'une cause cardiaque inexpliqué ?</div>
+                <div class="healthForm__form_table_row_bloc">
+                    <div>
+                        <label for="" class="healthForm__form_table_row_bloc_label">Oui</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                    <div>
+                        <label for="" class="healthForm__form_table_row_bloc_label">Non</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                </div>
+            </div>
+            <div class="healthForm__form_table_row">
+                <div class="healthForm__form_table_row_icon">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="healthForm__form_table_row_question">Un membre de votre famille est-il décédé subitement d'une cause cardiaque inexpliqué ?</div>
+                <div class="healthForm__form_table_row_bloc">
+                    <div class="healthForm__form_table_row_bloc_checkboxes">
+                        <label for="" class="healthForm__form_table_row_bloc_checkboxes_label">Oui</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                    <div class="healthForm__form_table_row_bloc_checkboxes">
+                        <label for="" class="healthForm__form_table_row_bloc_checkboxes_label">Non</label>
+                        <input type="radio" name="test" class="healthForm__form_table_row_bloc_input">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="sante__text">
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-
-            <p>Un membre de votre famille est-il décédé subitement d’une cause cardiaque ou inexpliquée ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Avez-vous ressenti une douleur dans la poitrine, des palpitations, un essoufflement inhabituel ou un malaise ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Avez-vous eu un épisode de respiration sifflante (asthme) ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Avez-vous eu une perte de connaissance ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Si vous avez arrêté le sport pendant 30 jours ou plus pour des raisons de santé, avez-vous repris sans l’accord d’un médecin ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Avez-vous débuté un traitement médical de longue durée (hors contraception et désensibilisation aux allergies) ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-          </div>
-        </div>
-
-      <h2 class="sante-title">A ce jour</h2>
-        <div class="sante__oui">
-          <p>Oui</p>
-          <p>Non</p>
-        </div>
-        <div class="sante_text">
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Ressentez-vous une douleur, un manque de force ou une raideur suite à un problème osseux, articulaire ou musculaire (fracture, entorse, luxation, déchirure, tendinite, etc…) survenu durant les 12 derniers mois ?</p>
-            <input type="checkbox">
-            <input type="checkbox">
-
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Votre pratique sportive est-elle interrompue pour des raisons de santé ?</p>
-
-            <input type="checkbox" class="sante__text_global_input">
-            <input type="checkbox" class="sante__text_global_input">
-
-          </div>
-          <div class="sante__text_global">
-            <i class="fa-solid fa-play" style="color: #ffe13f;"></i>
-            <p>Pensez-vous avoir besoin d’un avis médical pour poursuivre votre pratique sportive ?</p>
-
-            <input type="checkbox" class="sante__text_global_input">
-            <input type="checkbox" class="sante__text_global_input">
-          </div>
-        </div>
-        <div class="sante__button">
-          <a href="#" class="sante__button_text">Envoyer le formulaire</a>
-
-        </div>
-    </section>
-  </div>
+    </form>
+</section>

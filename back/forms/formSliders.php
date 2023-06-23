@@ -11,7 +11,16 @@ if(isset($_GET['case'])){
 <section class="sliderFormSection <?php echo $class ?>" id="sliderFormSection"   >
 
 <form action="back.php?action=sliders&case=<?php if (isset($action_form)){echo $action_form;}?>" method="post" enctype="multipart/form-data" class="slider__form">
-    <i class="slider__form_icon fa-solid fa-xmark" id="closeButton"></i>
+    <h1 class="slider__form__title">
+        <?php
+        if ($_GET['case'] == "loadSliders"){
+            echo "Modifier une Slide";
+        }
+        if($_GET['case']=="unloadSliders")
+            echo "Ajouter une Slide";
+        ?>
+    </h1>
+    <i class="slider__form__icon fa-solid fa-xmark" id="closeButton"></i>
     <label for="title_sliders" class="slider__form_title">Titre du Sliders (obligatoire)</label>
     <input id="title_sliders" class="slider__form_input" placeholder="Titre [obligatoire]" type="text" name="title_sliders" value="<?php if(isset($_POST['title_sliders'])){echo $_POST['title_sliders'];} ?>">
 

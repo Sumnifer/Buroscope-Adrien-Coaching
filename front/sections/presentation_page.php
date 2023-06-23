@@ -8,29 +8,13 @@ $stmt = mysqli_prepare($connexion, $request);
 $visibility = 2;
 mysqli_stmt_bind_param($stmt, "i", $visibility);
 mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
+$result = mysqli_stmt_get_result($stmt); ?>
 
-$request1 = "SELECT * FROM sliders WHERE visibility_sliders = ?";
-$stmt1 = mysqli_prepare($connexion, $request1);
-$visibility1 = 1;
-mysqli_stmt_bind_param($stmt1, "i", $visibility1);
-mysqli_stmt_execute($stmt1);
-$result1 = mysqli_stmt_get_result($stmt1);
-?>
 
-<div class="slider">
-    <?php
-    while ($rows1=mysqli_fetch_object($result1)){
-  echo "<img class='slider-image' src='".$rows1->img_sliders."' alt='".$rows1->alt_sliders."'>"; }
-  ?>
-  <button id="slider-prev"><i class="fa-solid fa-chevron-left slider_icons"></i></button>
-  <button id="slider-next"><i class="fa-solid fa-chevron-right slider_icons"></i></button>
-
-</div>
 
 <?php
     $content = "<main class='presentation_page' >";
-    $content .= "<h1 class='presentation_page__title'> Mes différentes <span class='presentation_page__title_span'>presentations</span></h1>";
+    $content .= "<h1 class='presentation_page__title'> Mes différentes <span class='presentation_page__title_span'>activités</span></h1>";
      while($rows = mysqli_fetch_object($result)) {
         if ($rows->direction_presentations == 'left') {
             $content .=  "<div class='presentation_page__card'>";
@@ -46,7 +30,22 @@ $result1 = mysqli_stmt_get_result($stmt1);
                $content .="<p class='presentation_page__card_content_paragraph'>$rows->content_presentations</p></div>";
                $content .="<img src='$rows->img_presentations' alt='' class='presentation_page__card_img'></div>";
         }
-    }?>
-    <?php if(isset($content)){echo $content;} ?>
-    <?php include "prestation.php"?>
+    }
+
+    $request = "SELECT * FROM pages WHERE page_name = 'A Propos'";
+    $result = mysqli_query($connexion, $request);
+    $rows = mysqli_fetch_object($result);
+    if($rows->visibility_slider == 1) {
+        include "slider.php";
+    }
+
+    if(isset($content)){echo $content;}
+
+    $request = "SELECT * FROM pages WHERE page_name = 'A Propos'";
+    $result = mysqli_query($connexion, $request);
+    $rows = mysqli_fetch_object($result);
+    if($rows->visibility_prestations == 1) {
+        include "prestation.php";
+    } ?>
+
 </main>

@@ -344,8 +344,7 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>POSITION</div>"
-        
+    $content .= "<div>POSITION</div>";
     $content .= "<div>SLIDERS</div>";
     $content .= "<div>IMAGE</div>";
     $content .= "<div>ACTIONS</div>";
@@ -360,7 +359,7 @@ if (isset($_SESSION["id_users"])) {
             $rows->id_sliders .
             "&rank=" .
             $rows->rank_sliders .
-            "'><i class='fa-solid fa-arrow-up ' style='margin-inline: 0.2rem; margin-left: 0.5rem'></i></a>" .
+            "'><i class='fa-solid fa-arrow-up ' style='margin-inline: 0.2rem;'></i></a>" .
             "<a class='content__details_summary_actions_arrows' href='back.php?action=sliders&case=rankSliders&direction=down&id_sliders=" .
             $rows->id_sliders .
             "&rank=" .

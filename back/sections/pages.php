@@ -2,40 +2,18 @@
 if (isset($_SESSION["id_users"])) {
     $connexion = connexion();
     $title = "Gestion des pages";
-    $form = "forms/formPages.php";
-    $action_form = "newPages";
+    $action_form = "modifyPages";
+    $form_title = "";
+    $connexion->set_charset("utf8");
 
     if (isset($_GET["case"])) {
         // + <=================================================================================================================>
 
         switch ($_GET["case"]) {
-            // * <=========================================================>
-
-            case "newPages":
-                if (empty($_POST["title_pages"])) {
-                    $confirmation =
-                        "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";
-                } else {
-                    $request = "INSERT INTO pages SET title_pages=?";
-                    $stmt = mysqli_prepare($connexion, $request);
-                    $title = $_POST["title_pages"];
-                    mysqli_stmt_bind_param($stmt, "s", $title);
-                    $result = mysqli_stmt_execute($stmt);
-
-                    $confirmation =
-                        "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été crée </p>";
-                }
-                foreach ($_POST as $cle => $valeur) {
-                    //unset supprime une variable
-                    unset($_POST[$cle]);
-                }
-                break;
-
-            // * <=========================================================>
 
             case "loadPages":
-                if (isset($_GET["id_pages"])) {
 
+                if (isset($_GET["id_pages"])) {
                     $action_form = "modifyPages&id_pages=" . $_GET["id_pages"];
                     $request = "SELECT * FROM pages WHERE id_pages=?";
                     $stmt = mysqli_prepare($connexion, $request);
@@ -45,8 +23,10 @@ if (isset($_SESSION["id_users"])) {
                     $result = mysqli_stmt_get_result($stmt);
 
                     $rows = mysqli_fetch_object($result);
-                    $_POST["title_pages"] = $rows->title_pages;
-                    $_POST["content_pages"] = $rows->content_pages;
+                    $form_title = "Modifier une Page : " .$rows->page_name;
+                    $visibility_slider = $rows->visibility_slider;
+                    $visibility_prestations = $rows->visibility_prestations;
+                $form = "forms/formPages.php";
                 }
                 break;
 
@@ -54,58 +34,24 @@ if (isset($_SESSION["id_users"])) {
 
             case "modifyPages":
                 if (isset($_GET["id_pages"])) {
-                    if (empty($_POST["title_pages"])) {
-                        $confirmation =
-                            "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Le champs titre ne peut être vide </p>";
-                    } else {
-                        $request = "UPDATE pages SET title_pages=? WHERE id_pages=?";
+                        $request = "UPDATE pages SET visibility_slider=?, visibility_prestations=? WHERE id_pages=?";
                         $stmt = mysqli_prepare($connexion, $request);
-                        $title = $_POST["title_pages"];
-                        $id = $_GET["id_pages"];
-                        mysqli_stmt_bind_param($stmt, "si", $title,$id);
-                        $result = mysqli_stmt_execute($stmt);
+                        $id = htmlspecialchars($_GET["id_pages"]);
+                        $visibility_slider = htmlspecialchars($_POST['slider']);
+                        $visibility_prestations = htmlspecialchars($_POST['prestations']);
+                        mysqli_stmt_bind_param($stmt, "iii", $visibility_slider, $visibility_prestations, $id);
+                        if(mysqli_stmt_execute($stmt)) {
 
-                        $confirmation =
-                            "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été modifiée </p>";
-                    }
+                            $confirmation =
+                                "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été modifiée </p>";
+                        }
                 }
                 break;
 
-            // * <=========================================================>
 
-            case "deletePages":
-                $request = "DELETE FROM pages WHERE id_pages=?";
-                $stmt = mysqli_prepare($connexion, $request);
-                $id = $_GET["id_pages"];
-                mysqli_stmt_bind_param($stmt, "i", $id);
-                $result = mysqli_stmt_execute($stmt);
-
-                $confirmation =
-                    "<p class='success'><i class='fa-solid fa-circle-check success_icon'></i> La page a bien été supprimer </p>";
-                break;
-
-            // * <=========================================================>
-
-            case "warningPages":
-                if (isset($_GET["id_pages"])) {
-                    $confirmation = "<div class='confirm'>";
-                    $confirmation .=
-                        "<p class='confirm__paragraph'>Êtes vous sûr de vouloir supprimer la page n°" .
-                        $_GET["id_pages"] .
-                        "</p>";
-                    $confirmation .=
-                        "<a class='confirm__paragraph_link' href='back.php?action=pages&case=deletePages&id_pages=" .
-                        $_GET["id_pages"] .
-                        "'>OUI <i class='fa-light fa-check confirm__paragraph_link_icons'></i></a>";
-                    $confirmation .=
-                        "<a class='confirm__paragraph_link' href='back.php?action=pages'>NON <i class='fa-light fa-xmark confirm__paragraph_link_icons'></i></a></div>";
-                }
-                break;
-
-            // * <=========================================================>
         }
 
-        // + <=================================================================================================================>
+    // + <=================================================================================================================>
     }
     // ? ==================================================================================================================>
 
@@ -113,28 +59,32 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>ID</div>";
     $content .= "<div>PAGE</div>";
-    $content .= "<div></div>";
+    $content .= "<div>SLIDER</div>";
+    $content .= "<div>PRESTATIONS</div>";
     $content .= "<div>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $content .= "<details class='content__details'>";
         $content .= "<summary class='content__details_summary'>";
-        $content .= "<div class='content__details_summary_items'>$rows->id_pages</div>";
-        $content .= "<div class='content__details_summary_items'>$rows->title_pages</div>";
-        $content .= "<div class='content__details_summary_items'></div>";
+        $content .= "<div class='content__details_summary_items'>$rows->page_name</div>";
+        if ($rows->visibility_slider == 1) {
+            $content .= "<div class='content__details_summary_items'>OUI</div>";
+        } else {
+            $content .= "<div class='content__details_summary_items'>NON</div>";
+        }
+        if ($rows->visibility_prestations == 1) {
+            $content .= "<div class='content__details_summary_items'>OUI</div>";
+        } else {
+            $content .= "<div class='content__details_summary_items'>NON</div>";
+        }
         $content .=
             "<div class='content__details_summary_actions'>
                 <a class='content__details_summary_actions_link-modify' href='back.php?action=pages&case=loadPages&id_pages=" .
             $rows->id_pages .
             "' >
                   <i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
-        $content .=
-            "<a class='content__details_summary_actions_link-trash' href='back.php?action=pages&case=warningPages&id_pages=" .
-            $rows->id_pages .
-            "'>
-                  <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
+
         $content .= "</summary></details>";
     }
     // ? ==================================================================================================================>

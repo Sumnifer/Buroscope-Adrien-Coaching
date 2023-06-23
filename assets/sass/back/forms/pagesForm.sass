@@ -1,7 +1,7 @@
 .pages__form
   display: flex
   flex-direction: column
-  padding: 2% 25%
+  padding: 2% 20%
   width: 100%
   background-color: $white
   border: 2px solid $blue
@@ -12,39 +12,40 @@
     font-weight: 900
     color: $blue
     text-transform: uppercase
-  &_input
-    padding: .4rem
-    margin: .2rem 0 .5rem 0
-    background-color: #c8c8c8
-    color: $blue
-    border: 1px solid $blue
-    border-radius: .625rem
-    outline: none
-    &::placeholder
+    margin-bottom: 2rem
+  &_container
+    width: 100%
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    align-items: center
+    gap: 2rem
+    margin-bottom: 1rem
+    &_label
       color: $blue
-
-  &_label
-    font-size: 1.3rem
-    color: $white
-  &_textarea
-    padding: .4rem
-    margin: .2rem 0 .5rem 0
-    background-color: $primary
-    color: $white
-    border: 1px solid $secondary
-    border-radius: .625rem
-    outline: none
-    min-width : 6.25rem
-    min-height : 6.25rem
-    max-width : 45rem
-    max-height : 45rem
-
-  &_btn
-    padding: .5rem
-    align-self: center
-    width: 30%
+      font-size: 1.2rem
+    &_bloc
+      width: 100%
+      display: flex
+      align-items: center
+      justify-content: flex-end
+      gap: .5rem
+      background-color: $blue
+      padding: 1rem
+      position: relative
+      &_label
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        width: 100%
+        height: 100%
+  &_cta
+    padding: 1rem
     margin-top: 1rem
-    border-radius: 30px
     border: none
     text-transform: uppercase
     color: $white

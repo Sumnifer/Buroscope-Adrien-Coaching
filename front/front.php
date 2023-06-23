@@ -7,6 +7,13 @@ include "sections/header.php";
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "index":
+
+            $request = "SELECT * FROM pages WHERE id_pages = 1";
+            $result = mysqli_query($connexion, $request);
+            $rows = mysqli_fetch_object($result);
+            if($rows->visibility_prestations == 1) {
+                $prestations = "sections/prestation.php";
+            }
             include "front.html";
             break;
         case "logging":
@@ -69,6 +76,17 @@ if (isset($_GET["action"])) {
         case "calendar":
             include "sections/calendar.php";
             break;
+        case "prestation":
+            $request = "SELECT * FROM pages WHERE page_name = 'Prestation'";
+            $result = mysqli_query($connexion, $request);
+            $rows = mysqli_fetch_object($result);
+            if($rows->visibility_slider == 1) {
+                include "sections/slider.php";
+            }
+            include "sections/prestation.php";
+            break;
+
+
     }
 }
 include "sections/footer.php";

@@ -31,7 +31,7 @@
         <a href="front.php?action=index" class="header__nav_menu_items_link">Accueil</a>
       </li>
       <li class="header__nav_menu_items">
-        <a href="front.php?action=presentation" class="header__nav_menu_items_link">Presentation</a>
+        <a href="front.php?action=presentation" class="header__nav_menu_items_link">A propos</a>
       </li>
       <li class="header__nav_menu_items">
         <a href="front.php?action=prestation" class="header__nav_menu_items_link">Prestation</a>

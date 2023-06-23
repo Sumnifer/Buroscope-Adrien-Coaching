@@ -57,8 +57,13 @@ $nomm[11] = "D&eacute;cembre";
  */
 
 $ajd = getdate();
-$mois = $ajd['mon'];
 $annee = $ajd['year'];
+if(isset($_GET['date'])){
+    $z = explode('-' ,$_GET['date']);
+    $mois = $z[1];
+} else {
+$mois = $ajd['mon'];
+}
 
 
 if(isset($_POST['mois']))
@@ -128,11 +133,10 @@ for ($jour = 0; $jour < 7; $jour++)
 $calEven.="</tr>\n<tr>\n";
 
 // Affichage des cellules vides en d�but de mois, s'il y en a
-for ($prems = 0; $prems < $premierJour; $prems++)
-    {
+for ($prems = 0; $prems < $premierJour; $prems++) {
     $classe = get_classe($prems, 2, $affichage);
-    $calEven.="<td $classe>&nbsp;</td>\n";
-    }
+    $calEven .= "<td $classe>&nbsp;</td>\n";
+}
 
 // Affichage des jours du mois
 $cptJour=0;
@@ -209,7 +213,6 @@ if (isset($_GET['case'])){
                     $schedules .="<p class='schedule__buttons reserved'>$rows->hours_schedules</p>";
                 }
             }
-
             break;
         case "confirmSchedules" :
             $date= $_GET["date"];
@@ -230,6 +233,7 @@ if (isset($_GET['case'])){
             $result=mysqli_query($connexion, $request);
             $confirmation = "<p class='success confirmation' style='margin: 2rem 25%;'><i class='success_icon fa-solid fa-circle-check'></i>Votre séance a bien été réservée</p>";
             break;
+
     }
 }
 
