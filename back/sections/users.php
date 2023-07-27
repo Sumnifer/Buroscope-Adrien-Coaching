@@ -232,19 +232,19 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
                 }
                 break;
         }
-    }
 
-    if (isset($_GET["case"]) && $_GET['case'] == "searchUsers") {
-        if ($_SESSION["statut_users"] == "root") {
-            $request = "SELECT * FROM users WHERE 
+
+        if ($_GET['case'] == "searchUsers") {
+            if ($_SESSION["statut_users"] == "root") {
+                $request = "SELECT * FROM users WHERE 
                                                    email_users LIKE '%$searchResult%' OR 
                                                    name_users LIKE '%$searchResult%' OR 
                                                    surname_users LIKE '%$searchResult%' OR 
                                                    date_users LIKE '%$searchResult%' OR 
                                                    statut_users LIKE '%$searchResult%'
             ORDER BY id_users";
-        } else {
-            $request = "SELECT * FROM users WHERE statut_users != 'root' AND 
+            } else {
+                $request = "SELECT * FROM users WHERE statut_users != 'root' AND 
                                                    email_users LIKE '%$searchResult%' OR 
                                                    name_users LIKE '%$searchResult%' OR 
                                                    surname_users LIKE '%$searchResult%' OR 
@@ -252,14 +252,14 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
                                                    statut_users LIKE '%$searchResult%' 
                                                   
              ORDER BY id_users";
+            }
+        } elseif ($_SESSION["statut_users"] == "admin") {
+            $request =
+                "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
+        } else {
+            $request = "SELECT * FROM users ORDER BY id_users";
         }
-    } elseif ($_SESSION["statut_users"] == "admin") {
-        $request =
-            "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
-    } else {
-        $request = "SELECT * FROM users ORDER BY id_users";
     }
-
     $result = mysqli_query($connexion, $request);
     $content = "<details class=\"content__details\">";
     $content .= "<summary class=\"content__details_summary\">";
