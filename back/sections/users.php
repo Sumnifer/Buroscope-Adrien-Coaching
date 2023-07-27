@@ -234,7 +234,7 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
         }
     }
 
-    if ($_GET["case"] == "searchUsers") {
+    if (isset($_GET["case"]) && $_GET['case'] == "searchUsers") {
         if ($_SESSION["statut_users"] == "root") {
             $request = "SELECT * FROM users WHERE 
                                                    email_users LIKE '%$searchResult%' OR 
