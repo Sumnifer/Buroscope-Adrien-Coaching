@@ -33,7 +33,7 @@ if (isset($_GET["action"])) {
             include "sections/inscription.php";
             break;
         case "formSante":
-            include "sections/formSante.php";
+            include "sections/health.php";
             break;
         case "logout":
             session_destroy();
@@ -85,7 +85,6 @@ if (isset($_GET["action"])) {
             }
             include "sections/prestation.php";
             break;
-
 
     }
 }
