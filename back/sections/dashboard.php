@@ -2,7 +2,6 @@
 
 $title = "Dashboard";
 $connexion = connexion();
-session_start();
 function counter($connexion, $table)
 {
     $request = "SELECT * FROM " . $table;
