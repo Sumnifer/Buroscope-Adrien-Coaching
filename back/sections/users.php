@@ -253,39 +253,42 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
                                                   
              ORDER BY id_users";
             }
+        }
         } elseif ($_SESSION["statut_users"] == "admin") {
             $request =
                 "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
         } else {
             $request = "SELECT * FROM users ORDER BY id_users";
         }
-    }
-    $result = mysqli_query($connexion, $request);
-    $content = "<details class=\"content__details\">";
-    $content .= "<summary class=\"content__details_summary\">";
-    $content .= "<div>ID</div>";
-    $content .= "<div>EMAIL</div>";
-    $content .= "<div>STATUT</div>";
-    $content .= "<div>ACTION</div>";
-    $content .= "</summary></details>";
-    while ($rows = mysqli_fetch_object($result)) {
-        $content .= "<details class=\"content__details\">";
+
+        $result = mysqli_query($connexion, $request);
+        $content = "<details class=\"content__details\">";
         $content .= "<summary class=\"content__details_summary\">";
-        $content .= "<div class=\"content__details_summary_items\">$rows->id_users</div>";
-        $content .= "<div class=\"content__details_summary_items\">$rows->email_users</div>";
-        $content .= "<div class=\"content__details_summary_items\">$rows->statut_users</div>";
-        $content .=
-            "<div class='content__details_summary_actions'><a class='modify content__details_summary_actions_link-modify' href='back.php?action=users&case=loadUsers&id_users=" .
-            $rows->id_users .
-            "' >
-                      <i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
-        $content .=
-            "<a class='content__details_summary_actions_link-trash' href='back.php?action=users&case=warningUsers&id_users=" .
-            $rows->id_users .
-            "'>
-                      <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
+        $content .= "<div>ID</div>";
+        $content .= "<div>EMAIL</div>";
+        $content .= "<div>STATUT</div>";
+        $content .= "<div>ACTION</div>";
         $content .= "</summary></details>";
+        while ($rows = mysqli_fetch_object($result)) {
+            $content .= "<details class=\"content__details\">";
+            $content .= "<summary class=\"content__details_summary\">";
+            $content .= "<div class=\"content__details_summary_items\">$rows->id_users</div>";
+            $content .= "<div class=\"content__details_summary_items\">$rows->email_users</div>";
+            $content .= "<div class=\"content__details_summary_items\">$rows->statut_users</div>";
+            $content .=
+                "<div class='content__details_summary_actions'><a class='modify content__details_summary_actions_link-modify' href='back.php?action=users&case=loadUsers&id_users=" .
+                $rows->id_users .
+                "' >
+                      <i class='fa-solid fa-pen-to-square content__details_summary_actions_link_icon-modify'></i></a>";
+            $content .=
+                "<a class='content__details_summary_actions_link-trash' href='back.php?action=users&case=warningUsers&id_users=" .
+                $rows->id_users .
+                "'>
+                      <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
+            $content .= "</summary></details>";
+        }
+
+    } else {
+        header("Location: ../front.php?action=login");
     }
-} else {
-    header("Location: ../front.php?action=login");
-}
+
