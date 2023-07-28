@@ -117,11 +117,11 @@ if (isset($_SESSION["id_users"])) {
                     "modifyPresentations&id_presentations=" .
                     $_GET["id_presentations"];
                 $id_presentations = $_GET["id_presentations"];
-                $title_presentations = $_POST["title_presentations"];
-                $content_presentations = $_POST["content_presentations"];
-                $alt_presentations = $_POST["alt_presentations"];
-                $direction_presentations = $_POST["direction_presentations"];
-                $visibility_presentations = $_POST["visibility_presentations"];
+                $title_presentations = htmlspecialchars($_POST["title_presentations"]);
+                $content_presentations = htmlspecialchars($_POST["content_presentations"]);
+                $alt_presentations = htmlspecialchars($_POST["alt_presentations"]);
+                $direction_presentations = htmlspecialchars($_POST["direction_presentations"]);
+                $visibility_presentations = htmlspecialchars($_POST["visibility_presentations"]);
 
                 $error = "";
 
