@@ -8,12 +8,17 @@ if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "index":
 
+            $questions = "sections/questions.php";
             $request = "SELECT * FROM pages WHERE id_pages = 1";
             $result = mysqli_query($connexion, $request);
             $rows = mysqli_fetch_object($result);
             if($rows->visibility_prestations == 1) {
                 $prestations = "sections/prestation.php";
+
             }
+
+
+
             include "front.html";
             break;
         case "logging":
