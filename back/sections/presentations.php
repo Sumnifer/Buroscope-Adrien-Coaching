@@ -118,7 +118,9 @@ if (isset($_SESSION["id_users"])) {
                     $_GET["id_presentations"];
                 $id_presentations = $_GET["id_presentations"];
                 $title_presentations = htmlspecialchars($_POST["title_presentations"]);
+                echo $_POST["content_presentations"] ."<hr> \n";
                 $content_presentations = htmlspecialchars($_POST["content_presentations"]);
+                echo $content_presentations ."<hr>";
                 $alt_presentations = htmlspecialchars($_POST["alt_presentations"]);
                 $direction_presentations = htmlspecialchars($_POST["direction_presentations"]);
                 $visibility_presentations = htmlspecialchars($_POST["visibility_presentations"]);
