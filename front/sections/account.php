@@ -91,20 +91,21 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
+            case 'index':
+                include "accountInfos.php";
+                break;
+            case 'accountSchedules':
+                $today = date("Y-m-d")." 00:00:00";
+                $request="SELECT * FROM schedules WHERE date_schedules >= '$today' AND id_users = '".$_SESSION["id_users"]."' ORDER BY date_schedules ASC";
+                $result=mysqli_query($connexion,$request);
+                $request2="SELECT * FROM schedules WHERE date_schedules < '$today' AND id_users = ".$_SESSION["id_users"]." ORDER BY date_schedules ASC";
+                $result2=mysqli_query($connexion,$request2);
+                include "accountSchedules.php";
+                break;
         }
     }
-    if ($_GET["case"] == "" || $_GET["case"] == "updateUsers") {
-        include "accountInfos.php";
-    }
-    if($_GET["case"] == "accountSchedules"){
-        $today = date("Y-m-d")." 00:00:00";
-        $request="SELECT * FROM schedules WHERE date_schedules >= '$today' AND id_users = '".$_SESSION["id_users"]."' ORDER BY date_schedules ASC";
-        $result=mysqli_query($connexion,$request);
-        $request2="SELECT * FROM schedules WHERE date_schedules < '$today' AND id_users = ".$_SESSION["id_users"]." ORDER BY date_schedules ASC";
-        $result2=mysqli_query($connexion,$request2);
-        include "accountSchedules.php";
-    }
+
 } else {
     header("Location: front.php?action=logging");
-} ?>
+}
 

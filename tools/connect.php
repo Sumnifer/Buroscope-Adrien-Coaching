@@ -2,6 +2,6 @@
 
 //connexion à la base distante
 const LOGIN = "root";
-const PASSE = 'root';
+const PASSE = '';
 const SERVEUR = "localhost";
 const BASE = "adrien";

@@ -2,7 +2,7 @@
 <nav class="account__nav">
     <ul class="account__nav_ul">
         <li class="account__nav_ul_li"><a href="front.php?action=index" class="account__nav_ul_li_link"><i class="fa-solid fa-globe account__nav_ul_li_link_icon"></i>Retour</a> <i class="fa-solid fa-chevron-right"></i></li>
-        <li class="account__nav_ul_li"><a href="front.php?action=account" class="account__nav_ul_li_link"><i class="fa-solid fa-user account__nav_ul_li_link_icon"></i>Mes Informations</a> <i class="fa-solid fa-chevron-right"></i></li>
+        <li class="account__nav_ul_li"><a href="front.php?action=account&case=index" class="account__nav_ul_li_link"><i class="fa-solid fa-user account__nav_ul_li_link_icon"></i>Mes Informations</a> <i class="fa-solid fa-chevron-right"></i></li>
         <li class="account__nav_ul_li"><a href="front.php?action=account&case=accountSchedules" class="account__nav_ul_li_link"><i class="fa-solid fa-dumbbell account__nav_ul_li_link_icon"></i>Mes Séances</a> <i class="fa-solid fa-chevron-right"></i></li>
         <li class="account__nav_ul_li"><a href="front.php?action=account&case=settings" class="account__nav_ul_li_link"><i class="fa-solid fa-gear account__nav_ul_li_link_icon"></i>Paramètres</a> <i class="fa-solid fa-chevron-right"></i></li>
         <li class="account__nav_ul_li"><a href="front.php?action=logout" class="account__nav_ul_li_link"><i class="fa-solid fa-sign-out account__nav_ul_li_link_icon"></i>Deconnexion</a> <i class="fa-solid fa-chevron-right"></i></li>
