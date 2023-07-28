@@ -7,7 +7,6 @@ include "sections/header.php";
 if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "index":
-
             $questions = "sections/questions.php";
             $request = "SELECT * FROM pages WHERE id_pages = 1";
             $result = mysqli_query($connexion, $request);
@@ -16,8 +15,6 @@ if (isset($_GET["action"])) {
                 $prestations = "sections/prestation.php";
 
             }
-
-
 
             include "front.html";
             break;
