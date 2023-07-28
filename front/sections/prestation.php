@@ -23,15 +23,14 @@ $nb_prestations = $rows1['nb_prestations'];
 $content = "<section class='prestation' id='prestation'>
 <h1 class='prestation__title'>
 Découvrez <span class='prestation__title_span'>mes prestations</span></h1>";
-    if(($nb_prestations == '3') || ($nb_prestations == '7')){
+if (($nb_prestations == '3') || ($nb_prestations == '7')) {
     $content .= "<div class='prestation__container' style='grid-template-columns: repeat(4, 1fr); gap: 2rem'>";
-    }
-    else{
+} else {
     $content .= "<div class='prestation__container' style='grid-template-columns: repeat(3, 1fr);'>";
-    }
+}
 
 
-while($rows = mysqli_fetch_object($result)) {
+while ($rows = mysqli_fetch_object($result)) {
 
     $content .= "<div class='prestation__container_card'>";
     $content .= "<img src='$rows->img_prestations' alt='$rows->alt_prestations' class='prestation__container_card_img'>";
@@ -46,6 +45,8 @@ $content .= "<i class='fa-solid fa-plus prestation__container_card-plus_link_ico
 $content .= "<p class='prestation__container_card-plus_link_paragraph'>Découvrir toutes<br> les préstations</p></a></div>";
 
 
-if(isset($content)){echo $content;} ?>
+if (isset($content)) {
+    echo $content;
+} ?>
 
 </section>
