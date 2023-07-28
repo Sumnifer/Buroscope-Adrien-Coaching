@@ -12,6 +12,7 @@ if (isset($_SESSION["id_users"])) {
                 $request = "SELECT COUNT(*) AS nb_sliders FROM sliders";
                 $result = mysqli_query($connexion, $request);
                 $rows = mysqli_fetch_object($result);
+
                 if (empty($_POST["title_sliders"])) {
                     $confirmation =
                         "<p class='warning'><i class='fa-solid fa-triangle-exclamation warning_icon'></i> Veuillez entrer un titre </p>";

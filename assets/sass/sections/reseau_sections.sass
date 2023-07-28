@@ -1,68 +1,80 @@
 .reseau
-  padding: 8rem 12.5rem
+  width: 120%
+  margin-block: 10rem
+  transform: rotate(-5deg) translateX(-10%)
   display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  &__title
-    font-size: 2rem
-    text-transform: uppercase
-    color: $white
-    font-weight: 600
-    margin-bottom: 2rem
-    &_span
-      color: $secondary
+  background-color: $blue
+  box-shadow: 0 5px 30px black
+
   &__container
-    width: 100%
-    display: grid
-    align-items: center
-    grid-template-columns: 15% 1fr
-    grid-template-rows: 1fr
-    gap: 2rem
-    &_img
-      height: 100%
-    &_block
-      height: 100%
+    width: 50%
+
+    &:nth-of-type(1)
       display: flex
       flex-direction: column
+      align-items: center
+      transform: rotate(5deg)
+      padding-block: 5rem
+      gap: 1rem
+
+    &:nth-of-type(2)
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+
+    &_img
+      width: 100%
+      height: 300px
+      object-fit: cover
+
+    &_title
+      text-transform: uppercase
+      font-size: 2rem
+      font-weight: bold
+      color: $white
+
+      &_span
+        color: $secondary
+
+    &_paragraph
+      color: $white
+      padding-inline: 35%
+      text-align: center
+
+    &_form
+      display: flex
+      flex-direction: column
+      align-items: center
       gap: 1rem
       width: 100%
-      &_items
+      padding-inline: 30%
+
+      &_input
         width: 100%
-        height: 100%
-        background-color: $blue
-        color: $white
+        padding: .5rem 1rem
+        background-color: transparent
+        border: 1px solid white
+        border-radius: 20px
+        &::placeholder
+          color: white
+
+      &_cta
+        padding: 1rem 3rem
+        background-color: $secondary
+        color: $primary
+        border: none
         border-radius: 10px
-        padding: 2rem
-        display: flex
-        flex-direction: column
-        &_paragraph
-          font-size: 1rem
-        &_social
-          padding-block: 2rem
-          display: flex
-          gap: 1rem
-          &_icon
-            width: 120px
-            text-align: center
-            aspect-ratio: 1
-            padding: 2rem
-            font-size: 3rem
-            border-radius: 50%
-            background-color: $secondary
-            color: $primary
-            cursor: pointer
-        &_form
-          margin-top: 1rem
-          background-color: $blue
-          display: flex
-          &_input
-            width: 50%
-            padding: .5rem 1rem
-            border: none
-          &_cta
-            padding: .5rem 1rem
-            background-color: $secondary
-            color: $primary
-            border: none
-            cursor: pointer
+        font-weight: bold
+
+    &_socials
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: .5rem
+      &_cta
+        width: 100%
+        background-color: $secondary
+        color: $primary
+        padding: .5rem 3rem
+        border: none
+        font-weight: bold
+
