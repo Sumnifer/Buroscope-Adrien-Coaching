@@ -23,20 +23,21 @@ $nb_prestations = $rows1['nb_prestations'];
 $content = "<section class='prestation' id='prestation'>
 <h1 class='prestation__title'>
 Découvrez <span class='prestation__title_span'>mes prestations</span></h1>";
-if (($nb_prestations == '3') || ($nb_prestations == '6')) {
-    $content .= "<div class='prestation__container' style='grid-template-columns: repeat(3, 1fr);'>";
-} else {
-    $content .= "<div class='prestation__container' style='grid-template-columns: repeat(4, 1fr);'>";
-}
+$content .= "<div class='prestation__container'>";
 
 
 while ($rows = mysqli_fetch_object($result)) {
-    $content .= "<div class='prestation__container_card'>";
+    $content .= "<div class='prestation__container_card' style='width: 300px; min-height: 375px'>";
     $content .= "<div class='prestation__container_card_header'>";
     $content .= "<h3 class='prestation__container_card_header_title'>$rows->title_prestations</h3>";
-    $content .= "<span class='prestation__container_card_header_span'> $rows->price_prestations €</span></div>";
+    $current_url = "https://bennyb35.fr/adrien-coaching/front/front.php?action=prestation";
+    if ($_SERVER['REQUEST_URI'] === $current_url) {
+        echo "coucou";
+        $content .= "<span class='prestation__container_card_header_span'> $rows->price_prestations €</span>";
+    }
+    $content .= "</div>";
     $content .= "<p class='prestation__container_card_paragraph'>$rows->content_prestations</p>";
-    $content .= "<a href='' class='prestation__container_card_cta'>Je m'inscris ! <i class='fa-solid fa-dumbbell'></i></a>";
+    $content .= "<a href='front.php?action=calendar&prestations=$rows->title_prestations' class='prestation__container_card_cta'>Je m'inscris ! <i class='fa-solid fa-dumbbell'></i></a>";
     $content .="</div>";
 
 }

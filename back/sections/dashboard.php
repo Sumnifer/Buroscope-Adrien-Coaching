@@ -43,10 +43,10 @@ $cards = [
         "icon" => "fa-cards-blank",
         "name" => "Prestations",
     ],
-    "messages" => [
-        "count" => counter($connexion, "messages"),
-        "icon" => "fa-envelope",
-        "name" => "Messages",
+    "questions" => [
+        "count" => counter($connexion, "questions"),
+        "icon" => "fa-question",
+        "name" => "Questions",
     ],
     "notices" => [
         "count" => counter($connexion, "notices"),

@@ -16,7 +16,7 @@
     if (isset($result)){
 while($rows=mysqli_fetch_object($result)) {
     echo "<div class='accountSchedule__container_items'>";
-    echo "<p class='accountSchedule__container_items_date'>Le " . strftime("%A %d %B %Y", strtotime($rows->date_schedules)) . " </p>";
+    echo "<p class='accountSchedule__container_items_date'>Formule ".$rows->title_prestations." Le " . date_format(date_create($rows->date_schedules), "d/m/Y") . " </p>";
     echo "<p class='accountSchedule__container_items_hours'>&nbsp;à " . $rows->hours_schedules . "</p>";
     echo "</div>";
 }

@@ -96,9 +96,9 @@ if (isset($_SESSION["id_users"])) {
                 break;
             case 'accountSchedules':
                 $today = date("Y-m-d")." 00:00:00";
-                $request="SELECT * FROM schedules WHERE date_schedules >= '$today' AND id_users = '".$_SESSION["id_users"]."' ORDER BY date_schedules ASC";
+                $request="SELECT * FROM schedules  AS s INNER JOIN prestations p ON s.prestation_schedules = p.id_prestations WHERE s.date_schedules >= '$today' AND s.id_users = '".$_SESSION["id_users"]."' ORDER BY s.date_schedules ASC";
                 $result=mysqli_query($connexion,$request);
-                $request2="SELECT * FROM schedules WHERE date_schedules < '$today' AND id_users = ".$_SESSION["id_users"]." ORDER BY date_schedules ASC";
+                $request2="SELECT * FROM schedules  AS s INNER JOIN prestations p ON s.prestation_schedules = p.id_prestations WHERE s.date_schedules < '$today' AND s.id_users = ".$_SESSION["id_users"]." ORDER BY s.date_schedules ASC";
                 $result2=mysqli_query($connexion,$request2);
                 include "accountSchedules.php";
                 break;

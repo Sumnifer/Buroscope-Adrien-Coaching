@@ -8,7 +8,7 @@ mysqli_set_charset($connexion, "utf8");
 $questions = "<section class=questions >";
 $questions .= "<h1 class='questions__title'>Foire au <span class='questions__title_span'>questions</span></h1>";
 $questions .= "<h2 class='questions__subtitle'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores, aspernatur,!</h2>";
-$request = "SELECT * FROM questions";
+$request = "SELECT * FROM questions WHERE visibility_question != 2 ORDER BY question_rank";
 $result = mysqli_query($connexion, $request);
 while ($rows = mysqli_fetch_object($result)) {
     $questions.="<details class='questions__details'>";

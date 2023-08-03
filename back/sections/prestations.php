@@ -1,7 +1,5 @@
 <?php
 if (isset($_SESSION["id_users"])) {
-    $connexion = connexion();
-    mysqli_set_charset($connexion, "utf8");
     $title = "Gestion des Prestations";
     $form = "forms/formPrestations.php";
 
@@ -19,9 +17,6 @@ if (isset($_SESSION["id_users"])) {
                 } elseif (empty($_POST["content_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer du contenu </p>";
-                } elseif (empty($_POST["alt_prestations"])) {
-                    $confirmation =
-                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez entrer un alt </p>";
                 } elseif (empty($_POST["visibility_prestations"])) {
                     $confirmation =
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation warning_icon'></i> Veuillez choisir une visibilité </p>";
@@ -32,53 +27,20 @@ if (isset($_SESSION["id_users"])) {
                     $request = "INSERT INTO prestations SET 
               title_prestations=?,
               content_prestations=?,
-              alt_prestations=?,
               rank_prestations=?,
               visibility_prestations=?,
               price_prestations=?";
                     $stmt = mysqli_prepare($connexion, $request);
                     mysqli_stmt_bind_param(
                         $stmt,
-                        "sssiis",
+                        "ssiis",
                         $_POST["title_prestations"],
                         $_POST["content_prestations"],
-                        $_POST["alt_prestations"],
                         $newRank,
                         $_POST["visibility_prestations"],
                         $_POST["price_prestations"]
                     );
                     $result = mysqli_stmt_execute($stmt);
-
-                    $last_Id = mysqli_insert_id($connexion);
-
-                    if (
-                        !empty($_FILES["img_prestations"]) &&
-                        $_FILES["img_prestations"]["error"] == 0
-                    ) {
-                        $file_name = $_FILES["img_prestations"]["name"];
-                        $file_extension = pathinfo(
-                            $file_name,
-                            PATHINFO_EXTENSION
-                        );
-                        $new_file_name =
-                            "prestation_" . $last_Id . "." . $file_extension;
-                        $file_path = "../medias/" . $new_file_name;
-
-                        if (
-                            move_uploaded_file(
-                                $_FILES["img_prestations"]["tmp_name"],
-                                $file_path
-                            )
-                        ) {
-                            $request2 =
-                                "UPDATE prestations SET img_prestations='" .
-                                $file_path .
-                                "' WHERE id_prestations='" .
-                                $last_Id .
-                                "'";
-                            $result2 = mysqli_query($connexion, $request2);
-                        }
-                    }
 
                     $confirmation =
                         "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La presentation a bien été crée </p>";
@@ -101,7 +63,6 @@ if (isset($_SESSION["id_users"])) {
                     $rows = mysqli_fetch_object($result);
                     $_POST["title_prestations"] = $rows->title_prestations;
                     $_POST["content_prestations"] = $rows->content_prestations;
-                    $_POST["alt_prestations"] = $rows->alt_prestations;
                     $_POST["price_prestations"] = $rows->price_prestations;
                     $visibility = $rows->visibility_prestations;
                 }
@@ -114,7 +75,6 @@ if (isset($_SESSION["id_users"])) {
                 $id_prestations = $_GET["id_prestations"];
                 $title_prestations = $_POST["title_prestations"];
                 $content_prestations = $_POST["content_prestations"];
-                $alt_prestations = $_POST["alt_prestations"];
                 $price_prestations = $_POST["price_prestations"];
                 $visibility_prestations = $_POST["visibility_prestations"];
 
@@ -127,10 +87,6 @@ if (isset($_SESSION["id_users"])) {
                 if (empty($content_prestations)) {
                     $error .=
                         "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner le contenu</p>";
-                }
-                if (empty($alt_prestations)) {
-                    $error .=
-                        "<p class='warning confirmation'><i class='fa-solid fa-circle-exclamation error_icon'></i> Veuillez renseigner la description alternative</p>";
                 }
                 if (empty($price_prestations)) {
                     $error .=
@@ -145,65 +101,22 @@ if (isset($_SESSION["id_users"])) {
                     $request = "UPDATE prestations SET 
               title_prestations=?,
               content_prestations=?,
-              alt_prestations=?,
               price_prestations=?,
               visibility_prestations=?
               WHERE id_prestations=?";
                     $stmt = mysqli_prepare($connexion, $request);
                     mysqli_stmt_bind_param(
                         $stmt,
-                        "sssisi",
+                        "ssisi",
                         $title_prestations,
                         $content_prestations,
-                        $alt_prestations,
                         $price_prestations,
                         $visibility_prestations,
                         $id_prestations
                     );
                     $result = mysqli_stmt_execute($stmt);
 
-                    if (
-                        isset($_FILES["img_prestations"]) &&
-                        $_FILES["img_prestations"]["error"] == 0
-                    ) {
-                        $request_img =
-                            "SELECT img_prestations FROM prestations WHERE id_prestations='" .
-                            $_GET["id_prestations"] .
-                            "'";
-                        $result_img = mysqli_query($connexion, $request_img);
-                        $img_path = mysqli_fetch_object($result_img)
-                            ->img_prestations;
 
-                        if (file_exists($img_path)) {
-                            unlink($img_path);
-                        }
-                        $file_name = $_FILES["img_prestations"]["name"];
-                        $file_extension = pathinfo(
-                            $file_name,
-                            PATHINFO_EXTENSION
-                        );
-                        $new_file_name =
-                            "prestation_" .
-                            $_GET["id_prestations"] .
-                            "." .
-                            $file_extension;
-                        $file_path = "../medias/" . $new_file_name;
-
-                        if (
-                            move_uploaded_file(
-                                $_FILES["img_prestations"]["tmp_name"],
-                                $file_path
-                            )
-                        ) {
-                            $request2 =
-                                "UPDATE prestations SET img_prestations='" .
-                                $file_path .
-                                "' WHERE id_prestations='" .
-                                $_GET["id_prestations"] .
-                                "'";
-                            $result2 = mysqli_query($connexion, $request2);
-                        }
-                    }
                     $confirmation =
                         "<p class='success confirmation'><i class='fa-solid fa-circle-check success_icon'></i> La présentation a bien été modifiée </p>";
                 } else {
@@ -255,18 +168,6 @@ if (isset($_SESSION["id_users"])) {
 
             case "deletePrestations":
                 if (isset($_GET["id_prestations"])) {
-                    // Récupérer le chemin du fichier image à supprimer
-                    $request_img =
-                        "SELECT img_prestations FROM prestations WHERE id_prestations='" .
-                        $_GET["id_prestations"] .
-                        "'";
-                    $result_img = mysqli_query($connexion, $request_img);
-                    $img_path = mysqli_fetch_object($result_img)
-                        ->img_prestations;
-
-                    if (file_exists($img_path)) {
-                        unlink($img_path);
-                    }
 
                     $request4 =
                         "DELETE FROM prestations WHERE id_prestations='" .
@@ -363,10 +264,10 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>POSITION</div>";
-    $content .= "<div>PRESTATION</div>";
-    $content .= "<div>IMAGE</div>";
-    $content .= "<div>ACTIONS</div>";
+    $content .= "<div class='content__details_summary_heading'>POSITION</div>";
+    $content .= "<div class='content__details_summary_heading'>PRESTATION</div>";
+    $content .= "<div class='content__details_summary_heading'>DESCRIPTION</div>";
+    $content .= "<div class='content__details_summary_heading'>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $content .= "<details class='content__details'>";
@@ -386,18 +287,18 @@ if (isset($_SESSION["id_users"])) {
             "'><i class='fa-solid fa-arrow-down'></i></a></div>";
         $content .= "<div class='content__details_summary_items'>$rows->title_prestations</div>";
 
-        $content .= "<div class='content__details_summary_items'><img src='$rows->img_prestations' alt='' class='content__details_summary_items_img''></div>";
-        $content .= "<div class='content__details_summary_actions'>";
+        $maxLength = 50;
+        $content .= "<div class='content__details_summary_items'>" . substr($rows->content_prestations, 0, $maxLength) . "...</div>";        $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_prestations == 1) {
             $content .=
                 "<a class='content__details_summary_actions_link-eyes' href='back.php?action=prestations&case=visibilityPrestations&visibility=2&id_prestations=" .
                 $rows->id_prestations .
-                "' ><i class='fa-solid fa-eye content__details_summary_actions_link_icon-eyes'></i></a>";
+                "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
         } else {
             $content .=
                 "<a class='content__details_summary_actions_link-eyes' href='back.php?action=prestations&case=visibilityPrestations&visibility=1&id_prestations=" .
                 $rows->id_prestations .
-                "' ><i class='fa-solid fa-eye-slash content__details_summary_actions_link_icon-eyes'></i></a>";
+                "' ><i class='fa-solid fa-eye content__details_summary_actions_link_icon-eyes'></i></a>";
         }
         $content .=
             "<a class='modify content__details_summary_actions_link-modify' href='back.php?action=prestations&case=loadPrestations&id_prestations=" .

@@ -1,42 +1,75 @@
 .testimonials
+  margin-top: 5%
   padding-inline: 15%
+  padding-bottom: 4rem
   position: relative
-  z-index: 3
+  z-index: 4
   margin-bottom: 6rem
+  display: flex
+  flex-direction: column
 
   &::after
     content: ''
     position: absolute
     width: 120%
-    height: 600px
-    background-color: $blue
+    height: 850px
+    background-color: #beb7b7
     left: -10%
-    top: -20%
-    transform: rotate(4deg)
-    z-index: -1
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5)
+    top: -15%
+    transform: rotate(2deg)
+    z-index: 4
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7)
+    @include max(medium)
+      top: -5%
+      height: 110%
+
+
+  &__confirmation
+    position: absolute
+    top: 1rem
+    opacity: 0
+    align-self: center
+    background-color: #BBF7D0
+    color: #166534
+    padding: 1rem 4rem
+    margin-bottom: 2rem
+    z-index: 10
 
   &__comment
-    padding-top: 2rem
     text-align: center
     text-transform: uppercase
-    color: $white
+    color: $primary
     font-size: 1rem
     font-weight: 600
+    margin-bottom: 2rem
+    position: relative
+    z-index: 5
+    @include max(small)
+      font-size: .8rem
 
   &__title
     padding-top: 2rem
     text-align: center
     text-transform: uppercase
-    color: $secondary
-    font-size: 2rem
+    color: $primary
+    font-size: 3rem
     font-weight: 600
     margin-bottom: 2rem
+    position: relative
+    z-index: 5
+    @include max(small)
+      font-size: 1.5rem
+
 
   &__cards
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 2rem
+    margin-bottom: 4rem
+    position: relative
+    z-index: 5
+    @include max(medium)
+      grid-template-columns: 1fr
 
     &_card
       background-color: $primary
@@ -56,6 +89,10 @@
         text-align: justify
         color: $white
         margin-bottom: 2rem
+        @include max(small)
+          font-size: .8rem
+          padding: 2rem 1rem
+
 
       &_name
         position: absolute
@@ -66,14 +103,15 @@
         text-decoration: underline
         background-color: $secondary
         border-top-right-radius: 50px
+
       &_img
         position: absolute
         bottom: 5%
         right: 5%
 
 
-
   &__cta
+    align-self: center
     display: flex
     justify-content: center
     align-items: center
@@ -86,7 +124,112 @@
     border-color: transparent
     color: $white
     cursor: pointer
+    position: relative
+    z-index: 5
 
     &_icon
       font-size: 1.5rem
       margin-right: .5rem
+
+  &__form
+    position: absolute
+    height: 100vh
+    transform: translateX(100%)
+    inset: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: 5rem 30%
+    background-color: rgba(255, 255, 255, 0.2)
+    backdrop-filter: blur(5px)
+    transition: transform 500ms ease-in-out
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7)
+    z-index: 10
+    @include max(medium)
+      padding: 2rem 5%
+
+    &_container
+      position: relative
+      display: flex
+      gap: .5rem
+      width: 100%
+      background-color: $primary
+      padding-inline: 15%
+      @include max(medium)
+        flex-direction: column
+
+
+      &_title
+        font-size: 2rem
+        text-align: center
+        color: $secondary
+        text-transform: uppercase
+        font-weight: bold
+        padding-bottom: 2rem
+
+      &_closeBtn
+        position: absolute
+        top: 20%
+        right: 5%
+        color: $secondary
+        font-size: 1.4rem
+        cursor: pointer
+
+      &:nth-of-type(1)
+        justify-content: center
+        padding-top: 4rem
+        padding-bottom: 1rem
+
+      &:nth-of-type(2)
+        padding-bottom: 1rem
+
+      &:nth-of-type(3)
+        padding-bottom: 4rem
+        flex-direction: column
+
+      &_bloc
+        display: flex
+        flex-direction: column
+        width: 100%
+        gap: .5rem
+
+        &_label
+          color: $secondary
+
+        &_input
+          width: 100%
+          padding: .5rem 1rem
+          background-color: transparent
+          border: 1px solid $secondary
+          outline: none
+          color: $secondary
+
+          &::placeholder
+            color: $secondary
+
+        &_textarea
+          width: 100%
+          height: 150px
+          padding: .5rem 1rem
+          background-color: transparent
+          border: 1px solid $secondary
+          outline: none
+          color: $secondary
+          resize: none
+
+        &_cta
+          align-self: center
+          margin-top: 1rem
+          padding: .5rem 2rem
+          border-radius: 10px
+          width: 50%
+          border: none
+          color: $blue
+          cursor: pointer
+          background-color: $secondary
+          @include max(medium)
+            width: 100%
+
+
+.testimonials__visible
+  transform: translateX(0)

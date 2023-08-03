@@ -86,46 +86,75 @@
       border: None
       font-weight: 900
     &_summary
-      padding: 0.5rem
+      height: 50px
       display: grid
       grid-template-columns: repeat(4,1fr)
       align-items: center
       gap: 1rem
-      border-bottom: 1px solid $white
+      text-align: center
+      &_heading
+        &:nth-of-type(1)
+          text-align: left
+          margin-left: 3rem
+        &:nth-of-type(4)
+          text-align: right
+          margin-right: 3rem
       &_items
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 50px
+        &:nth-of-type(1)
+          justify-content: flex-start
+          padding-inline: 1rem
+          height: 100%
+          gap: .3rem
         &_img
-          width: 60px
+          width: 50px
           aspect-ratio: 1
           object-fit: cover
 
       &_actions
         display: flex
-        gap: 0.5rem
+        align-items: center
+        justify-content: flex-end
+        height: 100%
         &_link
-          padding: 0.3rem
-          border-radius: 5px
+          height: 100%
+          aspect-ratio: 1
           display: grid
           place-items: center
           color: $white
           &-eyes
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 100%
+            aspect-ratio: 1
             background-color: #57a12e
             color: $white
-            padding: 0.3rem
-            border-radius: 5px
           &-trash
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 100%
+            aspect-ratio: 1
             background-color: red
             color: $white
-            padding: 0.3rem
-            border-radius: 5px
           &-modify
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 100%
+            aspect-ratio: 1
             background-color: dodgerblue
             color: $white
-            padding: 0.3rem
-            border-radius: 5px
         &_arrows
-          border-radius: 5px
-          padding: 0.5rem
-          margin: 0.2rem
+          height: 100%
+          aspect-ratio: 1
+          display: flex
+          align-items: center
+          justify-content: center
           color: $white
           background-color: $blue
           &:nth-of-type(1)
@@ -137,7 +166,7 @@
 .aside
   width: 100%
   background-color: #2F4858
-  height: 100vh
+  height: 100%
   grid-column: 1
   display: flex
   justify-content: center

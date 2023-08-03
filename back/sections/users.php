@@ -1,9 +1,10 @@
 <?php
 if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
+    $connexion = connexion();
+    mysqli_set_charset($connexion, "utf8");
     $title = "Gestion des Utilisateurs";
     $form = "forms/formUsers.php";
     $action_form = "newUsers";
-    $connexion = connexion();
 
     if (isset($_GET["case"])) {
         switch ($_GET["case"]) {
@@ -193,19 +194,20 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
 
             case "warningUsers":
                 if (isset($_GET["id_users"])) {
-                    $confirmation = "<div class=\"confirm \">";
+                    $confirmation = "<div class='confirm'>";
                     $confirmation .=
-                        "<p class=\"confirm__paragraph\"><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Êtes-vous sûr de vouloir supprimer l'utilisateur n°" .
+                        "<p class='confirm__paragraph'><i class='fa-solid fa-triangle-exclamation warning_icon'></i>Êtes vous sûr de vouloir supprimer l'utilisateur n°" .
                         $_GET["id_users"] .
                         "</p>";
                     $confirmation .=
-                        "<a class=\"confirm__paragraph_link \" href=\"back.php?action=users&case=deleteUsers&id_users=" .
+                        "<a class='confirm__paragraph_link' href='back.php?action=users&case=deleteUsers&id_users=" .
                         $_GET["id_users"] .
-                        "\">OUI<i class=\"fa-light fa-check confirm__paragraph_link_icons\"></i></a>";
+                        "'>OUI <i class='fa-light fa-check confirm__paragraph_link_icons'></i></a>";
                     $confirmation .=
-                        "<a class=\"confirm__paragraph_link \" href=\"back.php?action=users\">NON<i class=\"fa-light fa-xmark confirm__paragraph_link_icons\"></i></a></div>";
+                        "<a class='confirm__paragraph_link' href='back.php?action=users'>NON <i class='fa-light fa-xmark confirm__paragraph_link_icons'></i></a></div>";
                 }
                 break;
+
 
             case "deleteUsers":
                 if (isset($_GET["id_users"])) {
@@ -226,35 +228,13 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
                     }
                 }
                 break;
-            case "searchUsers":
-                if (isset($_POST["formUsersSearch"])) {
-                    $searchResult = $_POST["formUsersSearch"];
-                }
-                break;
+        }
+
         }
 
 
-        if ($_GET['case'] == "searchUsers") {
-            if ($_SESSION["statut_users"] == "root") {
-                $request = "SELECT * FROM users WHERE 
-                                                   email_users LIKE '%$searchResult%' OR 
-                                                   name_users LIKE '%$searchResult%' OR 
-                                                   surname_users LIKE '%$searchResult%' OR 
-                                                   date_users LIKE '%$searchResult%' OR 
-                                                   statut_users LIKE '%$searchResult%'
-            ORDER BY id_users";
-            } else {
-                $request = "SELECT * FROM users WHERE statut_users != 'root' AND 
-                                                   email_users LIKE '%$searchResult%' OR 
-                                                   name_users LIKE '%$searchResult%' OR 
-                                                   surname_users LIKE '%$searchResult%' OR 
-                                                   date_users LIKE '%$searchResult%' OR 
-                                                   statut_users LIKE '%$searchResult%' 
-                                                  
-             ORDER BY id_users";
-            }
-        }
-        } elseif ($_SESSION["statut_users"] == "admin") {
+
+        if ($_SESSION["statut_users"] == "admin") {
             $request =
                 "SELECT * FROM users WHERE statut_users != 'root' ORDER BY id_users";
         } else {
@@ -264,10 +244,10 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
         $result = mysqli_query($connexion, $request);
         $content = "<details class=\"content__details\">";
         $content .= "<summary class=\"content__details_summary\">";
-        $content .= "<div>ID</div>";
-        $content .= "<div>EMAIL</div>";
-        $content .= "<div>STATUT</div>";
-        $content .= "<div>ACTION</div>";
+        $content .= "<div class='content__details_summary_heading'>ID</div>";
+        $content .= "<div class='content__details_summary_heading'>EMAIL</div>";
+        $content .= "<div class='content__details_summary_heading'>STATUT</div>";
+        $content .= "<div class='content__details_summary_heading'>ACTION</div>";
         $content .= "</summary></details>";
         while ($rows = mysqli_fetch_object($result)) {
             $content .= "<details class=\"content__details\">";
@@ -283,8 +263,7 @@ if (isset($_SESSION["id_users"]) && $_SESSION["statut_users"] != "user") {
             $content .=
                 "<a class='content__details_summary_actions_link-trash' href='back.php?action=users&case=warningUsers&id_users=" .
                 $rows->id_users .
-                "'>
-                      <i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
+                "'><i class='fa-solid fa-trash content__details_summary_actions_link_icon-trash'></i></a>";
             $content .= "</summary></details>";
         }
 

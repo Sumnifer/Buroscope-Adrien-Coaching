@@ -16,7 +16,13 @@
     </div>
     <a href="" class="footer__mention">mentions légales</a>
 </footer>
+<?php
+// Démarrez la session
 
+
+// Mettez à jour $_SESSION['last_activity'] à chaque chargement du footer
+$_SESSION['last_activity'] = time();
+?>
 <script src="../script.js"></script>
 <script>
     // Récupérez tous les éléments avec la classe "confirmation"

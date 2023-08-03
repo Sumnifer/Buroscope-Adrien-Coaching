@@ -1,28 +1,47 @@
 .presentation_page
+  background-image: url("../img/1.png")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  padding-bottom: 5%
+
   &__title
-    margin-top: 6rem
+    padding-block: 4rem
     text-align: center
     font-size: 2rem
     font-weight: 700
-    margin-bottom: 1rem
     color: $white
     text-transform: uppercase
     &_span
       color: $secondary
   &__card
+    margin-inline: 5%
     display: flex
     justify-content: space-between
-    margin: 7rem 15%
     background-color: $blue
-    border-radius: 20px
     overflow: hidden
+    position: relative
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7)
+    &:nth-of-type(1)
+      box-shadow: 0 0 15px rgba(0, 0, 0, .7)
+    &:nth-of-type(2)
+      z-index: 3
+      box-shadow: 0 0 15px rgba(0, 0, 0, .7)
+    &:nth-of-type(4)
+      z-index: 3
+      box-shadow: 0 0 15px rgba(0, 0, 0, .7)
+    &:nth-of-type(6)
+      z-index: 3
+      box-shadow: 0 0 15px rgba(0, 0, 0, .7)
+    &:last-of-type
+      margin-bottom: 5%
     &_img
-      border-radius: 20px
       width: 30%
       aspect-ratio: 1
       object-fit: cover
+      opacity: .7
     &_content
-      padding: 5rem 3rem 5rem 4rem
+      padding: 4rem 10%
       width: 70%
       &_title
         font-size: 1.5rem
@@ -33,9 +52,11 @@
         &::after
           content: ''
           display: block
-          width: 4rem
+          width: 10rem
           height: 3px
+          filter: brightness(120%)
           background-color: $secondary
+          box-shadow: 0 0 15px $secondary
           margin-block: 1rem
       &_paragraph
         color: $white
@@ -45,6 +66,8 @@
 .slider
   position: relative
   height: 60vh
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+  z-index: 5
   &-image
     display: none
     position: absolute

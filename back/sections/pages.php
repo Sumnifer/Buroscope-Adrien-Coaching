@@ -59,10 +59,10 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>PAGE</div>";
-    $content .= "<div>SLIDER</div>";
-    $content .= "<div>PRESTATIONS</div>";
-    $content .= "<div>ACTIONS</div>";
+    $content .= "<div class='content__details_summary_heading'>PAGE</div>";
+    $content .= "<div class='content__details_summary_heading'>SLIDER</div>";
+    $content .= "<div class='content__details_summary_heading'>PRESTATIONS</div>";
+    $content .= "<div class='content__details_summary_heading'>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $content .= "<details class='content__details'>";

@@ -86,7 +86,7 @@ mysqli_close($connexion);
 </div>
 
 <section class="connexion">
-    <h1 class="connexion__title">Créer votre compte</h1>
+    <h1 class="connexion__title">Créer votre <span class="connexion__title_span">compte</span></h1>
     <p class="connexion__paragraph">
         Vous avez déjà un compte ?
         <a href="front.php?action=logging" class="connexion__paragraph_link">Connectez-vous.</a>
@@ -136,10 +136,10 @@ mysqli_close($connexion);
         <h2 class="inscription__form_title">Mes informations personnelles :</h2>
         <label for="gender_users" class="inscription__form_label">Civilité</label>
         <select class="inscription__form_input" name="gender_users" id="gender_users">
-            <option value="">Sélectionnez une civilité</option>
-            <option value="Monsieur">Monsieur</option>
-            <option value="Madame">Madame</option>
-            <option value="Autre">Autre</option>
+            <option value="" class="inscription__form_input_options">Sélectionnez une civilité</option>
+            <option value="Monsieur" class="inscription__form_input_options">Monsieur</option>
+            <option value="Madame" class="inscription__form_input_options">Madame</option>
+            <option value="Autre" class="inscription__form_input_options">Autre</option>
         </select>
         <div class="inscription__form_item">
             <label for="name_users" class="inscription__form_item_label">Prénom</label>
@@ -154,8 +154,8 @@ mysqli_close($connexion);
         <input type="number" name="phone_users" id="phone_users" placeholder="Téléphone"
                class="inscription__form_input" />
         <div class="inscription__form_item">
-            <label for="date_users" class="inscription__form_item_labeldate">Date de Naissance</label>
-            <input class="inscription__form_item_input" type="date" name="date_users" id="date_users">
+            <label for="date_users" class="inscription__form_item_label_date">Date de Naissance</label>
+            <input class="inscription__form_item_input" type="date" name="date_users" id="date_users" placeholder="Date de naissance">
         </div>
         <button type="submit" name="submit" class="inscription__form_cta">
             Continuer

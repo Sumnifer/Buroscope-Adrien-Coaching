@@ -72,5 +72,19 @@
         ?>
       </div>
     </details>
+      <?php
+      $connexion=connexion();
+      if (isset($_SESSION['id_users']) && $_SESSION['id_users'] != "") {
+          $request = "SELECT COUNT(*) AS nb_cart FROM temporary_schedules WHERE id_users = " . $_SESSION['id_users'];
+          $result = mysqli_query($connexion, $request);
+          $row = mysqli_fetch_assoc($result);
+          $nb_cart = $row['nb_cart'];
+          if ($nb_cart > 0) {
+              echo '<a href="front.php?action=cart&case=show" class="header__controls_cart"><i class="fa-solid fa-cart-shopping header__controls_cart_icon"></i></a>';
+          } else {
+              echo '<a href="front.php?action=cart&case=show" class="header__controls_cart"><i class="fa-light fa-cart-shopping header__controls_cart_icon"></i></a>';
+          }
+      }
+?>
   </div>
 </header>

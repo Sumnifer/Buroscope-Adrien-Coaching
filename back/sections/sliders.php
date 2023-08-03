@@ -1,7 +1,5 @@
 <?php
 if (isset($_SESSION["id_users"])) {
-    $connexion = connexion();
-    mysqli_set_charset($connexion, "utf8");
     $title = "Gestion du Slider";
     $form = "forms/formSliders.php";
     $action_form = "newSliders";
@@ -156,7 +154,7 @@ if (isset($_SESSION["id_users"])) {
                         $img_path = mysqli_fetch_object($result_img)
                             ->img_sliders;
 
-                        if (file_exists($img_path)) {
+                        if (!empty($img_path) && file_exists($img_path)) {
                             unlink($img_path);
                         }
                         $file_name = $_FILES["img_sliders"]["name"];
@@ -341,10 +339,10 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>POSITION</div>";
-    $content .= "<div>SLIDERS</div>";
-    $content .= "<div>IMAGE</div>";
-    $content .= "<div>ACTIONS</div>";
+    $content .= "<div class='content__details_summary_heading'>POSITION</div>";
+    $content .= "<div class='content__details_summary_heading'>SLIDERS</div>";
+    $content .= "<div class='content__details_summary_heading'>IMAGE</div>";
+    $content .= "<div class='content__details_summary_heading'>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $content .= "<details class='content__details'>";
@@ -365,7 +363,8 @@ if (isset($_SESSION["id_users"])) {
         $content .= "<div class='content__details_summary_items'>$rows->title_sliders</div>";
 
         $content .=
-            "<div class='content__details_summary_items'><img src='$rows->img_sliders' alt='' class='content__details_summary_items_img''></div>";
+            "<div class='content__details_summary_items'><img src='$rows->img_sliders' alt='$rows->alt_sliders' class='content__details_summary_items_img'></div>";
+
         $content .= "<div class='content__details_summary_actions'>";
         if ($rows->visibility_sliders == 1) {
             $content .=

@@ -1,5 +1,13 @@
 <section class="hero_section">
-    <img src="../assets/img/header.jpg" alt=""/>
+    <img src="../assets/img/image00020.jpeg" alt="">
+    <div class="hero_section__container">
+        <h1 class="hero_section__container_title">Repoussez <br> vos <span class="hero_section__container_title_span">limites !</span>
+        </h1>
+        <p class="hero_section__container_paragraph">Besoin d'un Coach Sportif expérimenté sur Dinan et sa périphérie ?
+            <br> Faites équipe avec moi pour un accompagnement personnalisé dans votre quête sportive !</p>
+        <a href="front.php?action=prestation" class="hero_section__container_cta">Découvrir mes <span
+                class="hero_section__container_cta_span">prestations</span></a>
+    </div>
 </section>
 <section class="about">
     <div class="about__container">
@@ -16,12 +24,12 @@
         </p>
         <div class="about__container_bloc">
             <a href="front.php?action=presentation" class="about__container_bloc_cta">En savoir plus</a>
-            <a href="front.php?action=prestation" class="about__container_bloc_cta">Mes Services</a>
+            <a href="front.php?action=prestation" class="about__container_bloc_cta">Mes Prestations</a>
         </div>
     </div>
     <div class="about__container">
         <img
-                src="../assets/img/hero_img.png"
+                src="../assets/img/image00024.jpeg"
                 alt=""
                 class="about__container_img"
         />
@@ -29,38 +37,44 @@
 </section>
 <?php if(isset($prestations)){ include $prestations;} ?>
 
-<section class="testimonials">
-    <h2 class="testimonials__comment">Ils nous ont fait confiance</h2>
+<section class="testimonials" id="testimonials">
     <h1 class="testimonials__title">Témoignages</h1>
+    <h2 class="testimonials__comment">Ils nous ont fait confiance</h2>
+    <div class="testimonials__confirmation" >Merci pour votre témoignage !</div>
     <div class="testimonials__cards">
-        <div class="testimonials__cards_card">
-            <i class="fa-solid fa-quote-left testimonials__cards_card_icon"></i>
-            <p class="testimonials__cards_card_paragraph">
-                Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour
-                le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
-            </p>
-            <div class="testimonials__cards_card_name">Nom de Post</div>
-            <img src="../assets/img/image_card.png" class="testimonials__cards_card_img" height="75" width="75"/>
-        </div>
-        <div class="testimonials__cards_card">
-            <i class="fa-solid fa-quote-left testimonials__cards_card_icon"></i>
-            <p class="testimonials__cards_card_paragraph">
-                Ma famille et mon travail ne me laissant plus le temps d’exercer une activité physique, j’ai opté pour
-                le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
-            </p>
-            <div class="testimonials__cards_card_name">Nom de Post</div>
-            <img src="../assets/img/image_card.png" class="testimonials__cards_card_img" height="75" width="75"/>
-        </div>
-        <div class="testimonials__cards_card">
-            <i class="fa-solid fa-quote-left testimonials__cards_card_icon"></i>
-            <p class="testimonials__cards_card_paragraph">
-                Ma famille et mon travail ne me laissaient plus le temps d’exercer une activité physique, j’ai opté pour
-                le coaching à domicile et je suis vraiment satisfaite d’avoir comme coach Adrien!
-            </p>
-            <div class="testimonials__cards_card_name">Nom de Post</div>
-            <img src="../assets/img/image_card.png" class="testimonials__cards_card_img" height="75" width="75"/>
-        </div>
+
+        <?php if(isset($testimonials)){ include $testimonials;} ?>
     </div>
+    <a href="front.php?action=index#testimonials" class="testimonials__cta">Laisser un Avis</a>
+    <form action="sections/testimonials_save.php" class="testimonials__form" id="testimonialsForm" method="POST">
+        <div class="testimonials__form_container">
+            <i class="fa-solid fa-xmark testimonials__form_container_closeBtn"></i>
+            <h1 class="testimonials__form_container_title">Laisser un Avis</h1>
+        </div>
+        <div class="testimonials__form_container">
+            <div class="testimonials__form_container_bloc">
+                <label for="testimonials_firstname" class="testimonials__form_container_bloc_label">Nom</label>
+                <input type="text" placeholder="Nom" class="testimonials__form_container_bloc_input"
+                       name="testimonials_firstname" id="testimonials_firstname">
+            </div>
+            <div class="testimonials__form_container_bloc">
+                <label for="testimonials_lastname" class="testimonials__form_container_bloc_label">Prénom</label>
+                <input type="text" placeholder="Nom" class="testimonials__form_container_bloc_input"
+                       name="testimonials_lastname" id="testimonials_lastname">
+            </div>
+        </div>
+        <div class="testimonials__form_container">
+            <div class="testimonials__form_container_bloc">
+                <label for="testimonials_content" class="testimonials__form_container_bloc_label">Votre Message</label>
+                <textarea name="testimonials_content" id="testimonials_content"
+                          class="testimonials__form_container_bloc_textarea"></textarea>
+            </div>
+            <div class="testimonials__form_container_bloc">
+                <button type="submit" class="testimonials__form_container_bloc_cta">Je donne mon avis <i class="fa-solid fa-thumbs-up"></i></button>
+            </div>
+        </div>
+
+    </form>
 </section>
 
 <?php if(isset($questions)){ include $questions ;} ?>
@@ -70,7 +84,7 @@
         <h1 class="reseau__container_title">Suivez <span class="reseau__container_title_span">Nous ! </span></h1>
         <p class="reseau__container_paragraph">Abonnez vous à notre newsletter pour recevoir nos dernières
             actualités</p>
-        <form action="#" class="reseau__container_form">
+        <form action="" class="reseau__container_form">
             <input type="email" name="newsletter" id="newsletter" class="reseau__container_form_input"
                    placeholder="Adresse email...">
             <button type="submit" class="reseau__container_form_cta">Je m'abonne !</button>
@@ -91,6 +105,65 @@
     </div>
 </section>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formTestimonials = document.getElementById("testimonialsForm");
+
+        formTestimonials.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const firstName = document.getElementById("testimonials_firstname").value.trim();
+            const lastName = document.getElementById("testimonials_lastname").value.trim();
+            const content = document.getElementById("testimonials_content").value.trim();
+
+            if (firstName === "" || lastName === "" || content === "") {
+                alert("Veuillez remplir tous les champs du formulaire.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("testimonials_firstname", firstName);
+            formData.append("testimonials_lastname", lastName);
+            formData.append("testimonials_content", content);
+
+            const options = {
+                method: "POST",
+                body: formData
+            };
+
+            fetch("sections/testimonials_save.php", options)
+                .then(response => {
+                    return response.text();
+                })
+                .then(data => {
+                    console.log(data);
+                    return JSON.parse(data);
+                })
+                .then(jsonData => {
+                    console.log(jsonData);
+                    document.getElementById("testimonialsForm").reset();
+                    // Affichez le message de confirmation
+                    const confirmationMessage = document.querySelector(".testimonials__confirmation");
+                    confirmationMessage.style.display = "block";
+                    confirmationMessage.style.opacity = 1;
+
+                    // Masquez le message de confirmation après quelques secondes (facultatif)
+                    setTimeout(function () {
+                        confirmationMessage.style.opacity = 0;
+                    }, 3000); // Afficher le message pendant 3 secondes, puis le masquer
+                    // Retirez la classe "testimonials_visible" du formulaire
+                    const testimonialsFormContainer = document.querySelector(".testimonials__form");
+                    body.style.overflowY="visible";
+                    testimonialsFormContainer.classList.remove("testimonials__visible");
+                })
+                .catch(error => {
+                    console.error("Erreur lors de la requête Ajax :", error);
+                });
+        });
+    });
+</script>
+
+
 
 <script type="text/javascript">
     $('#slider').sss({
@@ -101,4 +174,23 @@
         showNav: true
     });
 </script>
+<script>
+    let openBtn = document.querySelector(".testimonials__cta");
+    let closeBtn = document.querySelector(".testimonials__form_container_closeBtn");
+    let formTestimonials = document.querySelector(".testimonials__form");
+    let body = document.querySelector("body");
+    openBtn.addEventListener("click", function () {
+        formTestimonials.classList.add("testimonials__visible");
+        body.style.overflowY="hidden";
+    });
+    closeBtn.addEventListener("click", function () {
+        formTestimonials.classList.remove("testimonials__visible");
+        body.style.overflowY="visible";
+    });
+
+
+</script>
+
+
+
 

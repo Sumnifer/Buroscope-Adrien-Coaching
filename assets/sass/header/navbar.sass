@@ -1,14 +1,13 @@
 .header
   padding-inline: 10%
   height: 80px
-
   display: flex
   align-items: center
   justify-content: space-between
-
   background-color: $blue
   position: relative
-
+  z-index: 50
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7)
 
   &__logo
     display: flex
@@ -68,8 +67,8 @@
             height: 100%
             z-index: -1
             width: 100%
-            background-color: #243742
-            transition: transform 0.7s ease-in-out
+            background-color: $primary
+            transition: transform 0.4s ease-in-out
           &::after
             content: ''
             position: absolute
@@ -78,14 +77,20 @@
             height: 2px
             width: 0
             opacity: 0
-            background-color: white
-            transition: width 0.7s ease-in-out
-            transition-delay: 0.7s
+            background-color: $secondary
+            transition: width 0.4s ease-in-out
+            transition-delay: 0.4s
 
   &__controls
     display: flex
     align-items: center
     gap: 1rem
+
+    &_cart
+      color: $secondary
+      &_icon
+        font-size: 1.2rem
+        position: relative
 
     &_detail
       display: flex

@@ -28,10 +28,6 @@ if(isset($_GET['case'])){
         <input type="text" name="title_prestations" id="title_prestations" class="prestation__form_input" placeholder="Titre" value="<?php if (isset($_POST["title_prestations"])) {echo $_POST["title_prestations"];}?>">
         <label for="content_prestations" class="prestation__form_label">Contenu</label>
         <textarea name="content_prestations" id="content_prestations" class="prestation__form_textarea" placeholder="Contenu"><?php if (isset($_POST["content_prestations"])) {echo $_POST["content_prestations"];}?></textarea>
-        <label for="img_prestations" class="prestation__form_label">Illustration</label>
-        <input type="file" name="img_prestations" id="img_prestations" class="prestation__form_input" value="">
-        <label for="alt_prestations" class="prestation__form_label">Attribut Alt</label>
-        <input type="text" name="alt_prestations" id="alt_prestations" class="prestation__form_input" placeholder="Attribut" value="<?php if (isset($_POST['alt_prestations'])){echo $_POST['alt_prestations'];} ?>">
         <label for="price_prestations" class="prestation__form_label">Tarifs</label>
         <input type="number" name="price_prestations" id="price_prestations" class="prestation__form_input" value="<?php if (isset($_POST['price_prestations'])){echo $_POST['price_prestations'];} ?>">
         <label for="visibility_prestations" class="prestation__form_label">Visibilité</label>

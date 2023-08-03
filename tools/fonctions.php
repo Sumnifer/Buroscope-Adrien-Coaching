@@ -23,6 +23,7 @@ function login($login, $pass)
         $ligne = mysqli_fetch_object($resultat);
         $hashed_pass = password_verify($pass, $ligne->pass_users);
         if ($hashed_pass) {
+            $_SESSION["last_activity"] = time();
             $_SESSION["id_users"] = $ligne->id_users;
             $_SESSION["name_users"] = $ligne->name_users;
             $_SESSION["surname_users"] = $ligne->surname_users;
@@ -30,8 +31,10 @@ function login($login, $pass)
             $_SESSION["statut_users"] = $ligne->statut_users;
             if ($ligne->statut_users == "root"){
                 header("location: ../back/back.php");
+                echo "<script> window.location.replace('../back/back.php') </script>";
             }else {
                 header("location: ../front/front.php?action=index");
+                echo "<script> window.location.replace('../front/front.php?action=index') </script>";
             }
         }
     }

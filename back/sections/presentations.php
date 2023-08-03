@@ -1,6 +1,5 @@
 <?php
 if (isset($_SESSION["id_users"])) {
-    $connexion = connexion();
     mysqli_set_charset($connexion, "utf8");
     $title = "Gestion des Activités";
     $form = "forms/formPresentations.php";
@@ -118,9 +117,7 @@ if (isset($_SESSION["id_users"])) {
                     $_GET["id_presentations"];
                 $id_presentations = $_GET["id_presentations"];
                 $title_presentations = htmlspecialchars($_POST["title_presentations"]);
-                echo $_POST["content_presentations"] ."<hr> \n";
                 $content_presentations = htmlspecialchars($_POST["content_presentations"]);
-                echo $content_presentations ."<hr>";
                 $alt_presentations = htmlspecialchars($_POST["alt_presentations"]);
                 $direction_presentations = htmlspecialchars($_POST["direction_presentations"]);
                 $visibility_presentations = htmlspecialchars($_POST["visibility_presentations"]);
@@ -283,8 +280,6 @@ if (isset($_SESSION["id_users"])) {
                     }
                 }
                 break;
-
-                break;
             case "rankPresentations":
                 if (isset($_GET["id_presentations"])) {
                     switch ($_GET["direction"]) {
@@ -357,10 +352,10 @@ if (isset($_SESSION["id_users"])) {
     $result = mysqli_query($connexion, $request);
     $content = "<details class='content__details'>";
     $content .= "<summary class='content__details_summary'>";
-    $content .= "<div>POSITION</div>";
-    $content .= "<div>ACTIVITÉ</div>";
-    $content .= "<div>IMAGE</div>";
-    $content .= "<div>ACTIONS</div>";
+    $content .= "<div class='content__details_summary_heading'>POSITION</div>";
+    $content .= "<div class='content__details_summary_heading'>ACTIVITÉ</div>";
+    $content .= "<div class='content__details_summary_heading'>IMAGE</div>";
+    $content .= "<div class='content__details_summary_heading'>ACTIONS</div>";
     $content .= "</summary></details>";
     while ($rows = mysqli_fetch_object($result)) {
         $id = $rows->id_presentations;

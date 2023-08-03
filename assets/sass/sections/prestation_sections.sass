@@ -1,6 +1,11 @@
 .prestation
   position: relative
-  margin-bottom: 8rem
+  background-image: url("../img/1.png")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  padding-bottom: 5%
+
 
   &__title
     text-align: center
@@ -8,8 +13,11 @@
     color: $white
     font-size: 2rem
     font-weight: 600
-    margin-top: 6rem
-
+    padding-block: 6rem 4rem
+    @include max(medium)
+      font-size: 1.5rem
+    @include max(small)
+      padding-inline: 1rem
     &_span
       color: $secondary
 
@@ -19,54 +27,57 @@
     justify-content: center
     gap: 4rem
     padding: 5rem 20%
+    @include max(medium)
+      grid-template-columns: repeat(2, .5fr)
+    @include max(small)
+      grid-template-columns: 1fr
 
     &_card
       background-color: $blue
       display: flex
       flex-direction: column
       align-items: center
-      justify-content: space-between
+      overflow-x: hidden
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5)
 
       &:nth-of-type(2)
         transform: scale(1.10)
+        @include max(medium)
+          transform: scale(1)
+
 
       &_header
         width: 100%
         position: relative
-        background-color: $secondary
-        border-bottom-left-radius: 40px
-        border-bottom-right-radius: 40px
+        background-color: $blue
         padding: 2rem
         display: flex
         flex-direction: column
         align-items: center
-        gap: 2rem
-
-        &::before
-          content: ''
-          position: absolute
-          display: flex
-          bottom: -20px
-          left: 50%
-          transform: translateX(-50%) rotate(45deg)
-          width: 40px
-          height: 40px
-          background-color: $secondary
-          z-index: 100
+        gap: 1rem
 
         &_title
+          width: 200%
+          padding-block: .5rem
           text-align: center
           color: $primary
+          background-color: $secondary
           font-size: 1.2rem
           text-transform: uppercase
+          @include max(medium)
+            font-size: 1rem
+
 
         &_span
-          color: $primary
+          color: $secondary
           font-size: 3rem
+          @include max(medium)
+            font-size: 2rem
+
           font-weight: bold
 
       &_paragraph
-        padding: 3rem
+        padding: 1rem 3rem
         text-align: justify
         font-size: .9rem
         margin-bottom: 3rem

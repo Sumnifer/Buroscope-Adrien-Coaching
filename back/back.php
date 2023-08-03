@@ -71,6 +71,11 @@ if (isset($_SESSION["id_users"])) {
                     include "sections/testimonials.php";
                     break;
 
+                // * <== ----------------------------------------------------- ==>
+
+                case "questions" :
+                    include "sections/questions.php";
+                    break;
             }
 
             // ?<== ========================================== ==> Fin du Switch <== =========================================== ==>

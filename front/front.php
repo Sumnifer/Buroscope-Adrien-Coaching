@@ -8,6 +8,7 @@ if (isset($_GET["action"])) {
     switch ($_GET["action"]) {
         case "index":
             $questions = "sections/questions.php";
+            $testimonials = "sections/testimonials.php";
             $request = "SELECT * FROM pages WHERE id_pages = 1";
             $result = mysqli_query($connexion, $request);
             $rows = mysqli_fetch_object($result);
@@ -39,6 +40,7 @@ if (isset($_GET["action"])) {
             break;
         case "logout":
             session_destroy();
+            echo "<script> window.location.replace('front.php?action=index') </script>";
             header("location: front.php?action=index");
             break;
 
@@ -87,7 +89,11 @@ if (isset($_GET["action"])) {
             }
             include "sections/prestation.php";
             break;
+        case "cart":
+            include "sections/cart.php";
+            break;
 
     }
 }
+
 include "sections/footer.php";

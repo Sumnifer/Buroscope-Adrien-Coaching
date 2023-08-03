@@ -1,5 +1,10 @@
 .inscription_body
   position: relative
+  background-image: url("../img/1.png")
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+
   &_container
     width: 40%
     left: 10%
@@ -7,21 +12,25 @@
     position: absolute
     display: flex
     flex-direction: column
+
     &_img
       &:nth-of-type(1)
         align-self: flex-end
         width: 400px
         object-fit: cover
+
       &:nth-of-type(2)
         margin-top: -20%
         margin-left: 10%
         width: 300px
         object-fit: cover
+
       &:nth-of-type(3)
         margin-top: -30%
         margin-left: 30%
         width: 400px
         object-fit: cover
+
       &:nth-of-type(4)
         margin-top: -20%
         margin-left: 40%
@@ -32,48 +41,68 @@
   display: flex
   justify-content: center
   border-bottom: 3px solid $white
+
   &_logo
-      &_img
-        width: 200px
-        object-fit: cover
+    &_img
+      width: 200px
+      object-fit: cover
+
 .connexion
   padding-block: 5rem
   padding-left: 55%
   color: $white
   line-height: 2rem
+  background-color: $primary
+
   &__title
     font-weight: 700
     font-size: 1.5rem
     padding-bottom: 1rem
+    text-transform: uppercase
+    &_span
+      color: $secondary
+
   &__paragraph
     &_link
       color: $secondary
       text-decoration: underline
 
 .inscription
-  padding: 2rem 10% 2rem 55%
-  margin-bottom: 25rem
+  position: relative
+  z-index: 3
+  padding: 2rem 10% 25rem 55%
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7)
+
   &__title
     font-size: 1.5rem
     font-weight: 700
     color: $white
     padding-bottom: 1rem
+
   &__form
     display: flex
     flex-direction: column
     gap: 1rem
+
     &_title
       font-size: 1.5rem
       font-weight: 700
       color: $white
       padding-bottom: 1rem
+
     &_paragraph
       color: $white
+
     &_item
       display: flex
       gap: 2rem
+
       &_label
         display: none
+
+        &_date
+          display: none
+
       &_input
         width: 100%
         padding: .8rem
@@ -82,17 +111,21 @@
         border-radius: 10px
         color: $secondary
         outline: none
+
         &::placeholder
           color: $secondary
+
     &_required
       color: $white
       display: grid
       gap: .5rem
       grid-template-columns: repeat(2, 1fr)
-      grid-template-rows: repeat(2,1fr)
+      grid-template-rows: repeat(2, 1fr)
       margin-bottom: 2rem
+
     &_label
       display: none
+
     &_input
       width: 100%
       padding: .8rem
@@ -101,8 +134,14 @@
       border-radius: 10px
       color: $secondary
       outline: none
+
       &::placeholder
         color: $secondary
+
+      &_options
+        color: $secondary
+        background-color: $primary
+
     &_cta
       padding: .8rem
       background-color: $secondary

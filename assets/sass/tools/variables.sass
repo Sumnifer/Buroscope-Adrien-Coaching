@@ -1,9 +1,9 @@
 // couleurs
 
-$primary : #2f2f2b
+$primary : rgb(47, 47, 43)
 $secondary : #FFE13F
 $white: #f5f5f5
-$blue: #2F4858
+$blue: #222520
 
 // Breakpoints
 
@@ -14,8 +14,10 @@ $breakpoints-min: ("medium": "40em", "large": "64em", "xlarge": "87.5em")
 
 //Queries
 @mixin max($size)
-  @media screen and (max-width: map-get($breakpoints-max, $size))
+  $max-width: map-get($breakpoints-max, $size)
+  @media screen and (max-width: $max-width)
     @content
 @mixin min($size)
-  @media screen and (min-width: map-get($breakpoints-min, $size))
+  $min-width: map-get($breakpoints-min, $size)
+  @media screen and (min-width: $min-width)
     @content
